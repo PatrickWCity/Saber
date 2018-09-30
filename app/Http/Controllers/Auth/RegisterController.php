@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Usuario;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,8 +51,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'run' => 'max:10|unique:Usuario',
+            'nombre' => 'required|string|max:60',
+            'appat' => 'required|string|max:60',
+            'apmat' => 'max:60',
+            'direccion' => 'required|string|max:255',
+            'telefono' => 'numeric|required|string|digits_between:9,20|unique:Usuario',
+            'username' => 'required|string|max:20|unique:Acceso',
+            'email' => 'required|string|email|max:255|unique:Usuario',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -63,10 +71,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $input = Usuario::create([
+            'run' => $data['run'],
+            'nombre' => $data['nombre'],
+            'appat' => $data['appat'],
+            'apmat' => $data['apmat'],
+            'direccion' => $data['direccion'],
+            'telefono' => $data['telefono'],
             'email' => $data['email'],
+        ]);
+        return User::create([
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'diasClave' => '14',
+            'fechaCaducidad' => Carbon::now()->addDays(14),
+            'email' => $data['email'],
+            'estadoInicial' => '1',
+            'estadoAcceso' => null,
+            'idUsuario' => $input->idUsuario,
         ]);
     }
 }
