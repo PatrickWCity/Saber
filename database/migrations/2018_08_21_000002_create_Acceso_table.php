@@ -20,7 +20,8 @@ class CreateAccesoTable extends Migration
             $table->integer('diasClave');
             $table->dateTime('fechaCaducidad');
             $table->tinyInteger('estadoInicial');
-            $table->tinyInteger('estadoAcceso');
+            $table->timestamp('estadoAcceso')->nullable(); // para deshabilitar
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('foto')->default('default.png');
             $table->rememberToken();

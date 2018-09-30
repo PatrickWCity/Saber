@@ -13,9 +13,9 @@ class CreateFunction extends Migration
      */
     public function up()
     {
-        DB::unprepared('
+        //DB::unprepared('
         
-        ');
+        //');
     }
 
     /**
@@ -25,8 +25,8 @@ class CreateFunction extends Migration
      */
     public function down()
     {
-        DB::unprepared('
+        //DB::unprepared('
         
-        ');
+        //');
     }
 }

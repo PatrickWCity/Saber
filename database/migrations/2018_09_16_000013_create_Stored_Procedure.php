@@ -48,7 +48,7 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_eliminarUsuario`;
         ');
 
-        DB::unprepared('
+        DB::unprepared("
 
         CREATE PROCEDURE `sp_actualizarModulo`(
             IN `idModulo` INT,
@@ -113,8 +113,8 @@ class CreateStoredProcedure extends Migration
         END;
         
         CREATE PROCEDURE `sp_asignarModuloAPerfil`(
-            IN `idPerfil` INT,
-            IN `idModulo` INT
+            IN `idModulo` INT,
+            IN `idPerfil` INT
         )
         BEGIN
         INSERT INTO ModuloPerfil(fecha, estado, idModulo, idPerfil)
@@ -122,8 +122,8 @@ class CreateStoredProcedure extends Migration
         END;
         
         CREATE PROCEDURE `sp_asignarSubmoduloAModulo`(
-            IN `idModulo` INT,
-            IN `idSubmodulo` INT
+            IN `idSubmodulo` INT,
+            IN `idModulo` INT
         )
         BEGIN
         INSERT INTO SubmoduloModulo(fecha, estado, idSubmodulo, idModulo)
@@ -219,8 +219,8 @@ class CreateStoredProcedure extends Migration
         SELECT *
         FROM Modulo 
         WHERE Modulo.idModulo = idModulo
-        OR nombre LIKE CONCAT(`%`,palabraClave,`%`)
-        OR descripcion LIKE CONCAT(`%`,palabraClave,`%`);
+        OR nombre LIKE CONCAT('%',palabraClave,'%')
+        OR descripcion LIKE CONCAT('%',palabraClave,'%');
         END;
         
         CREATE PROCEDURE `sp_consultarUnPerfil`(
@@ -231,8 +231,8 @@ class CreateStoredProcedure extends Migration
         SELECT *
         FROM Perfil 
         WHERE Perfil.idPerfil = idPerfil
-        OR nombre LIKE CONCAT(`%`,palabraClave,`%`)
-        OR descripcion LIKE CONCAT(`%`,palabraClave,`%`);
+        OR nombre LIKE CONCAT('%',palabraClave,'%')
+        OR descripcion LIKE CONCAT('%',palabraClave,'%');
         END;
         
         CREATE PROCEDURE `sp_consultarUnSubmodulo`(
@@ -243,9 +243,9 @@ class CreateStoredProcedure extends Migration
         SELECT *
         FROM Submodulo 
         WHERE Submodulo.idSubmodulo = idSubmodulo
-        OR nombre LIKE CONCAT(`%`,palabraClave,`%`)
-        OR descripcion LIKE CONCAT(`%`,palabraClave,`%`)
-        OR ubicacion LIKE CONCAT(`%`,palabraClave,`%`);
+        OR nombre LIKE CONCAT('%',palabraClave,'%')
+        OR descripcion LIKE CONCAT('%',palabraClave,'%')
+        OR ubicacion LIKE CONCAT('%',palabraClave,'%');
         END;
         
         CREATE PROCEDURE `sp_consultarUsuariosDePerfil`(
@@ -267,7 +267,7 @@ class CreateStoredProcedure extends Migration
         FROM Usuario u
         WHERE u.idUsuario NOT IN
         (
-        SELECT u.idPerfil
+        SELECT u.idUsuario
         FROM Usuario u, PerfilUsuario pu, Perfil p
         WHERE p.idPerfil = idPerfil 
         AND p.idPerfil = pu.idPerfil
@@ -276,8 +276,8 @@ class CreateStoredProcedure extends Migration
         END;
 
         CREATE PROCEDURE `sp_desasignarModuloDePerfil`(
-            IN `idPerfil` INT,
-            IN `idModulo` INT
+            IN `idModulo` INT,
+            IN `idPerfil` INT
         )
         BEGIN
         DELETE FROM ModuloPerfil
@@ -286,8 +286,8 @@ class CreateStoredProcedure extends Migration
         END;
 
         CREATE PROCEDURE `sp_desasignarSubmoduloDeModulo`(
-            IN `idModulo` INT,
-            IN `idSubmodulo` INT
+            IN `idSubmodulo` INT,
+            IN `idModulo` INT
         )
         BEGIN
         DELETE FROM SubmoduloModulo
@@ -309,6 +309,10 @@ class CreateStoredProcedure extends Migration
             IN `idModulo` INT
         )
         BEGIN
+        DELETE FROM ModuloPerfil
+        WHERE ModuloPerfil.idModulo = idModulo;
+        DELETE FROM SubmoduloModulo
+        WHERE SubmoduloModulo.idModulo = idModulo;
         DELETE FROM Modulo
         WHERE Modulo.idModulo = idModulo;
         END;
@@ -317,6 +321,10 @@ class CreateStoredProcedure extends Migration
             IN `idPerfil` INT
         )
         BEGIN
+        DELETE FROM ModuloPerfil
+        WHERE ModuloPerfil.idPerfil = idPerfil;
+        DELETE FROM PerfilUsuario
+        WHERE PerfilUsuario.idPerfil = idPerfil;
         DELETE FROM Perfil
         WHERE Perfil.idPerfil = idPerfil;
         END;
@@ -325,6 +333,8 @@ class CreateStoredProcedure extends Migration
             IN `idSubmodulo` INT
         )
         BEGIN
+        DELETE FROM SubmoduloModulo
+        WHERE SubmoduloModulo.idSubmodulo = idSubmodulo;
         DELETE FROM Submodulo
         WHERE Submodulo.idSubmodulo = idSubmodulo;
         END;
@@ -373,20 +383,70 @@ class CreateStoredProcedure extends Migration
         SELECT *
         FROM Usuario
         WHERE Usuario.idUsuario = idUsuario
-        OR nombre LIKE CONCAT(`%`,palabraClave,`%`)
-        OR appat LIKE CONCAT(`%`,palabraClave,`%`)
-        OR apmat LIKE CONCAT(`%`,palabraClave,`%`)
-        OR email LIKE CONCAT(`%`,palabraClave,`%`);
+        OR nombre LIKE CONCAT('%',palabraClave,'%')
+        OR appat LIKE CONCAT('%',palabraClave,'%')
+        OR apmat LIKE CONCAT('%',palabraClave,'%')
+        OR email LIKE CONCAT('%',palabraClave,'%');
         END;
         
         CREATE PROCEDURE `sp_eliminarUsuario`(
             IN `idUsuario` INT
         )
         BEGIN
+        DELETE FROM HistoricoAcceso
+        WHERE HistoricoAcceso.idUsuario = idUsuario;
+        DELETE FROM HistoricoClave
+        WHERE HistoricoClave.idUsuario = idUsuario;
+        DELETE FROM Acceso
+        WHERE Acceso.idUsuario = idUsuario;
+        DELETE FROM PerfilUsuario
+        WHERE PerfilUsuario.idUsuario = idUsuario;
         DELETE FROM Usuario
         WHERE Usuario.idUsuario = idUsuario;
         END;
-        ');
+
+        CREATE PROCEDURE `sp_habilitarAcceso`(
+            IN `idUsuario` INT
+        )
+        BEGIN
+        UPDATE Acceso
+        SET email_verified_at = NOW(), estadoAcceso = null
+        WHERE Acceso.idUsuario = idUsuario;
+        END;
+
+        CREATE PROCEDURE `sp_deshabilitarAcceso`(
+            IN `idUsuario` INT
+        )
+        BEGIN
+        UPDATE Acceso
+        SET email_verified_at = null, estadoAcceso = NOW()
+        WHERE Acceso.idUsuario = idUsuario;
+        END;
+
+        CREATE PROCEDURE `sp_consultarUsuariosHabilitados`()
+        BEGIN
+        SELECT idUsuario, username, email
+        FROM Acceso
+        WHERE email_verified_at IS NOT NULL
+        AND estadoAcceso IS NULL ;
+        END;
+
+        CREATE PROCEDURE `sp_consultarUsuariosDeshabilitados`()
+        BEGIN
+        SELECT idUsuario, username, email
+        FROM Acceso
+        WHERE email_verified_at IS NULL
+        AND estadoAcceso IS NOT NULL ;
+        END;
+
+        CREATE PROCEDURE `sp_consultarUsuariosPendientes`()
+        BEGIN
+        SELECT idUsuario, username, email
+        FROM Acceso
+        WHERE email_verified_at IS NULL
+        AND estadoAcceso IS NULL ;
+        END;
+        ");
     }
 
     /**
@@ -429,6 +489,11 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_eliminarPerfil`;
         DROP PROCEDURE IF EXISTS `sp_eliminarSubmodulo`;
         DROP PROCEDURE IF EXISTS `sp_eliminarUsuario`;
+        DROP PROCEDURE IF EXISTS `sp_habilitarAcceso`;
+        DROP PROCEDURE IF EXISTS `sp_deshabilitarAcceso`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUsuariosHabilitados`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUsuariosDeshabilitados`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUsuariosPendientes`;
         ');
     }
 }

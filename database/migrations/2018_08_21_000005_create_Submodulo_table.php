@@ -15,9 +15,9 @@ class CreateSubmoduloTable extends Migration
     {
         Schema::create('Submodulo', function (Blueprint $table) {
             $table->increments('idSubmodulo');
-            $table->string('nombre', 60);
+            $table->string('nombre', 60)->unique();
             $table->string('descripcion')->nullable()->default(null);
-            $table->string('ubicacion');
+            $table->string('ubicacion')->unique();
         });
     }
 

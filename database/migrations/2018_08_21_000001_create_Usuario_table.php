@@ -20,7 +20,7 @@ class CreateUsuarioTable extends Migration
             $table->string('appat', 60);
             $table->string('apmat', 60)->nullable()->default(null);
             $table->string('direccion');
-            $table->string('telefono', 20);
+            $table->string('telefono', 20)->unique();
             $table->string('email')->unique();
         });
     }
