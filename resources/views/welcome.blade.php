@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="apple-touch-icon" href="img/touch-icon-iphone.png" />
         <title>Laravel</title>
-
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
@@ -63,6 +63,10 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/brands.css" integrity="sha384-rf1bqOAj3+pw6NqYrtaE1/4Se2NBwkIfeYbsFdtiR6TQz0acWiwJbv1IM/Nt/ite" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -72,25 +76,24 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('register') }}">Registrar</a>
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <i class="fas fa-chess-knight fa-flip-horizontal"></i>CMS v0.3.8<i class="fas fa-chess-knight"></i>
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="http://construyendomissuenos.cl/" class="btn">Construyendo Mis Sueños</a>
+                    <a href="https://laravel.com/docs" class="btn"><i class="fab fa-laravel"></i> Laravel</a>
+                    <a href="https://vuejs.org/v2/guide/" class="btn"><i class="fab fa-vuejs"></i> Vue.js</a>
+                    <a href="https://gitlab.com/AIEP/Saber" class="btn"><i class="fab fa-gitlab"></i> GitLab</a>
                 </div>
             </div>
         </div>
+        <script src="/js/app.js"></script>
     </body>
 </html>
