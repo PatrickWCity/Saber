@@ -1,6 +1,6 @@
 <template>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" v-if="$gate.esAdmin()">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -207,6 +207,7 @@ export default {
       }
     },
     loadPerfiles() {
+      if(this.$gate.esAdmin()){
       axios
         .get("api/perfil")
         .then(({ data }) => (this.perfiles = data))
@@ -227,6 +228,7 @@ export default {
             });
           });
         });
+      }
     },
     crearPerfil() {
       this.$Progress.start();

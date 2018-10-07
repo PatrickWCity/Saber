@@ -43,4 +43,15 @@ class User extends Authenticatable implements MustVerifyEmail
     //{
     //    return $this->belongsTo('App\Usuario');
     //}
+    
+    // PerfilUsuario
+    public function roles()
+    {
+        return $this->belongsToMany('App\Perfil', 'PerfilUsuario', 'idUsuario', 'idPerfil');
+    }
+    // Consulta si el Usuario tiene el Perfil
+    public function tienePerfil(string $role)
+    {
+        return $this->roles()->where('nombre', $role)->count() == 1;
+    }
 }

@@ -1,6 +1,6 @@
 <template>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" v-if="$gate.esAdmin()">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -189,6 +189,7 @@ export default {
       Fire.$emit("RefrescarListadoSinCon");
     },
     loadModulos() {
+      if(this.$gate.esAdmin()){
       axios
         .get("api/moduloperfil")
         .then(
@@ -226,6 +227,7 @@ export default {
             });
           });
         });
+      }
     },
     loadModulos2() {
       axios

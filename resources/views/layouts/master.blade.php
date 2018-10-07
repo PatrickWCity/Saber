@@ -89,6 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </router-link>
               </li>
+              @can('esAdmin')
               <li class="nav-item">
                   <router-link to="/documento" class="nav-link" active-class="active">
                     <i class="nav-icon far fa-file-alt"></i>
@@ -97,6 +98,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </p>
                   </router-link>
                 </li>
+                @endcan
+                @canany(['esAdmin','esOrganizador'])
                 <li class="nav-item">
                     <router-link to="/evento" class="nav-link" active-class="active">
                       <i class="nav-icon far fa-calendar-check"></i>
@@ -104,8 +107,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         Eventos
                       </p>
                     </router-link>
-                  </li>
-              <li class="nav-item">
+                </li>
+                @endcanany
+                @canany(['esAdmin','esAutor'])
+                <li class="nav-item">
                   <router-link to="/noticia" class="nav-link" active-class="active">
                     <i class="nav-icon far fa-newspaper"></i>
                     <p>
@@ -113,6 +118,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </p>
                   </router-link>
                 </li>
+                @endcanany
+                @can('esAdmin')
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link" :class="{'active': subIsActive(['/usuario', '/modulo', '/submodulo', '/perfil'])}">
                   <i class="nav-icon fas fa-wrench"></i>
@@ -177,7 +184,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                     </ul>
                 </li>
-
+                
 
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link" :class="{'active': subIsActive(['/habilitarusuario', '/deshabilitarusuario', '/usuariopendiente'])}">
@@ -208,14 +215,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </li>
                   </ul>
               </li>
-
-
+              @endcan
+              @canany(['esDev','esAdmin'])
                     <li class="nav-item">
                       <router-link to="/desarrollador" class="nav-link" active-class="active">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>Desarrollador</p>
                       </router-link>
                     </li>
+              @endcanany
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
@@ -259,6 +267,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- Scripts -->
+@auth
+    <script>
+    window.user =@json(auth()->user()->roles)
+    </script>
+@endauth
+
 <script src="/js/manifest.js"></script>
 <script src="/js/vendor.js"></script>
 <script src="/js/app.js"></script>

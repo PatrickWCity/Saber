@@ -36,6 +36,9 @@ window.Vue = require('vue');
 
 import { Form, HasError, AlertError } from 'vform'
 
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 

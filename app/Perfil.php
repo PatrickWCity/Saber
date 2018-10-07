@@ -12,4 +12,10 @@ class Perfil extends Model
     public $primaryKey = 'idPerfil';
     // Timestamps
     public $timestamps = false;
+    // PerfilUsuario
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'PerfilUsuario', 'idPerfil', 'idUsuario');
+    }
 }
