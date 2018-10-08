@@ -106,15 +106,15 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Stores Usuario from Create View
+        // Stores Usuario from Update View
         $this->validate($request, [
-            'run' => 'max:10|unique:Usuario',
+            'run' => 'max:10|unique:Usuario,idUsuario'.$request->id,
             'nombre' => 'required|max:60',
             'appat' => 'required|max:60',
             'apmat' => 'max:60',
             'direccion' => 'required|max:255',
-            'telefono' => 'required|max:20|unique:Usuario',
-            'email' => 'required|max:255|unique:Usuario'
+            'telefono' => 'required|max:20|unique:Usuario,idUsuario'.$request->id,
+            'email' => 'required|max:255|unique:Usuario,idUsuario'.$request->id
         ]);
         $values = 
         [

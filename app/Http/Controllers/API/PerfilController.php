@@ -74,9 +74,9 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Stores Perfil from Create View
+        // Stores Perfil from Update View
         $this->validate($request, [
-            'nombre' => 'required|max:60|unique:Perfil',
+            'nombre' => 'required|max:60|unique:Perfil,idPerfil'.$request->id,
             'descripcion' => 'max:255'
         ]);
         $values = 

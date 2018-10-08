@@ -77,11 +77,11 @@ class SubmoduloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Stores Submodulo from Create View
+        // Stores Submodulo from Update View
         $this->validate($request, [
-            'nombre' => 'required|max:60|unique:Submodulo',
+            'nombre' => 'required|max:60|unique:Submodulo,idSubmodulo'.$request->id,
             'descripcion' => 'max:255',
-            'ubicacion' => 'required|max:60|unique:Submodulo'
+            'ubicacion' => 'required|max:60|unique:Submodulo,idSubmodulo'.$request->id,
         ]);
         $values = 
         [

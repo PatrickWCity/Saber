@@ -74,9 +74,9 @@ class ModuloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Stores Modulo from Create View
+        // Stores Modulo from Update View
         $this->validate($request, [
-            'nombre' => 'required|max:60|unique:Modulo',
+            'nombre' => 'required|max:60|unique:Modulo,idModulo'.$request->id,
             'descripcion' => 'max:255'
         ]);
         $values = 
