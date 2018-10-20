@@ -29,8 +29,8 @@ class PerfilTableSeeder extends Seeder
                 'descripcion' => 'El Autor crea las Noticias en el Sistema.',
             ],
             [
-                'nombre' => 'Organizador',
-                'descripcion' => 'El Organizador de Eventos es el que Organiza los Eventos dento del Sistema.',
+                'nombre' => 'Comunicador',
+                'descripcion' => 'El Encargado de Comunicaciones es el que Organiza los Eventos dento del Sistema.',
             ],
             [
                 'nombre' => 'Voluntario',
