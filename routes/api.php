@@ -27,5 +27,20 @@ Route::apiResources([
     'submodulomodulo' => 'API\SubmoduloModuloController',
     'habilitarusuario' => 'API\HabilitarController',
     'deshabilitarusuario' => 'API\DeshabilitarController',
-    'usuariopendiente' => 'API\PendienteController'
+    'usuariopendiente' => 'API\PendienteController',
+    'noticia' => 'API\NoticiaController',
+    'tiponoticia' => 'API\TipoNoticiaController',
+    'documento' => 'API\DocumentoController',
+    'tipodocumento' => 'API\TipoDocumentoController',
+    'evento' => 'API\EventoController',
+    'tipoevento' => 'API\TipoEventoController',
+    'voluntario' => 'API\VoluntarioController',
+    'sede' => 'API\SedeController',
+    'area' => 'API\AreaController',
+    'user' => 'API\UserController',
+    'expositor' => 'API\ExpositorController',
+    'tipovoluntario' => 'API\TipoVoluntarioController'
 ]);
+
+Route::get('profile', 'API\UserController@profile');
+Route::put('profile', 'API\UserController@updateProfile');
