@@ -90,9 +90,9 @@ export default class Gate{
         var i, x = "";
         for (i in this.user) {
             x += this.user[i].nombre;
-            if(this.user[i].nombre === 'Organizador')
+            if(this.user[i].nombre === 'Comunicador')
             {
-                return this.user[i].nombre === 'Organizador'
+                return this.user[i].nombre === 'Comunicador'
                 break;
             }
         }

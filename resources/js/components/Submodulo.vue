@@ -1,4 +1,5 @@
 <template>
+<div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" v-if="$gate.esAdmin()">
     <!-- Content Header (Page header) -->
@@ -80,7 +81,7 @@
     <!-- /.content -->
     <!-- Modal -->
     <div class="modal fade" id="submoduloModal" tabindex="-1" role="dialog" aria-labelledby="submoduloModalTitulo" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" v-show="esEditar" id="submoduloModalTitulo">Actualizar Submódulo</h5>
@@ -98,7 +99,7 @@
               </div>
               <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <input v-model="form.descripcion" type="text" name="descripcion" class="form-control" :class="{ 'is-invalid': form.errors.has('descripcion') }" placeholder="Descripción de Submodulo">
+                <textarea v-model="form.descripcion" type="text" name="descripcion" class="form-control" :class="{ 'is-invalid': form.errors.has('descripcion') }" placeholder="Descripción de Submodulo"></textarea>
                 <has-error :form="form" field="descripcion"></has-error>
               </div>
               <div class="form-group">
@@ -118,6 +119,8 @@
     </div>
   </div>
   <!-- /.content-wrapper -->
+  <unauthorized v-if="!$gate.esAdmin()"></unauthorized>
+</div>
 </template>
 
 <script>
@@ -224,7 +227,44 @@ export default {
         .then(() => {
           $(document).ready(function() {
             table = $("#listado").DataTable({
-              responsive: true,
+              dom: "lBfrtip",
+                buttons: [
+                  {
+                    extend: "copy",
+                    title: null,
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "csv",
+                    title: "Listado de Submódulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "excel",
+                    title: "Listado de Submódulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "pdf",
+                    title: "Listado de Submódulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "print",
+                    title: "Listado de Submódulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  }
+                ],
               destroy: true,
               language: esp,
               order: [[ 0, "desc" ]],

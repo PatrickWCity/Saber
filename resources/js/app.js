@@ -20,7 +20,20 @@ const esp = {
 	"oAria": {
 		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
 		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-	}
+	},
+    "buttons": {
+        "copy": 'Copiar',
+        "csv": 'CSV',
+        "excel": 'Excel',
+        "pdf": 'PDF',
+        "print": 'Imprimir',
+        copyTitle: 'Copiado al portapapeles',
+        copyKeys: 'Presione <i>ctrl</i> o <i>\u2318</i> + <i>C</i> para copiar los datos de la tabla<br>a su sistema de portapapeles.<br><br>Para cancelar, haga clic en este mensaje o presione escape.',
+        copySuccess: {
+            _: '%d líneas copiadas',
+            1: '1 línea copiada'
+        }
+    }
 }
 window.esp = esp;
 
@@ -33,6 +46,8 @@ window.esp = esp;
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+import moment from 'moment';
 
 import { Form, HasError, AlertError } from 'vform'
 
@@ -56,8 +71,16 @@ window.toast = toast;
 
 window.Form = Form;
 
+import datePicker from 'vue-bootstrap-datetimepicker';
+Vue.use(datePicker);
+
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+
+Vue.filter('myDate', function(created){
+    moment.locale('es');
+    return moment(created).format('LLLL');
+})
 
 import VueProgressBar from 'vue-progressbar'
 Vue.use(VueProgressBar, {
@@ -79,11 +102,23 @@ let routes = [
     { path: '/moduloperfil', component: require('./components/ModuloPerfil.vue') },
     { path: '/submodulomodulo', component: require('./components/SubmoduloModulo.vue') },
     { path: '/documento', component: require('./components/Documento.vue') },
+    { path: '/tipodocumento', component: require('./components/TipoDocumento.vue') },
     { path: '/noticia', component: require('./components/Noticia.vue') },
+    { path: '/tiponoticia', component: require('./components/TipoNoticia.vue') },
     { path: '/evento', component: require('./components/Evento.vue') },
+    { path: '/tipoevento', component: require('./components/TipoEvento.vue') },
     { path: '/habilitarusuario', component: require('./components/HabilitarUsuario.vue') },
     { path: '/deshabilitarusuario', component: require('./components/DeshabilitarUsuario.vue') },
-    { path: '/usuariopendiente', component: require('./components/UsuarioPendiente.vue') }
+    { path: '/usuariopendiente', component: require('./components/UsuarioPendiente.vue') },
+    { path: '/voluntario', component: require('./components/Voluntario.vue') },
+    { path: '/sede', component: require('./components/Sede.vue') },
+    { path: '/area', component: require('./components/Area.vue') },
+    { path: '/expositor', component: require('./components/Expositor.vue') },
+    { path: '/tipovoluntario', component: require('./components/TipoVoluntario.vue') },
+    { path: '/403', component: require('./components/Unauthorized.vue') },
+    { path: '/404', component: require('./components/NotFound.vue') },
+    { path: '/500', component: require('./components/Error.vue') },
+    { path: '/503', component: require('./components/Maintenance.vue') }
 ]
 
 const router = new VueRouter({
@@ -112,6 +147,11 @@ Vue.component(
 Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue')
+);
+
+Vue.component(
+    'unauthorized',
+    require('./components/Unauthorized.vue')
 );
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));

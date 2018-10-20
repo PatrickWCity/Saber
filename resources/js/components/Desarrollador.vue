@@ -1,4 +1,5 @@
 <template>
+<div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" v-if="$gate.esAdmin() || $gate.esDev()">
     <!-- Content Header (Page header) -->
@@ -38,4 +39,7 @@
     <!-- /.content -->
     </div>
   </div>
+  <!-- /.content-wrapper -->
+  <unauthorized v-if="(!$gate.esAdmin() && !$gate.esDev()) || (!$gate.esDev() && $gate.esAdmin()) && ($gate.esDev() && !$gate.esAdmin())"></unauthorized>
+</div>
 </template>

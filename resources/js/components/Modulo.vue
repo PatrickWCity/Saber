@@ -1,4 +1,5 @@
 <template>
+<div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" v-if="$gate.esAdmin()">
     <!-- Content Header (Page header) -->
@@ -78,7 +79,7 @@
     <!-- /.content -->
     <!-- Modal -->
     <div class="modal fade" id="moduloModal" tabindex="-1" role="dialog" aria-labelledby="moduloModalTitulo" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" v-show="esEditar" id="moduloModalTitulo">Actualizar Módulo</h5>
@@ -96,7 +97,7 @@
               </div>
               <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <input v-model="form.descripcion" type="text" name="descripcion" class="form-control" :class="{ 'is-invalid': form.errors.has('descripcion') }" placeholder="Descripción de Modulo">
+                <textarea v-model="form.descripcion" type="text" name="descripcion" class="form-control" :class="{ 'is-invalid': form.errors.has('descripcion') }" placeholder="Descripción de Modulo"></textarea>
                 <has-error :form="form" field="descripcion"></has-error>
               </div>
             </div>
@@ -111,6 +112,8 @@
     </div>
   </div>
   <!-- /.content-wrapper -->
+  <unauthorized v-if="!$gate.esAdmin()"></unauthorized>
+</div>
 </template>
 
 <script>
@@ -207,27 +210,64 @@ export default {
       }
     },
     loadModulos() {
-      if(this.$gate.esAdmin()){
-      axios
-        .get("api/modulo")
-        .then(({ data }) => (this.modulos = data))
-        .then(() => {
-          $(document).ready(function() {
-            table = $("#listado").DataTable({
-              responsive: true,
-              destroy: true,
-              language: esp,
-              order: [[ 0, "desc" ]],
-              columnDefs: [
-                {
-                  searchable: false,
-                  orderable: false,
-                  targets: 3
-                }
-              ]
+      if (this.$gate.esAdmin()) {
+        axios
+          .get("api/modulo")
+          .then(({ data }) => (this.modulos = data))
+          .then(() => {
+            $(document).ready(function() {
+              table = $("#listado").DataTable({
+                dom: "lBfrtip",
+                buttons: [
+                  {
+                    extend: "copy",
+                    title: null,
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "csv",
+                    title: "Listado de Módulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "excel",
+                    title: "Listado de Módulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "pdf",
+                    title: "Listado de Módulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  },
+                  {
+                    extend: "print",
+                    title: "Listado de Módulos",
+                    exportOptions: {
+                      columns: "th:not(:last-child)"
+                    }
+                  }
+                ],
+                destroy: true,
+                language: esp,
+                order: [[0, "desc"]],
+                columnDefs: [
+                  {
+                    searchable: false,
+                    orderable: false,
+                    targets: 3
+                  }
+                ]
+              });
             });
           });
-        });
       }
     },
     crearModulo() {

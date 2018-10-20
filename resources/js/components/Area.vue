@@ -7,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Mantenedor de Perfiles</h1>
+            <h1 class="m-0 text-dark">Areas</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-              <li class="breadcrumb-item active">Perfiles</li>
+              <li class="breadcrumb-item active">Areas</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Listado de Perfiles</h3>
+                <h3 class="card-title">Listado de Areas</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-primary center-block" @click="crearModal"><i class="fas fa-plus"></i> Crear</button>
                 </div>
@@ -48,16 +48,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="perfil in perfiles" :key="perfil.idPerfil">
-                        <td>{{perfil.idPerfil}}</td>
-                        <td>{{perfil.nombre}}</td>
-                        <td>{{perfil.descripcion}}</td>
+                      <tr v-for="area in areas" :key="area.idArea">
+                        <td>{{area.idArea}}</td>
+                        <td>{{area.nombre}}</td>
+                        <td>{{area.descripcion}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
-                            <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(perfil)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(area)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarPerfil(perfil.idPerfil)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarArea(area.idArea)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -78,26 +78,26 @@
     </div>
     <!-- /.content -->
     <!-- Modal -->
-    <div class="modal fade" id="perfilModal" tabindex="-1" role="dialog" aria-labelledby="perfilModalTitulo" aria-hidden="true">
+    <div class="modal fade" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="areaModalTitulo" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" v-show="esEditar" id="perfilModalTitulo">Actualizar Perfil</h5>
-            <h5 class="modal-title" v-show="!esEditar" id="perfilModalTitulo">Crear Perfil</h5>
+            <h5 class="modal-title" v-show="esEditar" id="areaModalTitulo">Actualizar Area</h5>
+            <h5 class="modal-title" v-show="!esEditar" id="areaModalTitulo">Crear Area</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form @submit.prevent="esEditar ? actualizarPerfil() : crearPerfil()" @keydown="form.onKeydown($event)">
+          <form @submit.prevent="esEditar ? actualizarArea() : crearArea()" @keydown="form.onKeydown($event)">
             <div class="modal-body">
               <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input v-model="form.nombre" type="text" name="nombre" class="form-control" :class="{ 'is-invalid': form.errors.has('nombre') }" placeholder="Nombre de Perfil">
+                <input v-model="form.nombre" type="text" name="nombre" class="form-control" :class="{ 'is-invalid': form.errors.has('nombre') }" placeholder="Nombre de Area">
                 <has-error :form="form" field="nombre"></has-error>
               </div>
               <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea v-model="form.descripcion" type="text" name="descripcion" class="form-control" :class="{ 'is-invalid': form.errors.has('descripcion') }" placeholder="Descripción de Perfil"></textarea>
+                <textarea v-model="form.descripcion" type="text" name="descripcion" class="form-control" :class="{ 'is-invalid': form.errors.has('descripcion') }" placeholder="Descripción de Area"></textarea>
                 <has-error :form="form" field="descripcion"></has-error>
               </div>
             </div>
@@ -118,13 +118,18 @@
 
 <script>
 var table;
+$(document).ready(function() {
+  if(window.location.href.indexOf('#areaModal') != -1) {
+    $('#areaModal').modal('show');
+  }
+});
 export default {
   data() {
     return {
       esEditar: false,
-      perfiles: {},
+      areas: {},
       form: new Form({
-        idPerfil: "",
+        idArea: "",
         nombre: "",
         descripcion: "",
         palabraClave: ""
@@ -132,23 +137,23 @@ export default {
     };
   },
   methods: {
-    actualizarPerfil() {
+    actualizarArea() {
       this.$Progress.start();
       this.form
-        .put("api/perfil/" + this.form.idPerfil)
+        .put("api/area/" + this.form.idArea)
         .then(() => {
-          Fire.$emit("RefrescarListadoPerfil");
-          $("#perfilModal").modal("hide");
+          Fire.$emit("RefrescarListadoArea");
+          $("#areaModal").modal("hide");
           toast({
             type: "success",
-            title: "¡El Perfil fue Actualizado con Exito!"
+            title: "¡La Area fue Actualizada con Exito!"
           });
           this.$Progress.finish();
         })
         .catch(() => {
           toast({
             type: "warning",
-            title: "¡El Perfil no pudo ser Actualizado con Exito!"
+            title: "¡La Area no pudo ser Actualizada con Exito!"
           });
           this.$Progress.fail();
         });
@@ -157,67 +162,67 @@ export default {
       this.esEditar = false;
       this.form.reset();
       this.form.clear();
-      $("#perfilModal").modal("show");
+      $("#areaModal").modal("show");
     },
-    editarModal(perfil) {
+    editarModal(area) {
       this.esEditar = true;
       this.form.reset();
       this.form.clear();
-      $("#perfilModal").modal("show");
-      this.form.fill(perfil);
+      $("#areaModal").modal("show");
+      this.form.fill(area);
     },
-    eliminarPerfil(idPerfil) {
+    eliminarArea(idArea) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Perfil de ID: " + idPerfil + "?",
+          "¿Está seguro que desea eliminar la Area de ID: " + idArea + "?",
         text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         cancelButtonText: "¡No, Cancelar!",
-        confirmButtonText: "¡Si, Eliminar Perfil!"
+        confirmButtonText: "¡Si, Eliminar Area!"
       }).then(result => {
         if (result.value) {
           this.$Progress.start();
           this.form
-            .delete("api/perfil/" + idPerfil)
+            .delete("api/area/" + idArea)
             .then(() => {
-              Fire.$emit("RefrescarListadoPerfil");
+              Fire.$emit("RefrescarListadoArea");
               toast({
                 type: "success",
-                title: "¡El Perfil fue Eliminado con Exito!"
+                title: "¡La Area fue Eliminada con Exito!"
               });
               this.$Progress.finish();
             })
             .catch(() => {
               toast({
                 type: "warning",
-                title: "¡El Perfil no pudo ser Eliminado con Exito!"
+                title: "¡La Area no pudo ser Eliminada con Exito!"
               });
               this.$Progress.fail();
             });
         }
       });
     },
-    buscarPerfil() {
+    buscarArea() {
       if (palabraClave == null || palabraClave == "") {
-        axios.get("api/perfil").then(({ data }) => (this.perfiles = data));
+        axios.get("api/area").then(({ data }) => (this.areas = data));
       } else {
         axios
-          .get("api/perfil/" + palabraClave)
-          .then(({ data }) => (this.perfiles = data));
+          .get("api/area/" + palabraClave)
+          .then(({ data }) => (this.areas = data));
       }
     },
-    loadPerfiles() {
-      if(this.$gate.esAdmin()){
-      axios
-        .get("api/perfil")
-        .then(({ data }) => (this.perfiles = data))
-        .then(() => {
-          $(document).ready(function() {
-            table = $("#listado").DataTable({
-              dom: "lBfrtip",
+    loadAreas() {
+      if (this.$gate.esAdmin()) {
+        axios
+          .get("api/area")
+          .then(({ data }) => (this.areas = data))
+          .then(() => {
+            $(document).ready(function() {
+              table = $("#listado").DataTable({
+                dom: "lBfrtip",
                 buttons: [
                   {
                     extend: "copy",
@@ -228,65 +233,65 @@ export default {
                   },
                   {
                     extend: "csv",
-                    title: "Listado de Perfiles",
+                    title: "Listado de Areas",
                     exportOptions: {
                       columns: "th:not(:last-child)"
                     }
                   },
                   {
                     extend: "excel",
-                    title: "Listado de Perfiles",
+                    title: "Listado de Areas",
                     exportOptions: {
                       columns: "th:not(:last-child)"
                     }
                   },
                   {
                     extend: "pdf",
-                    title: "Listado de Perfiles",
+                    title: "Listado de Areas",
                     exportOptions: {
                       columns: "th:not(:last-child)"
                     }
                   },
                   {
                     extend: "print",
-                    title: "Listado de Perfiles",
+                    title: "Listado de Areas",
                     exportOptions: {
                       columns: "th:not(:last-child)"
                     }
                   }
                 ],
-              destroy: true,
-              language: esp,
-              order: [[ 0, "desc" ]],
-              columnDefs: [
-                {
-                  searchable: false,
-                  orderable: false,
-                  targets: 3
-                }
-              ]
+                destroy: true,
+                language: esp,
+                order: [[0, "desc"]],
+                columnDefs: [
+                  {
+                    searchable: false,
+                    orderable: false,
+                    targets: 3
+                  }
+                ]
+              });
             });
           });
-        });
       }
     },
-    crearPerfil() {
+    crearArea() {
       this.$Progress.start();
       this.form
-        .post("api/perfil")
+        .post("api/area")
         .then(() => {
-          Fire.$emit("RefrescarListadoPerfil");
-          $("#perfilModal").modal("hide");
+          Fire.$emit("RefrescarListadoArea");
+          $("#areaModal").modal("hide");
           toast({
             type: "success",
-            title: "¡El Perfil fue Creado con Exito!"
+            title: "¡La Area fue Creada con Exito!"
           });
           this.$Progress.finish();
         })
         .catch(() => {
           toast({
             type: "warning",
-            title: "¡El Perfil no pudo ser Ingresado con Exito!"
+            title: "¡La Area no pudo ser Ingresada con Exito!"
           });
           this.$Progress.fail();
         });
@@ -294,10 +299,10 @@ export default {
   },
   created() {
     this.$Progress.start();
-    this.loadPerfiles();
-    Fire.$on("RefrescarListadoPerfil", () => {
+    this.loadAreas();
+    Fire.$on("RefrescarListadoArea", () => {
       table.destroy();
-      this.loadPerfiles();
+      this.loadAreas();
     });
     this.$Progress.finish();
   }

@@ -1,4 +1,5 @@
 <template>
+<div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" v-if="$gate.esAdmin()">
     <!-- Content Header (Page header) -->
@@ -125,6 +126,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <unauthorized v-if="!$gate.esAdmin()"></unauthorized>
+</div>
 </template>
 
 <script>
@@ -210,7 +213,6 @@ export default {
         .then(() => {
           $(document).ready(function() {
             tableSin = $("#listadoSin").DataTable({
-              responsive: true,
               destroy: true,
               language: esp,
               columnDefs: [
@@ -222,7 +224,6 @@ export default {
               ]
             });
             tableCon = $("#listadoCon").DataTable({
-              responsive: true,
               destroy: true,
               language: esp,
               columnDefs: [
@@ -250,7 +251,6 @@ export default {
         .then(() => {
           $(document).ready(function() {
             tableSin = $("#listadoSin").DataTable({
-              responsive: true,
               destroy: true,
               language: esp,
               columnDefs: [
@@ -262,7 +262,6 @@ export default {
               ]
             });
             tableCon = $("#listadoCon").DataTable({
-              responsive: true,
               destroy: true,
               language: esp,
               columnDefs: [
