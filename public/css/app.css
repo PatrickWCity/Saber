@@ -14137,214 +14137,388 @@ a.text-muted:hover {
 .elevation-5 {
   -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
           box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-}table.dataTable {
-  clear: both;
-  margin-top: 6px !important;
-  margin-bottom: 6px !important;
-  max-width: none !important;
-  border-collapse: separate !important;
-  border-spacing: 0;
+}/*!
+ * Datetimepicker for Bootstrap 3
+ * version : 4.17.47
+ * https://github.com/Eonasdan/bootstrap-datetimepicker/
+ */
+.bootstrap-datetimepicker-widget {
+  list-style: none;
 }
-table.dataTable td,
-table.dataTable th {
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-}
-table.dataTable td.dataTables_empty,
-table.dataTable th.dataTables_empty {
-  text-align: center;
-}
-table.dataTable.nowrap th,
-table.dataTable.nowrap td {
-  white-space: nowrap;
-}
-
-div.dataTables_wrapper div.dataTables_length label {
-  font-weight: normal;
-  text-align: left;
-  white-space: nowrap;
-}
-div.dataTables_wrapper div.dataTables_length select {
-  width: auto;
-  display: inline-block;
-}
-div.dataTables_wrapper div.dataTables_filter {
-  text-align: right;
-}
-div.dataTables_wrapper div.dataTables_filter label {
-  font-weight: normal;
-  white-space: nowrap;
-  text-align: left;
-}
-div.dataTables_wrapper div.dataTables_filter input {
-  margin-left: 0.5em;
-  display: inline-block;
-  width: auto;
-}
-div.dataTables_wrapper div.dataTables_info {
-  padding-top: 0.85em;
-  white-space: nowrap;
-}
-div.dataTables_wrapper div.dataTables_paginate {
-  margin: 0;
-  white-space: nowrap;
-  text-align: right;
-}
-div.dataTables_wrapper div.dataTables_paginate ul.pagination {
-  margin: 2px 0;
-  white-space: nowrap;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-}
-div.dataTables_wrapper div.dataTables_processing {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  margin-left: -100px;
-  margin-top: -26px;
-  text-align: center;
-  padding: 1em 0;
-}
-
-table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting,
-table.dataTable thead > tr > td.sorting_asc,
-table.dataTable thead > tr > td.sorting_desc,
-table.dataTable thead > tr > td.sorting {
-  padding-right: 30px;
-}
-table.dataTable thead > tr > th:active,
-table.dataTable thead > tr > td:active {
-  outline: none;
-}
-table.dataTable thead .sorting,
-table.dataTable thead .sorting_asc,
-table.dataTable thead .sorting_desc,
-table.dataTable thead .sorting_asc_disabled,
-table.dataTable thead .sorting_desc_disabled {
-  cursor: pointer;
-  position: relative;
-}
-table.dataTable thead .sorting:before, table.dataTable thead .sorting:after,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:before,
-table.dataTable thead .sorting_desc_disabled:after {
-  position: absolute;
-  bottom: 0.9em;
+.bootstrap-datetimepicker-widget.dropdown-menu {
   display: block;
-  opacity: 0.3;
+  margin: 2px 0;
+  padding: 4px;
+  width: 19em;
 }
-table.dataTable thead .sorting:before,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc_disabled:before {
-  right: 1em;
-  content: "\2191";
-}
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:after {
-  right: 0.5em;
-  content: "\2193";
-}
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_desc:after {
-  opacity: 1;
-}
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc_disabled:after {
-  opacity: 0;
-}
-
-div.dataTables_scrollHead table.dataTable {
-  margin-bottom: 0 !important;
-}
-
-div.dataTables_scrollBody table {
-  border-top: none;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-div.dataTables_scrollBody table thead .sorting:before,
-div.dataTables_scrollBody table thead .sorting_asc:before,
-div.dataTables_scrollBody table thead .sorting_desc:before,
-div.dataTables_scrollBody table thead .sorting:after,
-div.dataTables_scrollBody table thead .sorting_asc:after,
-div.dataTables_scrollBody table thead .sorting_desc:after {
-  display: none;
-}
-div.dataTables_scrollBody table tbody tr:first-child th,
-div.dataTables_scrollBody table tbody tr:first-child td {
-  border-top: none;
-}
-
-div.dataTables_scrollFoot > .dataTables_scrollFootInner {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-}
-div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
-  margin-top: 0 !important;
-  border-top: none;
-}
-
-@media screen and (max-width: 767px) {
-  div.dataTables_wrapper div.dataTables_length,
-  div.dataTables_wrapper div.dataTables_filter,
-  div.dataTables_wrapper div.dataTables_info,
-  div.dataTables_wrapper div.dataTables_paginate {
-    text-align: center;
+@media (min-width: 576px) {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
   }
 }
-table.dataTable.table-sm > thead > tr > th {
-  padding-right: 20px;
+@media (min-width: 768px) {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
 }
-table.dataTable.table-sm .sorting:before,
-table.dataTable.table-sm .sorting_asc:before,
-table.dataTable.table-sm .sorting_desc:before {
-  top: 5px;
-  right: 0.85em;
+@media (min-width: 992px) {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
 }
-table.dataTable.table-sm .sorting:after,
-table.dataTable.table-sm .sorting_asc:after,
-table.dataTable.table-sm .sorting_desc:after {
-  top: 5px;
+.bootstrap-datetimepicker-widget.dropdown-menu:before,
+.bootstrap-datetimepicker-widget.dropdown-menu:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
 }
-
-table.table-bordered.dataTable th,
-table.table-bordered.dataTable td {
-  border-left-width: 0;
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  top: -7px;
+  left: 7px;
 }
-table.table-bordered.dataTable th:last-child, table.table-bordered.dataTable th:last-child,
-table.table-bordered.dataTable td:last-child,
-table.table-bordered.dataTable td:last-child {
-  border-right-width: 0;
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  top: -6px;
+  left: 8px;
 }
-table.table-bordered.dataTable tbody th,
-table.table-bordered.dataTable tbody td {
-  border-bottom-width: 0;
+.bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #ccc;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  bottom: -7px;
+  left: 6px;
 }
-
-div.dataTables_scrollHead table.table-bordered {
-  border-bottom-width: 0;
+.bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  bottom: -6px;
+  left: 7px;
 }
-
-div.table-responsive > div.dataTables_wrapper > div.row {
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
+  left: auto;
+  right: 6px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
+  left: auto;
+  right: 7px;
+}
+.bootstrap-datetimepicker-widget .list-unstyled {
   margin: 0;
 }
-div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:first-child {
-  padding-left: 0;
+.bootstrap-datetimepicker-widget a[data-action] {
+  padding: 6px 0;
 }
-div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
-  padding-right: 0;
+.bootstrap-datetimepicker-widget a[data-action]:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second {
+  width: 54px;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget button[data-action] {
+  padding: 6px;
+}
+.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Increment Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Increment Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Decrement Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Decrement Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Show Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Show Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Toggle AM/PM";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Clear the picker";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Set the date to today";
+}
+.bootstrap-datetimepicker-widget .picker-switch {
+  text-align: center;
+}
+.bootstrap-datetimepicker-widget .picker-switch::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Toggle Date and Time Screens";
+}
+.bootstrap-datetimepicker-widget .picker-switch td {
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  line-height: inherit;
+}
+.bootstrap-datetimepicker-widget .picker-switch td span,
+.bootstrap-datetimepicker-widget .picker-switch td i {
+  line-height: 2.5;
+  height: 2.5em;
+  width: 100%;
+}
+.bootstrap-datetimepicker-widget table {
+  width: 100%;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 0.5em;
+}
+.bootstrap-datetimepicker-widget table th {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+}
+.bootstrap-datetimepicker-widget table th.picker-switch {
+  width: 145px;
+}
+.bootstrap-datetimepicker-widget table th.disabled,
+.bootstrap-datetimepicker-widget table th.disabled:hover {
+  background: none;
+  color: #dee2e6;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget table th.prev::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Previous Month";
+}
+.bootstrap-datetimepicker-widget table th.next::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Next Month";
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
+  cursor: pointer;
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+  background: #f8f9fa;
+}
+.bootstrap-datetimepicker-widget table td {
+  height: 54px;
+  line-height: 54px;
+  width: 54px;
+}
+.bootstrap-datetimepicker-widget table td.cw {
+  font-size: .8em;
+  height: 20px;
+  line-height: 20px;
+  color: #dee2e6;
+}
+.bootstrap-datetimepicker-widget table td.day {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+}
+.bootstrap-datetimepicker-widget table td.day:hover,
+.bootstrap-datetimepicker-widget table td.hour:hover,
+.bootstrap-datetimepicker-widget table td.minute:hover,
+.bootstrap-datetimepicker-widget table td.second:hover {
+  background: #f8f9fa;
+  cursor: pointer;
+}
+.bootstrap-datetimepicker-widget table td.old,
+.bootstrap-datetimepicker-widget table td.new {
+  color: #dee2e6;
+}
+.bootstrap-datetimepicker-widget table td.today {
+  position: relative;
+}
+.bootstrap-datetimepicker-widget table td.today:before {
+  content: '';
+  display: inline-block;
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
+  border-bottom-color: #dee2e6;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #dee2e6;
+  color: #007bff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bootstrap-datetimepicker-widget table td.active.today:before {
+  border-bottom-color: #fff;
+}
+.bootstrap-datetimepicker-widget table td.disabled,
+.bootstrap-datetimepicker-widget table td.disabled:hover {
+  background: none;
+  color: #dee2e6;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget table td span,
+.bootstrap-datetimepicker-widget table td i {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  margin: 2px 1.5px;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+.bootstrap-datetimepicker-widget table td span:hover,
+.bootstrap-datetimepicker-widget table td i:hover {
+  background: #f8f9fa;
+}
+.bootstrap-datetimepicker-widget table td span.active,
+.bootstrap-datetimepicker-widget table td i.active {
+  background-color: #dee2e6;
+  color: #007bff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bootstrap-datetimepicker-widget table td span.old,
+.bootstrap-datetimepicker-widget table td i.old {
+  color: #dee2e6;
+}
+.bootstrap-datetimepicker-widget table td span.disabled,
+.bootstrap-datetimepicker-widget table td i.disabled,
+.bootstrap-datetimepicker-widget table td span.disabled:hover,
+.bootstrap-datetimepicker-widget table td i.disabled:hover {
+  background: none;
+  color: #dee2e6;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget.usetwentyfour td.hour {
+  height: 27px;
+  line-height: 27px;
+}
+.bootstrap-datetimepicker-widget.wider {
+  width: 21em;
+}
+.bootstrap-datetimepicker-widget .datepicker-decades .decade {
+  line-height: 1.8em !important;
+}
+.input-group.date .input-group-addon {
+  cursor: pointer;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
@@ -24820,7 +24994,7 @@ a.text-dark:focus {
 }
 
 /*!
- * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -25066,6 +25240,10 @@ readers do not read off random characters that represent icons */
 
 .fa-accusoft:before {
   content: "\F369";
+}
+
+.fa-acquisitions-incorporated:before {
+  content: "\F6AF";
 }
 
 .fa-ad:before {
@@ -25488,6 +25666,10 @@ readers do not read off random characters that represent icons */
   content: "\F517";
 }
 
+.fa-blender-phone:before {
+  content: "\F6B6";
+}
+
 .fa-blind:before {
   content: "\F29D";
 }
@@ -25530,6 +25712,10 @@ readers do not read off random characters that represent icons */
 
 .fa-book:before {
   content: "\F02D";
+}
+
+.fa-book-dead:before {
+  content: "\F6B7";
 }
 
 .fa-book-open:before {
@@ -25668,6 +25854,10 @@ readers do not read off random characters that represent icons */
   content: "\F083";
 }
 
+.fa-campground:before {
+  content: "\F6BB";
+}
+
 .fa-cannabis:before {
   content: "\F55F";
 }
@@ -25736,6 +25926,10 @@ readers do not read off random characters that represent icons */
   content: "\F217";
 }
 
+.fa-cat:before {
+  content: "\F6BE";
+}
+
 .fa-cc-amazon-pay:before {
   content: "\F42D";
 }
@@ -25782,6 +25976,10 @@ readers do not read off random characters that represent icons */
 
 .fa-certificate:before {
   content: "\F0A3";
+}
+
+.fa-chair:before {
+  content: "\F6C0";
 }
 
 .fa-chalkboard:before {
@@ -25946,6 +26144,14 @@ readers do not read off random characters that represent icons */
 
 .fa-cloud-download-alt:before {
   content: "\F381";
+}
+
+.fa-cloud-moon:before {
+  content: "\F6C3";
+}
+
+.fa-cloud-sun:before {
+  content: "\F6C4";
 }
 
 .fa-cloud-upload-alt:before {
@@ -26132,8 +26338,16 @@ readers do not read off random characters that represent icons */
   content: "\F4F2";
 }
 
+.fa-creative-commons-zero:before {
+  content: "\F4F3";
+}
+
 .fa-credit-card:before {
   content: "\F09D";
+}
+
+.fa-critical-role:before {
+  content: "\F6C9";
 }
 
 .fa-crop:before {
@@ -26216,6 +26430,10 @@ readers do not read off random characters that represent icons */
   content: "\F108";
 }
 
+.fa-dev:before {
+  content: "\F6CC";
+}
+
 .fa-deviantart:before {
   content: "\F1BD";
 }
@@ -26230,6 +26448,14 @@ readers do not read off random characters that represent icons */
 
 .fa-dice:before {
   content: "\F522";
+}
+
+.fa-dice-d20:before {
+  content: "\F6CF";
+}
+
+.fa-dice-d6:before {
+  content: "\F6D1";
 }
 
 .fa-dice-five:before {
@@ -26300,6 +26526,10 @@ readers do not read off random characters that represent icons */
   content: "\F395";
 }
 
+.fa-dog:before {
+  content: "\F6D3";
+}
+
 .fa-dollar-sign:before {
   content: "\F155";
 }
@@ -26344,6 +26574,10 @@ readers do not read off random characters that represent icons */
   content: "\F568";
 }
 
+.fa-dragon:before {
+  content: "\F6D5";
+}
+
 .fa-draw-polygon:before {
   content: "\F5EE";
 }
@@ -26368,12 +26602,20 @@ readers do not read off random characters that represent icons */
   content: "\F56A";
 }
 
+.fa-drumstick-bite:before {
+  content: "\F6D7";
+}
+
 .fa-drupal:before {
   content: "\F1A9";
 }
 
 .fa-dumbbell:before {
   content: "\F44B";
+}
+
+.fa-dungeon:before {
+  content: "\F6D9";
 }
 
 .fa-dyalog:before {
@@ -26532,6 +26774,10 @@ readers do not read off random characters that represent icons */
   content: "\F082";
 }
 
+.fa-fantasy-flight-games:before {
+  content: "\F6DC";
+}
+
 .fa-fast-backward:before {
   content: "\F049";
 }
@@ -26582,6 +26828,10 @@ readers do not read off random characters that represent icons */
 
 .fa-file-contract:before {
   content: "\F56C";
+}
+
+.fa-file-csv:before {
+  content: "\F6DD";
 }
 
 .fa-file-download:before {
@@ -26698,6 +26948,10 @@ readers do not read off random characters that represent icons */
 
 .fa-fish:before {
   content: "\F578";
+}
+
+.fa-fist-raised:before {
+  content: "\F6DE";
 }
 
 .fa-flag:before {
@@ -26866,6 +27120,10 @@ readers do not read off random characters that represent icons */
 
 .fa-gg-circle:before {
   content: "\F261";
+}
+
+.fa-ghost:before {
+  content: "\F6E2";
 }
 
 .fa-gift:before {
@@ -27100,6 +27358,10 @@ readers do not read off random characters that represent icons */
   content: "\F5F7";
 }
 
+.fa-hammer:before {
+  content: "\F6E3";
+}
+
 .fa-hamsa:before {
   content: "\F665";
 }
@@ -27172,8 +27434,16 @@ readers do not read off random characters that represent icons */
   content: "\F2B5";
 }
 
+.fa-hanukiah:before {
+  content: "\F6E6";
+}
+
 .fa-hashtag:before {
   content: "\F292";
+}
+
+.fa-hat-wizard:before {
+  content: "\F6E8";
 }
 
 .fa-haykal:before {
@@ -27216,6 +27486,14 @@ readers do not read off random characters that represent icons */
   content: "\F591";
 }
 
+.fa-hiking:before {
+  content: "\F6EC";
+}
+
+.fa-hippo:before {
+  content: "\F6ED";
+}
+
 .fa-hips:before {
   content: "\F452";
 }
@@ -27242,6 +27520,10 @@ readers do not read off random characters that represent icons */
 
 .fa-hornbill:before {
   content: "\F592";
+}
+
+.fa-horse:before {
+  content: "\F6F0";
 }
 
 .fa-hospital:before {
@@ -27284,8 +27566,16 @@ readers do not read off random characters that represent icons */
   content: "\F251";
 }
 
+.fa-house-damage:before {
+  content: "\F6F1";
+}
+
 .fa-houzz:before {
   content: "\F27C";
+}
+
+.fa-hryvnia:before {
+  content: "\F6F2";
 }
 
 .fa-html5:before {
@@ -27728,6 +28018,10 @@ readers do not read off random characters that represent icons */
   content: "\F22A";
 }
 
+.fa-mask:before {
+  content: "\F6FA";
+}
+
 .fa-mastodon:before {
   content: "\F4F6";
 }
@@ -27904,6 +28198,10 @@ readers do not read off random characters that represent icons */
   content: "\F21C";
 }
 
+.fa-mountain:before {
+  content: "\F6FC";
+}
+
 .fa-mouse-pointer:before {
   content: "\F245";
 }
@@ -27918,6 +28216,10 @@ readers do not read off random characters that represent icons */
 
 .fa-neos:before {
   content: "\F612";
+}
+
+.fa-network-wired:before {
+  content: "\F6FF";
 }
 
 .fa-neuter:before {
@@ -28010,6 +28312,10 @@ readers do not read off random characters that represent icons */
 
 .fa-osi:before {
   content: "\F41A";
+}
+
+.fa-otter:before {
+  content: "\F700";
 }
 
 .fa-outdent:before {
@@ -28126,6 +28432,10 @@ readers do not read off random characters that represent icons */
 
 .fa-pencil-ruler:before {
   content: "\F5AE";
+}
+
+.fa-penny-arcade:before {
+  content: "\F704";
 }
 
 .fa-people-carry:before {
@@ -28476,6 +28786,10 @@ readers do not read off random characters that represent icons */
   content: "\F4D6";
 }
 
+.fa-ring:before {
+  content: "\F70B";
+}
+
 .fa-road:before {
   content: "\F018";
 }
@@ -28528,6 +28842,10 @@ readers do not read off random characters that represent icons */
   content: "\F548";
 }
 
+.fa-running:before {
+  content: "\F70C";
+}
+
 .fa-rupee-sign:before {
   content: "\F156";
 }
@@ -28566,6 +28884,10 @@ readers do not read off random characters that represent icons */
 
 .fa-scribd:before {
   content: "\F28A";
+}
+
+.fa-scroll:before {
+  content: "\F70E";
 }
 
 .fa-search:before {
@@ -28724,6 +29046,10 @@ readers do not read off random characters that represent icons */
   content: "\F54C";
 }
 
+.fa-skull-crossbones:before {
+  content: "\F714";
+}
+
 .fa-skyatlas:before {
   content: "\F216";
 }
@@ -28738,6 +29064,10 @@ readers do not read off random characters that represent icons */
 
 .fa-slack-hash:before {
   content: "\F3EF";
+}
+
+.fa-slash:before {
+  content: "\F715";
 }
 
 .fa-sliders-h:before {
@@ -28842,6 +29172,10 @@ readers do not read off random characters that represent icons */
 
 .fa-speakap:before {
   content: "\F3F3";
+}
+
+.fa-spider:before {
+  content: "\F717";
 }
 
 .fa-spinner:before {
@@ -29248,6 +29582,10 @@ readers do not read off random characters that represent icons */
   content: "\F205";
 }
 
+.fa-toilet-paper:before {
+  content: "\F71E";
+}
+
 .fa-toolbox:before {
   content: "\F552";
 }
@@ -29262,6 +29600,10 @@ readers do not read off random characters that represent icons */
 
 .fa-torii-gate:before {
   content: "\F6A1";
+}
+
+.fa-tractor:before {
+  content: "\F722";
 }
 
 .fa-trade-federation:before {
@@ -29476,6 +29818,10 @@ readers do not read off random characters that represent icons */
   content: "\F501";
 }
 
+.fa-user-injured:before {
+  content: "\F728";
+}
+
 .fa-user-lock:before {
   content: "\F502";
 }
@@ -29628,6 +29974,10 @@ readers do not read off random characters that represent icons */
   content: "\F027";
 }
 
+.fa-volume-mute:before {
+  content: "\F6A9";
+}
+
 .fa-volume-off:before {
   content: "\F026";
 }
@@ -29696,6 +30046,10 @@ readers do not read off random characters that represent icons */
   content: "\F266";
 }
 
+.fa-wind:before {
+  content: "\F72E";
+}
+
 .fa-window-close:before {
   content: "\F410";
 }
@@ -29716,6 +30070,10 @@ readers do not read off random characters that represent icons */
   content: "\F17A";
 }
 
+.fa-wine-bottle:before {
+  content: "\F72F";
+}
+
 .fa-wine-glass:before {
   content: "\F4E3";
 }
@@ -29726,6 +30084,10 @@ readers do not read off random characters that represent icons */
 
 .fa-wix:before {
   content: "\F5CF";
+}
+
+.fa-wizards-of-the-coast:before {
+  content: "\F730";
 }
 
 .fa-wolf-pack-battalion:before {
@@ -29842,7 +30204,7 @@ readers do not read off random characters that represent icons */
 }
 
 /*!
- * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -29850,8 +30212,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?70e65a7d34902f2c350816ecfe2f6492);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?70e65a7d34902f2c350816ecfe2f6492) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?14a08198ec7d1eb96d515362293fed36) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?815694de1120d6c1e9d1f0895ee81056) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?0079a0ab6bec4da7d6e16f2a2e87cd71) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?38508b2e7fac045869a86a15936433f7) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?8edbef6af175c4c78e9912f766e9e0dd);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.eot?8edbef6af175c4c78e9912f766e9e0dd) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?946f7400d254b08b8ca19c8a70ade0e2) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff?fc99cf2991bfb604dd5c939f0766273f) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?d9e91b320c59f22e543f41d641639375) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg?1d220cf9da36861171fa90d3c164f4d3) format("svg");
 }
 
 .fa,
@@ -29861,7 +30223,7 @@ readers do not read off random characters that represent icons */
 }
 
 /*!
- * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -29869,8 +30231,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: normal;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?9b6c8da3c489424e2b3e9c9fb6314b37);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?9b6c8da3c489424e2b3e9c9fb6314b37) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?48461ea4e797c9774dabb4a0440d2f56) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?7b464e274bc331f9a765d765359635a5) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?947b9537bc0fecc8130d48eb753495a1) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?b5472631dbace30d549357ec325b9c62) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?3cd80df0f3d51118fe6a0d5861ade8bb);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.eot?3cd80df0f3d51118fe6a0d5861ade8bb) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?554f4f0aa372f88f0dfb3d1b129b3a40) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff?cb899fd0c9ee53f4029c748a9cc8a51a) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?94eef589e0a57d1ff4b07bb49d46dac2) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg?3bd0b15a9af4b9d737b7c06c53b57568) format("svg");
 }
 
 .fab {
@@ -29878,7 +30240,7 @@ readers do not read off random characters that represent icons */
 }
 
 /*!
- * Font Awesome Free 5.3.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.4.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -29886,8 +30248,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?7422060ca379ee9939d3b687d072acad);
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?7422060ca379ee9939d3b687d072acad) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?949a2b066ec37f5a384712fc7beaf2f1) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?381af09a1366b6c2ae65eac5dd6f0588) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?73fe7f1effbf382f499831a0a9f18626) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?b5a61b229c9c92a6ac21f5b0e3c6e9f1) format("svg");
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?cc73e8d1fd1960c91502ca9a637f4315);
+  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.eot?cc73e8d1fd1960c91502ca9a637f4315) format("embedded-opentype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?b4b673c246336df8fc6563226407dfdb) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff?1fd3de3f0eae964fc3b8c13a4fab42b6) format("woff"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?7210218d8bc8295fc92416c22864d359) format("truetype"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.svg?b5a61b229c9c92a6ac21f5b0e3c6e9f1) format("svg");
 }
 
 .far {

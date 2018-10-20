@@ -1,19 +1,19 @@
 <template>
 <div>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" v-if="$gate.esAdmin() || $gate.esAutor()">
+  <div class="content-wrapper" v-if="$gate.esAdmin()">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Noticias</h1>
+            <h1 class="m-0 text-dark">Voluntario</h1>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="/home">Inicio</a></li>
-              <li class="breadcrumb-item active">Noticias</li>
+              <li class="breadcrumb-item active">Voluntario</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -45,6 +45,6 @@
     </div>
   </div>
   <!-- /.content-wrapper -->
-  <unauthorized v-if="(!$gate.esAdmin() && !$gate.esAutor()) || (!$gate.esAutor() && $gate.esAdmin()) && ($gate.esAutor() && !$gate.esAdmin())"></unauthorized>
+  <unauthorized v-if="!$gate.esAdmin()"></unauthorized>
 </div>
 </template>

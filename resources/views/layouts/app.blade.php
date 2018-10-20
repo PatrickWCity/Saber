@@ -11,8 +11,8 @@
 
     <!-- Scripts -->
     <script src="/js/manifest.js"></script>
-<script src="/js/vendor.js"></script>
-<script src="/js/app.js"></script>
+    <script src="/js/vendor.js"></script>
+    <script src="/js/app.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -23,10 +23,12 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <!--<nav class="navbar navbar-expand-md navbar-light navbar-laravel">-->
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{ url('/img/logo-navbar.png') }}" alt="logo" style="height:27px;">
+                    {{ config('app.name', 'Construyendo Mis Sueños') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +37,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        
 
+                          <li class="nav-item {{ Request::is('/eventos') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/eventos') }}">Eventos</a>
+                          </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

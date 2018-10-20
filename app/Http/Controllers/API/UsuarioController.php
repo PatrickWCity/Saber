@@ -42,7 +42,7 @@ class UsuarioController extends Controller
     {
         // Stores Usuario from Create View
         $this->validate($request, [
-            'run' => 'max:10|unique:Usuario',
+            'run' => 'max:10|nullable|unique:Usuario',
             'nombre' => 'min:3|required|max:60',
             'appat' => 'min:3|required|max:60',
             'apmat' => 'max:60',

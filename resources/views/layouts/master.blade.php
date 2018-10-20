@@ -30,6 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   }
   </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/datatables.min.css"/>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -52,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden;">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden; z-index: 1040;">
     <!-- Brand Logo -->
     <router-link to="/home" class="brand-link">
       <img src="./img/logo-navbar.png" alt="CMS Logo" class="brand-image img-circle"
@@ -65,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="./img/user.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="./img/profile/{{ Auth::user()->foto }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           @guest
@@ -91,10 +92,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               @can('esAdmin')
               <li class="nav-item">
+                <router-link to="/area" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-map-marker-alt"></i>
+                  <p>
+                    Areas
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/sede" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Sedes
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/expositor" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-user-tie"></i>
+                  <p>
+                    Expositores
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
                   <router-link to="/documento" class="nav-link" active-class="active">
                     <i class="nav-icon far fa-file-alt"></i>
                     <p>
                       Documentos
+                    </p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/tipodocumento" class="nav-link" active-class="active">
+                    <i class="nav-icon fas fa-file"></i>
+                    <p>
+                      Tipo de Documentos
                     </p>
                   </router-link>
                 </li>
@@ -108,6 +141,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </p>
                     </router-link>
                 </li>
+                <li class="nav-item">
+                  <router-link to="/tipoevento" class="nav-link" active-class="active">
+                    <i class="nav-icon fas fa-calendar"></i>
+                    <p>
+                      Tipo de Eventos
+                    </p>
+                  </router-link>
+              </li>
                 @endcanany
                 @canany(['esAdmin','esAutor'])
                 <li class="nav-item">
@@ -115,6 +156,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <i class="nav-icon far fa-newspaper"></i>
                     <p>
                       Noticias
+                    </p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/tiponoticia" class="nav-link" active-class="active">
+                    <i class="nav-icon fas fa-newspaper"></i>
+                    <p>
+                      Tipo de Noticias
                     </p>
                   </router-link>
                 </li>
@@ -276,5 +325,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/js/manifest.js"></script>
 <script src="/js/vendor.js"></script>
 <script src="/js/app.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/datatables.min.js"></script>
 </body>
 </html>
