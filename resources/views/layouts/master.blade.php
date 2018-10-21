@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden; z-index: 1040;">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden;">
     <!-- Brand Logo -->
     <router-link to="/home" class="brand-link">
       <img src="./img/logo-navbar.png" alt="CMS Logo" class="brand-image img-circle"

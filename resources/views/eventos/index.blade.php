@@ -36,25 +36,6 @@
                 </div>
                 </td>
             </tr>
-                <!-- Modal -->
-                <div class="modal fade" id="EliminarModal{{$evento->idEvento}}" tabindex="-1" role="dialog" aria-labelledby="EliminarModal{{$evento->idEvento}}Title" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModal{{$evento->idEvento}}LongTitle">Eliminar Evento {{$evento->idEvento}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                        Esta Seguro que quere Eliminar el Evento {{$evento->idEvento}} ?
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
             @endforeach
         </tbody>
     </table>
