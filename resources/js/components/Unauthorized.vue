@@ -1,6 +1,6 @@
 <template>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div>
            <div class="md:flex min-h-screen">
             <div class="w-full md:w-1/2 bg-white flex items-center justify-center">
                 <div class="max-w-sm m-8">
@@ -12,7 +12,7 @@
                     <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">
                         Lo sentimos, no estás autorizado para acceder a esta página.                    </p>
 
-                    <a href="/">
+                    <a href="/dashboard">
                         <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
                             Ir a inicio
                         </button>

@@ -36,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper" id="app">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+  <nav class="main-header navbar navbar-expand navnar-dark bg-dark navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -91,30 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
               @can('esAdmin')
-              <li class="nav-item">
-                <router-link to="/area" class="nav-link" active-class="active">
-                  <i class="nav-icon fas fa-map-marker-alt"></i>
-                  <p>
-                    Areas
-                  </p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/sede" class="nav-link" active-class="active">
-                  <i class="nav-icon fas fa-building"></i>
-                  <p>
-                    Sedes
-                  </p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/expositor" class="nav-link" active-class="active">
-                  <i class="nav-icon fas fa-user-tie"></i>
-                  <p>
-                    Expositores
-                  </p>
-                </router-link>
-              </li>
+              
               <li class="nav-item">
                   <router-link to="/documento" class="nav-link" active-class="active">
                     <i class="nav-icon far fa-file-alt"></i>
@@ -148,6 +125,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       Tipo de Eventos
                     </p>
                   </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/area" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-map-marker-alt"></i>
+                  <p>
+                    Areas
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/sede" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-building"></i>
+                  <p>
+                    Sedes
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/expositor" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-user-tie"></i>
+                  <p>
+                    Expositores
+                  </p>
+                </router-link>
               </li>
                 @endcanany
                 @canany(['esAdmin','esAutor'])
@@ -293,10 +294,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
     <!-- router view -->
     <router-view></router-view>
     <!-- set progressbar -->
     <vue-progress-bar></vue-progress-bar>
+  </div>
   <!-- /.content-wrapper -->
 
   <!-- /.content-wrapper -->

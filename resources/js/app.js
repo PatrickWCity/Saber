@@ -118,7 +118,8 @@ let routes = [
     { path: '/403', component: require('./components/Unauthorized.vue') },
     { path: '/404', component: require('./components/NotFound.vue') },
     { path: '/500', component: require('./components/Error.vue') },
-    { path: '/503', component: require('./components/Maintenance.vue') }
+    { path: '/503', component: require('./components/Maintenance.vue') },
+    { path: '*', component: require('./components/NotFound.vue') }
 ]
 
 const router = new VueRouter({
