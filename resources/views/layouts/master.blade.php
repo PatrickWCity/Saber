@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <router-link to="/home" class="brand-link">
       <img src="./img/logo-navbar.png" alt="CMS Logo" class="brand-image img-circle"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">CMS v0.3.8</span>
+      <span class="brand-text font-weight-light">CMS v0.4.12</span>
     </router-link>
 
     <!-- Sidebar -->
@@ -308,10 +308,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      CMS v0.3.8
+      CMS v0.4.12
     </div>
     <!-- Default to the left -->
-    <strong>Primer Estado de Avance <i class="fas fa-chess-knight"></i> <a href="https://dev.patrickwcity.com">Proyecto de Titulo</a>.</strong> Hecha de manera Clara, Precisa y Concisa con <i class="fas fa-heart"></i>.
+    <strong>Segundo Estado de Avance <i class="fas fa-chess-knight"></i> <a href="https://dev.patrickwcity.com">Proyecto de Titulo</a>.</strong> Hecha de manera Clara, Precisa y Concisa con <i class="fas fa-heart"></i>.
   </footer>
 </div>
 <!-- ./wrapper -->
