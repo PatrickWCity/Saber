@@ -183,7 +183,7 @@
                 <div class="form-row">
                 <select class="form-control col-lg-11" :class="{ 'is-invalid': form.errors.has('idExpositor') }" v-model="form.idExpositor"> <!-- @change="asignar2()"> v-model="form.idPerfil" v-on:change="form.idPerfil" -->
                     <option disabled value="">Seleccione un Expositor</option>
-                    <option v-for="expositor in descexpositores" :key="expositor.idExpositor"  v-bind:value="expositor.idExpositor">{{expositor.nombre+" "+expositor.appat+" "+expositor.apmat}}</option>
+                    <option v-for="expositor in descexpositores" :key="expositor.idExpositor"  v-bind:value="expositor.idExpositor">{{expositor.nombre+" "+expositor.appat+" "+ (expositor.apmat? expositor.apmat : "") }}</option>
                   </select>
                   <has-error :form="form" field="idExpositor"></has-error>
                   <div class="btn-group col-lg-1" style="width:100%">

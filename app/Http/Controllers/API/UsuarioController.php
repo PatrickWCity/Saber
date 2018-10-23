@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\crearUsuario;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -81,6 +83,8 @@ class UsuarioController extends Controller
         ]);
         //return redirect('/usuario')->with('success', 'Usuario Ingresado');
         //return $request->all();
+        Mail::to($request->email)->send(new crearUsuario($username));
+
         return ['message' => 'El Usuario fue Ingresado con Exito!'];
     }
 
