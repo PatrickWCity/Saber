@@ -14,9 +14,9 @@ class CreateTipoDocumentoTable extends Migration
     public function up()
     {
         Schema::create('TipoDocumento', function (Blueprint $table) {
-            $table->increments('idTipoDocumento');
-            $table->string('nombre', 60)->unique();
-            $table->string('descripcion')->nullable()->default(null);
+            $table->increments('idTipoDocumento')->comment('Identificador de Tipo de Documento');
+            $table->string('nombre', 60)->unique()->comment('Nombre de Tipo de Documento');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Tipo de Documento');
         });
     }
 

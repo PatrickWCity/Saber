@@ -14,14 +14,14 @@ class CreateUsuarioTable extends Migration
     public function up()
     {
         Schema::create('Usuario', function (Blueprint $table) {
-            $table->increments('idUsuario');
-            $table->string('run', 10)->nullable()->default(null)->unique();
-            $table->string('nombre', 60);
-            $table->string('appat', 60);
-            $table->string('apmat', 60)->nullable()->default(null);
-            $table->string('direccion');
-            $table->string('telefono', 20)->unique();
-            $table->string('email')->unique();
+            $table->increments('idUsuario')->comment('Identificador de Usuario');
+            $table->string('run', 10)->nullable()->default(null)->unique()->comment('RUN de Usuario');
+            $table->string('nombre', 60)->comment('Nombre de Usuario');
+            $table->string('appat', 60)->comment('Apellido Paterno de Usuario');
+            $table->string('apmat', 60)->nullable()->default(null)->comment('Apellido Materno de Usuario');
+            $table->string('direccion')->comment('Dirección de Usuario');
+            $table->string('telefono', 20)->unique()->comment('Teléfono de Usuario');
+            $table->string('email')->unique()->comment('Correo Electrónico de Usuario');
         });
     }
 

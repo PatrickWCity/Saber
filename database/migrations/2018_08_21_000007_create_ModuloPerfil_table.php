@@ -14,11 +14,11 @@ class CreateModuloPerfilTable extends Migration
     public function up()
     {
         Schema::create('ModuloPerfil', function (Blueprint $table) {
-            $table->increments('idModuloPerfil');
-            $table->dateTime('fecha');
-            $table->tinyInteger('estado');
-            $table->unsignedInteger('idModulo');
-            $table->unsignedInteger('idPerfil');
+            $table->increments('idModuloPerfil')->comment('Identificador de MóduloPerfil');
+            $table->dateTime('fecha')->comment('Fecha de MóduloPerfil');
+            $table->tinyInteger('estado')->comment('Estado de MóduloPerfil');
+            $table->unsignedInteger('idModulo')->comment('Identificador de Módulo');
+            $table->unsignedInteger('idPerfil')->comment('Identificador de Perfil');
 
             $table->foreign('idModulo')
                   ->references('idModulo')->on('Modulo');

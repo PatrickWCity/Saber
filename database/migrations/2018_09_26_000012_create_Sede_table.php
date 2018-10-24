@@ -14,10 +14,10 @@ class CreateSedeTable extends Migration
     public function up()
     {
         Schema::create('Sede', function (Blueprint $table) {
-            $table->increments('idSede');
-            $table->string('nombre', 60)->unique();
-            $table->string('descripcion')->nullable()->default(null);
-            $table->string('ubicacion')->unique();
+            $table->increments('idSede')->comment('Identificador de Sede');
+            $table->string('nombre', 60)->unique()->comment('Nombre de Sede');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Sede');
+            $table->string('ubicacion')->unique()->comment('Ubicación de Sede');
         });
     }
 

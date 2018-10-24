@@ -14,10 +14,10 @@ class CreateHistoricoClaveTable extends Migration
     public function up()
     {
         Schema::create('HistoricoClave', function (Blueprint $table) {
-            $table->increments('idHistoricoClave');
-            $table->string('clave');
-            $table->dateTime('fecha');
-            $table->unsignedInteger('idUsuario');
+            $table->increments('idHistoricoClave')->comment('Identificador de HistoricoClave');
+            $table->string('clave')->comment('Clave Anterior de Usuario');
+            $table->dateTime('fecha')->comment('Fecha de Cambio de Clave');
+            $table->unsignedInteger('idUsuario')->comment('Identificador de Usuario');
 
             $table->foreign('idUsuario')
                   ->references('idUsuario')->on('Usuario');

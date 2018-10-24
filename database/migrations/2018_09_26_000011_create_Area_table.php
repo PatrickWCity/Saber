@@ -14,9 +14,9 @@ class CreateAreaTable extends Migration
     public function up()
     {
         Schema::create('Area', function (Blueprint $table) {
-            $table->increments('idArea');
-            $table->string('nombre')->unique();
-            $table->string('descripcion')->nullable()->default(null);
+            $table->increments('idArea')->comment('Identificador de Área');
+            $table->string('nombre')->unique()->comment('Nombre de Área');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Área');
         });
     }
 

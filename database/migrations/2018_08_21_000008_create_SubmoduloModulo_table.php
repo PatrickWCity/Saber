@@ -14,11 +14,11 @@ class CreateSubmoduloModuloTable extends Migration
     public function up()
     {
         Schema::create('SubmoduloModulo', function (Blueprint $table) {
-            $table->increments('idSubmoduloModulo');
-            $table->dateTime('fecha');
-            $table->tinyInteger('estado');
-            $table->unsignedInteger('idSubmodulo');
-            $table->unsignedInteger('idModulo');
+            $table->increments('idSubmoduloModulo')->comment('Identificador de SubmóduloMódulo');
+            $table->dateTime('fecha')->comment('Fecha de SubmóduloMódulo');
+            $table->tinyInteger('estado')->comment('Estado de SubmóduloMódulo');
+            $table->unsignedInteger('idSubmodulo')->comment('Identificador de Submódulo');
+            $table->unsignedInteger('idModulo')->comment('Identificador de Módulo');
 
             $table->foreign('idSubmodulo')
                   ->references('idSubmodulo')->on('Submodulo');

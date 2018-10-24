@@ -14,10 +14,10 @@ class CreateSubmoduloTable extends Migration
     public function up()
     {
         Schema::create('Submodulo', function (Blueprint $table) {
-            $table->increments('idSubmodulo');
-            $table->string('nombre', 60)->unique();
-            $table->string('descripcion')->nullable()->default(null);
-            $table->string('ubicacion')->unique();
+            $table->increments('idSubmodulo')->comment('Identificador de Submódulo');
+            $table->string('nombre', 60)->unique()->comment('Nombre de Submódulo');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Submódulo');
+            $table->string('ubicacion')->unique()->comment('Ubicación de Submódulo');
         });
     }
 

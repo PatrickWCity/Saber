@@ -14,11 +14,11 @@ class CreatePerfilUsuarioTable extends Migration
     public function up()
     {
         Schema::create('PerfilUsuario', function (Blueprint $table) {
-            $table->increments('idPerfilUsuario');
-            $table->dateTime('fecha');
-            $table->tinyInteger('estado');
-            $table->unsignedInteger('idPerfil');
-            $table->unsignedInteger('idUsuario');
+            $table->increments('idPerfilUsuario')->comment('Identificador de PerfilUsuario');
+            $table->dateTime('fecha')->comment('Fecha de PerfilUsuario');
+            $table->tinyInteger('estado')->comment('Estado de PerfilUsuario');
+            $table->unsignedInteger('idPerfil')->comment('Identificador de Perfil');
+            $table->unsignedInteger('idUsuario')->comment('Identificador de Usuario');
 
             $table->foreign('idPerfil')
                   ->references('idPerfil')->on('Perfil');

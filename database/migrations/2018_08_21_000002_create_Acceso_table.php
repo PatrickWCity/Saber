@@ -14,18 +14,18 @@ class CreateAccesoTable extends Migration
     public function up()
     {
         Schema::create('Acceso', function (Blueprint $table) {
-            $table->increments('idAcceso');
-            $table->string('username', 20)->unique();
-            $table->string('password');
-            $table->integer('diasClave');
-            $table->dateTime('fechaCaducidad');
-            $table->tinyInteger('estadoInicial');
-            $table->timestamp('estadoAcceso')->nullable(); // para deshabilitar
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('foto')->default('default.png');
-            $table->rememberToken();
-            $table->unsignedInteger('idUsuario')->unique();
+            $table->increments('idAcceso')->comment('Identificador de Acceso');
+            $table->string('username', 20)->unique()->comment('Username de Acceso del Usuario');
+            $table->string('password')->comment('Clave de Acceso del Usuario');
+            $table->integer('diasClave')->comment('Días de Clave de Acceso del Usuario');
+            $table->dateTime('fechaCaducidad')->comment('Fecha de Caducidad de Clave de Acceso del Usuario');
+            $table->tinyInteger('estadoInicial')->comment('Estado Inicial de Acceso del Usuario');
+            $table->timestamp('estadoAcceso')->nullable()->comment('Estado de Acceso del Usuario'); // para deshabilitar
+            $table->string('email')->unique()->comment('Correo Electrónico de Acceso del Usuario');
+            $table->timestamp('email_verified_at')->nullable()->comment('Fecha de Verificación de Acceso del Usuario por Correo Electrónico');
+            $table->string('foto')->default('default.png')->comment('Foto de Perfil del Usuario');
+            $table->rememberToken()->comment('Token de Recordar de Acceso del Usuario');
+            $table->unsignedInteger('idUsuario')->unique()->comment('Identificador del Usuario');
 
             $table->foreign('idUsuario')
                   ->references('idUsuario')->on('Usuario');

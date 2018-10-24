@@ -14,13 +14,14 @@ class CreateNoticiaTable extends Migration
     public function up()
     {
         Schema::create('Noticia', function (Blueprint $table) {
-            $table->increments('idNoticia');
-            $table->string('titulo', 60)->unique();
-            $table->longText('contenido');
-            $table->string('imagenPortada');
-            $table->timestamps();
-            $table->unsignedInteger('idTipoNoticia');
-            $table->unsignedInteger('idUsuario');
+            $table->increments('idNoticia')->comment('Identificador de Noticia');
+            $table->string('titulo', 60)->unique()->comment('Titulo de Noticia');
+            $table->longText('contenido')->comment('Contenido de Noticia');
+            $table->string('imagenPortada')->comment('Imagen de Portada de Noticia');
+            $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Noticia');
+            $table->timestamp('fechaActualizada')->nullable()->comment('Fecha de Actualización de Noticia');
+            $table->unsignedInteger('idTipoNoticia')->comment('Identificador de Tipo de Noticia');
+            $table->unsignedInteger('idUsuario')->comment('Identificador de Usuario');
             
             $table->foreign('idTipoNoticia')
                   ->references('idTipoNoticia')->on('TipoNoticia');

@@ -14,9 +14,9 @@ class CreateTipoNoticiaTable extends Migration
     public function up()
     {
         Schema::create('TipoNoticia', function (Blueprint $table) {
-            $table->increments('idTipoNoticia');
-            $table->string('nombre', 60)->unique();
-            $table->string('descripcion')->nullable()->default(null);
+            $table->increments('idTipoNoticia')->comment('Identificador de Tipo de Noticia');
+            $table->string('nombre', 60)->unique()->comment('Nombre de Tipo de Noticia');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Tipo de Noticia');
         });
     }
 

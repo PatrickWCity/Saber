@@ -14,9 +14,9 @@ class CreatePerfilTable extends Migration
     public function up()
     {
         Schema::create('Perfil', function (Blueprint $table) {
-            $table->increments('idPerfil');
-            $table->string('nombre', 60)->unique();
-            $table->string('descripcion')->nullable()->default(null);
+            $table->increments('idPerfil')->comment('Identificador de Perfil');
+            $table->string('nombre', 60)->unique()->comment('Nombre de Perfil');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Perfil');
         });
     }
 

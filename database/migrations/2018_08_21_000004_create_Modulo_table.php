@@ -14,9 +14,9 @@ class CreateModuloTable extends Migration
     public function up()
     {
         Schema::create('Modulo', function (Blueprint $table) {
-            $table->increments('idModulo');
-            $table->string('nombre', 60)->unique();
-            $table->string('descripcion')->nullable()->default(null);
+            $table->increments('idModulo')->comment('Identificador de Módulo');
+            $table->string('nombre', 60)->unique()->comment('Nombre de Módulo');
+            $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Módulo');
         });
     }
 

@@ -14,11 +14,11 @@ class CreateExpositorTable extends Migration
     public function up()
     {
         Schema::create('Expositor', function (Blueprint $table) {
-            $table->increments('idExpositor');
-            $table->string('run', 10)->nullable()->default(null)->unique();
-            $table->string('nombre', 60);
-            $table->string('appat', 60);
-            $table->string('apmat', 60)->nullable()->default(null);
+            $table->increments('idExpositor')->comment('Identificador de Expositor');
+            $table->string('run', 10)->nullable()->default(null)->unique()->comment('RUN de Expositor');
+            $table->string('nombre', 60)->comment('Nombre de Expositor');
+            $table->string('appat', 60)->comment('Apellido Paterno de Expositor');
+            $table->string('apmat', 60)->nullable()->default(null)->comment('Apellido Materno de Expositor');
         });
     }
 
