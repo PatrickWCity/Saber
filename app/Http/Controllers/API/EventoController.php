@@ -49,10 +49,10 @@ class EventoController extends Controller
             'descripcion' => 'max:255',
             'fechaInicio' => 'required|date',
             'fechaTermino' => 'required|date',
-            'idTipoEvento' => 'required', // ID not required
-            'idSede' => 'required', // ID not required
-            'idArea' => 'required', // ID not required
-            'idExpositor' => 'required' // ID not required
+            'idTipoEvento' => 'sometimes', // ID not required
+            'idSede' => 'sometimes', // ID not required
+            'idArea' => 'sometimes', // ID not required
+            'idExpositor' => 'sometimes' // ID not required
         ]);
         $values = 
         [ 
@@ -97,11 +97,7 @@ class EventoController extends Controller
             'nombre' => 'required|max:60|unique:Evento,idEvento'.$request->id,
             'descripcion' => 'max:255',
             'fechaInicio' => 'required|date',
-            'fechaTermino' => 'required|date',
-            'idTipoEvento' => 'required', // ID not required
-            'idSede' => 'required', // ID not required
-            'idArea' => 'required', // ID not required
-            'idExpositor' => 'required' // ID not required
+            'fechaTermino' => 'required|date'
         ]);
         $values = 
         [

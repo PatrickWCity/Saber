@@ -10,4 +10,6 @@ class Documento extends Model
     protected $table = 'Documento';
     // Primary Key
     public $primaryKey = 'idDocumento';
+    // Timestamps
+    public $timestamps = false;
 }
