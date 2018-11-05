@@ -18,18 +18,20 @@ class CreateNoticiaTable extends Migration
             $table->string('titulo', 60)->unique()->comment('Titulo de Noticia');
             $table->longText('contenido')->comment('Contenido de Noticia');
             $table->string('imagenPortada')->comment('Imagen de Portada de Noticia');
-            $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Noticia');
-            $table->timestamp('fechaActualizada')->nullable()->comment('Fecha de Actualización de Noticia');
-            $table->unsignedInteger('idTipoNoticia')->comment('Identificador de Tipo de Noticia');
-            $table->unsignedInteger('idUsuario')->comment('Identificador de Usuario');
+            $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Noticia');//->useCurrent();
+            $table->timestamp('fechaActualizada')->nullable()->comment('Fecha de Actualización de Noticia');//->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->unsignedInteger('idTipoNoticia')->nullable()->default(null)->comment('Identificador de Tipo de Noticia');
+            //$table->unsignedInteger('idUsuario')->nullable()->default(null)->comment('Identificador de Usuario');
             
             $table->foreign('idTipoNoticia')
-                  ->references('idTipoNoticia')->on('TipoNoticia');
-                  //->onDelete('cascade');
+                  ->references('idTipoNoticia')->on('TipoNoticia')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
 
-            $table->foreign('idUsuario')
-                  ->references('idUsuario')->on('Usuario');
-                  //->onDelete('cascade');
+            //$table->foreign('idUsuario')
+            //      ->references('idUsuario')->on('Usuario')
+            //      ->onDelete('cascade')
+            //      ->onUpdate('cascade');
         });
     }
 

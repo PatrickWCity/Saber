@@ -118,6 +118,11 @@
 
 <script>
 var table;
+$(document).ready(function() {
+  if(window.location.href.indexOf('#tipoNoticiaModal') != -1) {
+    $('#tipoNoticiaModal').modal('show');
+  }
+});
 export default {
   data() {
     return {

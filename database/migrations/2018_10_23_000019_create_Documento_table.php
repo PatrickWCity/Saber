@@ -17,14 +17,16 @@ class CreateDocumentoTable extends Migration
             $table->increments('idDocumento')->comment('Identificador de Documento');
             $table->string('nombre', 60)->unique()->comment('Nombre de Documento');
             $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Documento');
+            $table->string('ubicacion')->unique()->comment('Ubicación de Documento');
             //$table->timestamp('created_at')->nullable()->comment('my comment');
             //$table->timestamp('updated_at')->nullable()->comment('my comment');
             
-            $table->unsignedInteger('idTipoDocumento')->comment('Identificador de Tipo de Documento');
+            $table->unsignedInteger('idTipoDocumento')->nullable()->default(null)->comment('Identificador de Tipo de Documento');
 
             $table->foreign('idTipoDocumento')
-                  ->references('idTipoDocumento')->on('TipoDocumento');
-                  //->onDelete('cascade');
+                  ->references('idTipoDocumento')->on('TipoDocumento')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 

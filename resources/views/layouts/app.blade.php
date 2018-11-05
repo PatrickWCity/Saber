@@ -37,11 +37,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        
-
-                          <li class="nav-item {{ Request::is('/eventos') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('/eventos') }}">Eventos</a>
+                        <li class="nav-item {{ Request::is('/noticias') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/noticias') }}">Noticias</a>
                           </li>
+                        <li class="nav-item {{ Request::is('/documentos') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/documentos') }}">Documentos</a>
+                          </li>
+                      <li class="nav-item {{ Request::is('/eventos') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/eventos') }}">Eventos</a>
+                      </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -61,6 +65,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/home" style="color: #212529 !important;">
+                                        Dashboard
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" style="color: #212529 !important;">

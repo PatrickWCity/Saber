@@ -90,6 +90,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </router-link>
               </li>
+              @canany(['esAdmin','esAutor'])
+                <li class="nav-item">
+                  <router-link to="/noticia" class="nav-link" active-class="active">
+                    <i class="nav-icon far fa-newspaper"></i>
+                    <p>
+                      Noticias
+                    </p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/tiponoticia" class="nav-link" active-class="active">
+                    <i class="nav-icon fas fa-newspaper"></i>
+                    <p>
+                      Tipo de Noticias
+                    </p>
+                  </router-link>
+                </li>
+                @endcanany
               @can('esAdmin')
               
               <li class="nav-item">
@@ -150,24 +168,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </router-link>
               </li>
-                @endcanany
-                @canany(['esAdmin','esAutor'])
-                <li class="nav-item">
-                  <router-link to="/noticia" class="nav-link" active-class="active">
-                    <i class="nav-icon far fa-newspaper"></i>
-                    <p>
-                      Noticias
-                    </p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/tiponoticia" class="nav-link" active-class="active">
-                    <i class="nav-icon fas fa-newspaper"></i>
-                    <p>
-                      Tipo de Noticias
-                    </p>
-                  </router-link>
-                </li>
                 @endcanany
                 @can('esAdmin')
               <li class="nav-item has-treeview">

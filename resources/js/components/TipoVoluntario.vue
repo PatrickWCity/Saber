@@ -118,6 +118,11 @@
 
 <script>
 var table;
+$(document).ready(function() {
+  if(window.location.href.indexOf('#tipoVoluntarioModal') != -1) {
+    $('#tipoVoluntarioModal').modal('show');
+  }
+});
 export default {
   data() {
     return {

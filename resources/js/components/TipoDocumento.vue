@@ -118,6 +118,11 @@
 
 <script>
 var table;
+$(document).ready(function() {
+  if(window.location.href.indexOf('#tipoDocumentoModal') != -1) {
+    $('#tipoDocumentoModal').modal('show');
+  }
+});
 export default {
   data() {
     return {

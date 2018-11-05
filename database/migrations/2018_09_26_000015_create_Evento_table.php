@@ -26,17 +26,21 @@ class CreateEventoTable extends Migration
             $table->unsignedInteger('idExpositor')->nullable()->default(null)->comment('Identificador de Expositor');
 
             $table->foreign('idTipoEvento')
-                  ->references('idTipoEvento')->on('TipoEvento');
-                  //->onDelete('cascade');
+                  ->references('idTipoEvento')->on('TipoEvento')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
             $table->foreign('idSede')
-                  ->references('idSede')->on('Sede');
-                  //->onDelete('cascade');
+                  ->references('idSede')->on('Sede')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
             $table->foreign('idArea')
-                  ->references('idArea')->on('Area');
-                  //->onDelete('cascade');
+                  ->references('idArea')->on('Area')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
             $table->foreign('idExpositor')
-                  ->references('idExpositor')->on('Expositor');
-                  //->onDelete('cascade');
+                  ->references('idExpositor')->on('Expositor')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 

@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::resource('eventos','EventoController');
 
+Route::resource('noticias','NoticiaController');
+
+Route::resource('documentos','DocumentoController');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

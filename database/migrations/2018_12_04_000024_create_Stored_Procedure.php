@@ -53,7 +53,6 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosPendientes`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoNoticia`;
-        DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosEvento`;
         DROP PROCEDURE IF EXISTS `sp_actualizarEvento`;
@@ -93,6 +92,11 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_agregarExpositor`;
         DROP PROCEDURE IF EXISTS `sp_consultarUnExpositor`;
         DROP PROCEDURE IF EXISTS `sp_eliminarExpositor`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_agregarDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarDocumento`;
         ');
 
         DB::unprepared("
@@ -506,12 +510,6 @@ class CreateStoredProcedure extends Migration
         FROM TipoNoticia;
         END;
 
-        CREATE PROCEDURE `sp_consultarTodosDocumento`()
-        BEGIN
-        SELECT *
-        FROM Documento;
-        END;
-
         CREATE PROCEDURE `sp_consultarTodosTipoDocumento`()
         BEGIN
         SELECT *
@@ -899,6 +897,56 @@ class CreateStoredProcedure extends Migration
         DELETE FROM Evento
         WHERE Evento.idEvento = idEvento;
         END;
+
+        CREATE PROCEDURE `sp_actualizarDocumento`(
+            IN `idDocumento` INT,
+            IN `nombre` VARCHAR(60),
+            IN `descripcion` VARCHAR(255),
+            IN `ubicacion` VARCHAR(255),
+            IN `idTipoDocumento` INT
+        )
+        BEGIN
+        UPDATE Documento
+        SET nombre = nombre, descripcion = descripcion, ubicacion = ubicacion, idTipoDocumento = idTipoDocumento
+        WHERE Documento.idDocumento = idDocumento;
+        END;
+        
+        CREATE PROCEDURE `sp_agregarDocumento`(
+            IN `nombre` VARCHAR(60),
+            IN `descripcion` VARCHAR(255),
+            IN `ubicacion` VARCHAR(255),
+            IN `idTipoDocumento` INT
+        )
+        BEGIN
+        INSERT INTO Documento (nombre, descripcion, ubicacion, idTipoDocumento)
+        VALUES(nombre, descripcion, ubicacion, idTipoDocumento);
+        END;
+
+        CREATE PROCEDURE `sp_consultarUnDocumento`(
+            IN `idDocumento` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT Documento.*, TipoDocumento.nombre as TipoDocumento
+        FROM Documento, TipoDocumento
+        WHERE Documento.idTipoDocumento = TipoDocumento.idTipoDocumento
+        AND Documento.idDocumento = idDocumento;
+        END;
+
+        CREATE PROCEDURE `sp_consultarTodosDocumento`()
+        BEGIN
+        SELECT Documento.*, TipoDocumento.nombre as TipoDocumento
+        FROM Documento, TipoDocumento
+		WHERE Documento.idTipoDocumento = TipoDocumento.idTipoDocumento;
+        END;
+
+        CREATE PROCEDURE `sp_eliminarDocumento`(
+            IN `idDocumento` INT
+        )
+        BEGIN
+        DELETE FROM Documento
+        WHERE Documento.idDocumento = idDocumento;
+        END;
         ");
     }
 
@@ -949,7 +997,6 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosPendientes`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoNoticia`;
-        DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosEvento`;
         DROP PROCEDURE IF EXISTS `sp_actualizarEvento`;
@@ -989,6 +1036,11 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_agregarExpositor`;
         DROP PROCEDURE IF EXISTS `sp_consultarUnExpositor`;
         DROP PROCEDURE IF EXISTS `sp_eliminarExpositor`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_agregarDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarDocumento`;
         ');
     }
 }

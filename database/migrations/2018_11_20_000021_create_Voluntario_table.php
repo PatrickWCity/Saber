@@ -20,11 +20,12 @@ class CreateVoluntarioTable extends Migration
             $table->string('appat', 60)->comment('Apellido Paterno de Voluntario');
             $table->string('apmat', 60)->nullable()->default(null)->comment('Apellido Materno de Voluntario');
             
-            $table->unsignedInteger('idTipoVoluntario')->comment('Identificador de Tipo de Voluntario');
+            $table->unsignedInteger('idTipoVoluntario')->nullable()->default(null)->comment('Identificador de Tipo de Voluntario');
 
             $table->foreign('idTipoVoluntario')
-                  ->references('idTipoVoluntario')->on('TipoVoluntario');
-                  //->onDelete('cascade');
+                  ->references('idTipoVoluntario')->on('TipoVoluntario')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 
