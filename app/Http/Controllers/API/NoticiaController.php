@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use DB;
 use App\Noticia;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,10 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosNoticia()');
+        return $data = [
+            'Noticias'       => DB::select('CALL sp_consultarTodosNoticia()'),
+            'TipoNoticias'   => DB::select('CALL sp_consultarTodosTipoNoticia()')
+        ];
     }
 
     /**
@@ -37,7 +41,25 @@ class NoticiaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Stores Noticia from Create View
+        $this->validate($request, [
+            'titulo' => 'required|max:191|unique:Noticia',
+            'contenido' =>'required',
+            'imagenPortada' => 'required',
+            'idTipoNoticia' => 'required' // ID not required
+        ]);
+        $values = 
+        [ 
+            $request->titulo,
+            $request->contenido,
+            $request->imagenPortada,
+            Carbon::now(),
+            null,
+            $request->idTipoNoticia
+        ];
+        DB::insert('CALL sp_agregarNoticia(?,?,?,?,?,?)', $values);
+
+        return ['message' => 'El Noticia fue Ingresado con Exito!'];
     }
 
     /**
@@ -48,7 +70,9 @@ class NoticiaController extends Controller
      */
     public function show($id)
     {
-        //
+        $numero = null;
+        $numero = (int)$id;
+        return DB::select('CALL sp_consultarUnNoticia(?,?)', [$numero,$id]);
     }
 
     /**
@@ -60,7 +84,26 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Stores Noticia from Update View
+        $this->validate($request, [
+            'titulo' => 'required|max:191|unique:Noticia,idNoticia'.$request->id,
+            'contenido' =>'required',
+            //'imagenPortada' => 'required',
+            'idTipoNoticia' => 'required',
+        ]);
+        $values = 
+        [
+            $id,
+            $request->titulo,
+            $request->contenido,
+            $request->imagenPortada,
+            $request->fechaCreada,
+            Carbon::now(),
+            $request->idTipoNoticia
+        ];
+        DB::update('CALL sp_actualizarNoticia(?,?,?,?,?,?,?)', $values);
+        
+        return ['message' => 'El Noticia fue Actualizado con Exito!'];
     }
 
     /**
@@ -71,6 +114,7 @@ class NoticiaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::delete('CALL sp_eliminarNoticia(?)', [$id]);
+        return ['message' => 'El Noticia fue Eliminado con Exito!'];
     }
 }

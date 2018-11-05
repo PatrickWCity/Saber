@@ -3,29 +3,33 @@
 @section('content')
 <div class="container mt-1 pt-1">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/datatables.min.css"/>
-    <h2>Documento</h2>
-    <p>Listado de Documento</p>
-    @if(count($documentos) > 0)    
+    <h2>Noticias</h2>
+    <p>Listado de Noticias</p>
+    @if(count($noticias) > 0)    
     <table id="listado" class="table table-bordered table-striped table-responsive-sm">
         <thead>
             <tr class="text-center">
-                <th class="align-middle">Nombre</th>
-                <th class="align-middle">Descripcion</th>
-                <th class="align-middle">Fecha de Inicio</th>
-                <th class="align-middle">Tipo de Documento</th>
+                <th class="align-middle">Titulo</th>
+                <th class="align-middle">Contenido</th>
+                <th class="align-middle">Imagen de Portada</th>
+                <th class="align-middle">Fecha de Creacion</th>
+                <th class="align-middle">Fecha de Actualizacion</th>
+                <th class="align-middle">Tipo de Noticia</th>
                 <th class="align-middle">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($documentos as $documento)
+            @foreach($noticias as $noticia)
             <tr>
-                <td class="align-middle">{{$documento->nombre}}</td>
-                <td class="align-middle">{{$documento->descripcion}}</td>
-                <td class="align-middle">{{$documento->ubicacion}}</td>
-                <td class="align-middle">{{$documento->TipoDocumento}}</td>
+                <td class="align-middle">{{$noticia->titulo}}</td>
+                <td class="align-middle">{{$noticia->contenido}}</td>
+                <td class="align-middle">{{$noticia->imagenPortada}}</td>
+                <td class="align-middle">{{Carbon\Carbon::parse($noticia->fechaCreada)->toDayDateTimeString()}}</td>
+                <td class="align-middle">{{Carbon\Carbon::parse($noticia->fechaActualizada)->toDayDateTimeString()}}</td>
+                <td class="align-middle">{{$noticia->TipoNoticia}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">
-                    <a class="btn btn-primary btn-block" href="/documentos/{{$documento->idDocumento}}" role="button" title="Ver Documento {{$documento->idDocumento}}">Ver</a>
+                    <a class="btn btn-primary btn-block" href="/noticias/{{$noticia->idNoticia}}" role="button" title="Ver Noticia {{$noticia->idNoticia}}">Ver</a>
                 </div>
                 </td>
             </tr>
@@ -48,28 +52,28 @@
               },
               {
                 extend: "csv",
-                title: "Listado de Documento",
+                title: "Listado de Noticias",
                 exportOptions: {
                   columns: "th:not(:last-child)"
                 }
               },
               {
                 extend: "excel",
-                title: "Listado de Documento",
+                title: "Listado de Noticias",
                 exportOptions: {
                   columns: "th:not(:last-child)"
                 }
               },
               {
                 extend: "pdf",
-                title: "Listado de Documento",
+                title: "Listado de Noticias",
                 exportOptions: {
                   columns: "th:not(:last-child)"
                 }
               },
               {
                 extend: "print",
-                title: "Listado de Documento",
+                title: "Listado de Noticias",
                 exportOptions: {
                   columns: "th:not(:last-child)"
                 }
@@ -82,14 +86,14 @@
             {
               searchable: false,
               orderable: false,
-              targets: 4
+              targets: 6
             }
           ]
         });
       });
       </script>
     @else
-        <p>Documento no encontrado.</p>
+        <p>Noticias no encontrado.</p>
     @endif
 </div>
 @endsection

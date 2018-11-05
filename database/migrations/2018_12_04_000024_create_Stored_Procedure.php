@@ -51,7 +51,6 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosHabilitados`;
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosDeshabilitados`;
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosPendientes`;
-        DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosEvento`;
@@ -97,6 +96,11 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_agregarDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarUnDocumento`;
         DROP PROCEDURE IF EXISTS `sp_eliminarDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_agregarNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarNoticia`;
         ');
 
         DB::unprepared("
@@ -496,12 +500,6 @@ class CreateStoredProcedure extends Migration
         FROM Acceso
         WHERE email_verified_at IS NULL
         AND estadoAcceso IS NULL ;
-        END;
-
-        CREATE PROCEDURE `sp_consultarTodosNoticia`()
-        BEGIN
-        SELECT *
-        FROM Noticia;
         END;
 
         CREATE PROCEDURE `sp_consultarTodosTipoNoticia`()
@@ -947,6 +945,60 @@ class CreateStoredProcedure extends Migration
         DELETE FROM Documento
         WHERE Documento.idDocumento = idDocumento;
         END;
+
+        CREATE PROCEDURE `sp_actualizarNoticia`(
+            IN `idNoticia` INT,
+            IN `titulo` VARCHAR(191),
+            IN `contenido` LONGTEXT,
+            IN `imagenPortada` VARCHAR(191),
+            IN `fechaCreada` TIMESTAMP,
+            IN `fechaActualizada` TIMESTAMP,
+            IN `idTipoNoticia` INT
+        )
+        BEGIN
+        UPDATE Noticia
+        SET titulo = titulo, contenido = contenido, imagenPortada = imagenPortada, fechaCreada = fechaCreada, fechaActualizada = fechaActualizada, idTipoNoticia = idTipoNoticia
+        WHERE Noticia.idNoticia = idNoticia;
+        END;
+        
+        CREATE PROCEDURE `sp_agregarNoticia`(
+            IN `titulo` VARCHAR(191),
+            IN `contenido` LONGTEXT,
+            IN `imagenPortada` VARCHAR(191),
+            IN `fechaCreada` TIMESTAMP,
+            IN `fechaActualizada` TIMESTAMP,
+            IN `idTipoNoticia` INT
+        )
+        BEGIN
+        INSERT INTO Noticia (titulo, contenido, imagenPortada, fechaCreada, fechaActualizada, idTipoNoticia)
+        VALUES(titulo, contenido, imagenPortada, fechaCreada, fechaActualizada, idTipoNoticia);
+        END;
+
+        CREATE PROCEDURE `sp_consultarUnNoticia`(
+            IN `idNoticia` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT Noticia.*, TipoNoticia.nombre as TipoNoticia
+        FROM Noticia, TipoNoticia
+        WHERE Noticia.idTipoNoticia = TipoNoticia.idTipoNoticia
+        AND Noticia.idNoticia = idNoticia;
+        END;
+
+        CREATE PROCEDURE `sp_consultarTodosNoticia`()
+        BEGIN
+        SELECT Noticia.*, TipoNoticia.nombre as TipoNoticia
+        FROM Noticia, TipoNoticia
+		WHERE Noticia.idTipoNoticia = TipoNoticia.idTipoNoticia;
+        END;
+
+        CREATE PROCEDURE `sp_eliminarNoticia`(
+            IN `idNoticia` INT
+        )
+        BEGIN
+        DELETE FROM Noticia
+        WHERE Noticia.idNoticia = idNoticia;
+        END;
         ");
     }
 
@@ -995,7 +1047,6 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosHabilitados`;
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosDeshabilitados`;
         DROP PROCEDURE IF EXISTS `sp_consultarUsuariosPendientes`;
-        DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosTipoDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosEvento`;
@@ -1041,6 +1092,11 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_agregarDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarUnDocumento`;
         DROP PROCEDURE IF EXISTS `sp_eliminarDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_agregarNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarNoticia`;
         ');
     }
 }

@@ -15,7 +15,7 @@ class CreateNoticiaTable extends Migration
     {
         Schema::create('Noticia', function (Blueprint $table) {
             $table->increments('idNoticia')->comment('Identificador de Noticia');
-            $table->string('titulo', 60)->unique()->comment('Titulo de Noticia');
+            $table->string('titulo')->unique()->comment('Titulo de Noticia');
             $table->longText('contenido')->comment('Contenido de Noticia');
             $table->string('imagenPortada')->comment('Imagen de Portada de Noticia');
             $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Noticia');//->useCurrent();
