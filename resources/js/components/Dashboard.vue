@@ -107,6 +107,80 @@
       </div>
       <!-- /.container-fluid -->
     </div>
+    <div class="container-fluid" v-if="$gate.esAdmin() || $gate.esAutor()">
+        <h4 class="mb-2">Seccion de Noticias</h4>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>{{noticias}}</h3>
+
+                <p>Noticias</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-newspaper"></i>
+              </div>
+              <router-link to="/noticia" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{tiponoticias}}</h3>
+
+                <p>Tipo de Noticias</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-newspaper"></i>
+              </div>
+              <router-link to="/tiponoticia" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+        <div class="container-fluid" v-if="$gate.esAdmin() || $gate.esAutor()">
+        <h4 class="mb-2">Seccion de Documentos</h4>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>{{documentos}}</h3>
+
+                <p>Documentos</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-file-alt"></i>
+              </div>
+              <router-link to="/documento" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{tipodocumentos}}</h3>
+
+                <p>Tipo de Documentos</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-file"></i>
+              </div>
+              <router-link to="/tipodocumento" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
     <!-- /.content -->
     </div>
   </div>
@@ -120,21 +194,29 @@ export default {
       tipoeventos: 0,
       sedes: 0,
       areas: 0,
-      expositores: 0
+      expositores: 0,
+      noticias: 0,
+      tiponoticias: 0,
+      documentos: 0,
+      tipodocumentos: 0
     };
   },
   methods: {
     loadEventos() {
       if(this.$gate.esAdmin() || this.$gate.esOrganizador()){
       axios
-        .get("api/evento")
+        .get("api/dashboard")
         .then(
           ({ data }) => (
             (this.eventos = data.Eventos.length),
             (this.tipoeventos = data.TipoEventos.length),
             (this.sedes = data.Sedes.length),
             (this.areas = data.Areas.length),
-            (this.expositores = data.Expositores.length)
+            (this.expositores = data.Expositores.length),
+            (this.noticias = data.Noticias.length),
+            (this.tiponoticias = data.TipoNoticias.length),
+            (this.documentos = data.Documentos.length),
+            (this.tipodocumentos = data.TipoDocumentos.length)
           )
         )
       }

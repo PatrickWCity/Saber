@@ -25,8 +25,8 @@
             <tr>
                 <td class="align-middle">{{$evento->nombre}}</td>
                 <td class="align-middle">{{$evento->descripcion}}</td>
-                <td class="align-middle">{{Carbon\Carbon::parse($evento->fechaInicio)->toDayDateTimeString()}}</td>
-                <td class="align-middle">{{Carbon\Carbon::parse($evento->fechaTermino)->toDayDateTimeString()}}</td>
+                <td class="align-middle">{{Date::parse($evento->fechaInicio)->format('l, j \d\e F \d\e Y G:i')}}</td>
+                <td class="align-middle">{{Date::parse($evento->fechaTermino)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 <td class="align-middle">{{$evento->TipoEvento}}</td>
                 <td class="align-middle">{{$evento->Sede}}</td>
                 <td class="align-middle">{{$evento->Area}}</td>

@@ -24,8 +24,8 @@
                 <td class="align-middle">{{$noticia->titulo}}</td>
                 <td class="align-middle">{{$noticia->contenido}}</td>
                 <td class="align-middle">{{$noticia->imagenPortada}}</td>
-                <td class="align-middle">{{Carbon\Carbon::parse($noticia->fechaCreada)->toDayDateTimeString()}}</td>
-                <td class="align-middle">{{Carbon\Carbon::parse($noticia->fechaActualizada)->toDayDateTimeString()}}</td>
+                <td class="align-middle">{{Date::parse($noticia->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</td>
+                <td class="align-middle">{{Date::parse($noticia->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 <td class="align-middle">{{$noticia->TipoNoticia}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">

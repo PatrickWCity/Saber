@@ -16,9 +16,15 @@
         <dd class="col-8">{{$evento->descripcion}}</dd>
         @endif
         <dt class="col-4">Fecha de Inicio:</dt>
-        <dd class="col-8">{{$evento->fechaInicio}}</dd>
+        <dd class="col-8">{{Date::parse($evento->fechaInicio)->format('l, j \d\e F \d\e Y G:i')}}</dd>
+        <dt class="col-4">Fecha de Inicio:</dt>
+        <dd class="col-8">{{Date::parse($evento->fechaInicio)->ago()}}</dd>
         <dt class="col-4">Fecha de Termino:</dt>
-        <dd class="col-8">{{$evento->fechaTermino}}</dd>
+        <dd class="col-8">{{Date::parse($evento->fechaTermino)->format('l, j \d\e F \d\e Y G:i')}}</dd>
+        <dt class="col-4">Fecha de Termino:</dt>
+        <dd class="col-8">{{Date::parse($evento->fechaTermino)->ago()}}</dd>
+        <dt class="col-4">Duracion:</dt>
+        <dd class="col-8">{{Date::parse($evento->fechaInicio)->timespan($evento->fechaTermino)}}</dd>
         <dt class="col-4">Tipo de Evento:</dt>
         <dd class="col-8">{{$evento->TipoEvento}}</dd>
         <dt class="col-4">Sede:</dt>

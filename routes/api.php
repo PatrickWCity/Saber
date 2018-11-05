@@ -39,7 +39,8 @@ Route::apiResources([
     'area' => 'API\AreaController',
     'user' => 'API\UserController',
     'expositor' => 'API\ExpositorController',
-    'tipovoluntario' => 'API\TipoVoluntarioController'
+    'tipovoluntario' => 'API\TipoVoluntarioController',
+    'dashboard' => 'API\DashboardController'
 ]);
 
 Route::get('profile', 'API\UserController@profile');
