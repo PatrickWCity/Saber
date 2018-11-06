@@ -3,6 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\Evento;
+use App\TipoEvento;
+use App\Sede;
+use App\Area;
+use App\Expositor;
+use App\Noticia;
+use App\TipoNoticia;
+use App\Documento;
+use App\TipoDocumento;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,15 +25,15 @@ class DashboardController extends Controller
     public function index()
     {
         return $data = [
-            'Eventos'       => DB::select('CALL sp_consultarTodosEvento()'),
-            'TipoEventos'   => DB::select('CALL sp_consultarTodosTipoEvento()'),
-            'Sedes'         => DB::select('CALL sp_consultarTodosSede()'),
-            'Areas'         => DB::select('CALL sp_consultarTodosArea()'),
-            'Expositores'     => DB::select('CALL sp_consultarTodosExpositor()'),
-            'Noticias'       => DB::select('CALL sp_consultarTodosNoticia()'),
-            'TipoNoticias'   => DB::select('CALL sp_consultarTodosTipoNoticia()'),
-            'Documentos'       => DB::select('CALL sp_consultarTodosDocumento()'),
-            'TipoDocumentos'   => DB::select('CALL sp_consultarTodosTipoDocumento()')
+            'Eventos'        => Evento::count(),
+            'TipoEventos'    => TipoEvento::count(),
+            'Sedes'          => Sede::count(),
+            'Areas'          => Area::count(),
+            'Expositores'    => Expositor::count(),
+            'Noticias'       => Noticia::count(),
+            'TipoNoticias'   => TipoNoticia::count(),
+            'Documentos'     => Documento::count(),
+            'TipoDocumentos' => TipoDocumento::count()
         ];
     }
 

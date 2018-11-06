@@ -101,6 +101,7 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_agregarNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarUnNoticia`;
         DROP PROCEDURE IF EXISTS `sp_eliminarNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUltimasNoticia`;
         ');
 
         DB::unprepared("
@@ -999,6 +1000,14 @@ class CreateStoredProcedure extends Migration
         DELETE FROM Noticia
         WHERE Noticia.idNoticia = idNoticia;
         END;
+
+        CREATE PROCEDURE `sp_consultarUltimasNoticia`()
+        BEGIN
+        SELECT Noticia.*, TipoNoticia.nombre as TipoNoticia
+        FROM Noticia, TipoNoticia
+        WHERE Noticia.idTipoNoticia = TipoNoticia.idTipoNoticia
+        ORDER BY idNoticia DESC LIMIT 0,4;
+        END;
         ");
     }
 
@@ -1097,6 +1106,7 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_agregarNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarUnNoticia`;
         DROP PROCEDURE IF EXISTS `sp_eliminarNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUltimasNoticia`;
         ');
     }
 }

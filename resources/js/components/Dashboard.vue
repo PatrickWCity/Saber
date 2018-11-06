@@ -208,15 +208,15 @@ export default {
         .get("api/dashboard")
         .then(
           ({ data }) => (
-            (this.eventos = data.Eventos.length),
-            (this.tipoeventos = data.TipoEventos.length),
-            (this.sedes = data.Sedes.length),
-            (this.areas = data.Areas.length),
-            (this.expositores = data.Expositores.length),
-            (this.noticias = data.Noticias.length),
-            (this.tiponoticias = data.TipoNoticias.length),
-            (this.documentos = data.Documentos.length),
-            (this.tipodocumentos = data.TipoDocumentos.length)
+            (this.eventos = data.Eventos),
+            (this.tipoeventos = data.TipoEventos),
+            (this.sedes = data.Sedes),
+            (this.areas = data.Areas),
+            (this.expositores = data.Expositores),
+            (this.noticias = data.Noticias),
+            (this.tiponoticias = data.TipoNoticias),
+            (this.documentos = data.Documentos),
+            (this.tipodocumentos = data.TipoDocumentos)
           )
         )
       }

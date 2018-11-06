@@ -30,7 +30,8 @@
         <dt class="col-4">Tipo de Noticia:</dt>
         <dd class="col-8">{{$noticia->TipoNoticia}}</dd>
     </dl>
-    <a href="/noticias" class="btn btn-dark" title="Volver">Volver</a>
+    <a href="/noticias" class="btn btn-dark" title="Volver">Volver a Noticias</a>
+    <a href="/" class="btn btn-dark" title="Volver">Volver a Página Principal</a>
     @endforeach
     @else
         <p>Noticia no encontrada.</p>
