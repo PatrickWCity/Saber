@@ -49,7 +49,7 @@ class UsuarioController extends Controller
             'appat' => 'min:3|required|max:60',
             'apmat' => 'max:60',
             'direccion' => 'required|max:255',
-            'telefono' => 'required|max:20|unique:Usuario',
+            'telefono' => 'required|between:9,15|unique:Usuario',
             'email' => 'required|max:255|unique:Usuario'
         ]);
         $values = 
@@ -117,7 +117,7 @@ class UsuarioController extends Controller
             'appat' => 'required|max:60',
             'apmat' => 'max:60',
             'direccion' => 'required|max:255',
-            'telefono' => 'required|max:20|unique:Usuario,idUsuario'.$request->id,
+            'telefono' => 'required|between:9,15|unique:Usuario,idUsuario'.$request->id,
             'email' => 'required|max:255|unique:Usuario,idUsuario'.$request->id
         ]);
         $values = 

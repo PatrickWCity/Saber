@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'appat' => 'required|string|max:60',
             'apmat' => 'max:60',
             'direccion' => 'required|string|max:255',
-            'telefono' => 'numeric|required|string|digits_between:9,20|unique:Usuario',
+            'telefono' => 'required|string|between:9,15|unique:Usuario',
             'username' => 'required|string|max:20|unique:Acceso',
             'email' => 'required|string|email|max:255|unique:Usuario',
             'password' => 'required|string|min:6|confirmed',
