@@ -27,7 +27,6 @@ class CreateNoticiaTable extends Migration
                   ->references('idTipoNoticia')->on('TipoNoticia')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-
             //$table->foreign('idUsuario')
             //      ->references('idUsuario')->on('Usuario')
             //      ->onDelete('cascade')

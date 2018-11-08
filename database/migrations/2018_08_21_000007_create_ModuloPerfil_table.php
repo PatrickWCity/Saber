@@ -23,7 +23,6 @@ class CreateModuloPerfilTable extends Migration
             $table->foreign('idModulo')
                   ->references('idModulo')->on('Modulo');
                   //->onDelete('cascade');
-                  
             $table->foreign('idPerfil')
                   ->references('idPerfil')->on('Perfil');
                   //->onDelete('cascade');

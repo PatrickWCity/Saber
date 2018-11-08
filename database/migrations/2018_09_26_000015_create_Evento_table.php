@@ -19,11 +19,11 @@ class CreateEventoTable extends Migration
             $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Evento');
             $table->dateTime('fechaInicio')->comment('Fecha de Inicio de Evento');
             $table->dateTime('fechaTermino')->comment('Fecha de Termino de Evento');
-
             $table->unsignedInteger('idTipoEvento')->nullable()->default(null)->comment('Identificador de Tipo de Evento');
             $table->unsignedInteger('idSede')->nullable()->default(null)->comment('Identificador de Sede');
             $table->unsignedInteger('idArea')->nullable()->default(null)->comment('Identificador de Área');
             $table->unsignedInteger('idExpositor')->nullable()->default(null)->comment('Identificador de Expositor');
+            //$table->unsignedInteger('idUsuario')->nullable()->default(null)->comment('Identificador de Usuario');
 
             $table->foreign('idTipoEvento')
                   ->references('idTipoEvento')->on('TipoEvento')
@@ -41,6 +41,10 @@ class CreateEventoTable extends Migration
                   ->references('idExpositor')->on('Expositor')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
+            //$table->foreign('idUsuario')
+            //      ->references('idUsuario')->on('Usuario')
+            //      ->onDelete('cascade')
+            //      ->onUpdate('cascade');
         });
     }
 

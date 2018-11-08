@@ -23,7 +23,6 @@ class CreateSubmoduloModuloTable extends Migration
             $table->foreign('idSubmodulo')
                   ->references('idSubmodulo')->on('Submodulo');
                   //->onDelete('cascade');
-
             $table->foreign('idModulo')
                   ->references('idModulo')->on('Modulo');
                   //->onDelete('cascade');
