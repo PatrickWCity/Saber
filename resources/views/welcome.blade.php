@@ -11,22 +11,22 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
-        <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="{{ mix('js/vendor.js') }}"></script>
-        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ asset(mix('js/manifest.js')) }}"></script>
+        <script src="{{ asset(mix('js/vendor.js')) }}"></script>
+        <script src="{{ asset(mix('js/app.js')) }}"></script>
 
-        <script src="/js/holder.min.js"></script>
-        <script src="/js/offcanvas.js"></script>
+        <script src="{{ asset('/js/holder.min.js') }}"></script>
+        <script src="{{ asset('/js/offcanvas.js') }}"></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="/css/carousel.css" rel="stylesheet">
-        <link href="/css/offcanvas.css" rel="stylesheet">
+        <link href="{{ asset('/css/carousel.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/offcanvas.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
