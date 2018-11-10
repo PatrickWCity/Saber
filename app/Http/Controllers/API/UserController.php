@@ -44,6 +44,9 @@ class UserController extends Controller
         if(!empty($request->password)){
             $request->merge(['password' => Hash::make($request['password'])]);
         }
+        $usuario = Usuario::find(auth('api')->user()->getIdUsuario());
+        $usuario->email = $request->email;
+        $usuario->save();
         $user->update($request->all());
         return ['message' => "Success"];
     }
