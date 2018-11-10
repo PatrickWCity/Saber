@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use DB;
 use App\Documento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -52,9 +53,11 @@ class DocumentoController extends Controller
             $request->nombre,
             $request->descripcion,
             $request->ubicacion,
+            Carbon::now(),
+            null,
             $request->idTipoDocumento
         ];
-        DB::insert('CALL sp_agregarDocumento(?,?,?,?)', $values);
+        DB::insert('CALL sp_agregarDocumento(?,?,?,?,?,?)', $values);
 
         return ['message' => 'El Documento fue Ingresado con Exito!'];
     }
@@ -94,9 +97,11 @@ class DocumentoController extends Controller
             $request->nombre,
             $request->descripcion,
             $request->ubicacion,
+            $request->fechaCreada,
+            Carbon::now(),
             $request->idTipoDocumento
         ];
-        DB::update('CALL sp_actualizarDocumento(?,?,?,?,?)', $values);
+        DB::update('CALL sp_actualizarDocumento(?,?,?,?,?,?,?)', $values);
         
         return ['message' => 'El Documento fue Actualizado con Exito!'];
     }

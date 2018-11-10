@@ -45,6 +45,8 @@
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Ubicación</th>
+                        <th>Fecha Creada</th>
+                        <th>Fecha Actualizada</th>
                         <th>Tipo de Documento</th>
                         <th class="text-center">Operaciones</th>
                       </tr>
@@ -55,6 +57,8 @@
                         <td>{{documento.nombre}}</td>
                         <td>{{documento.descripcion}}</td>
                         <td>{{documento.ubicacion}}</td>
+                        <td>{{noticia.fechaCreada}}</td>
+                        <td>{{noticia.fechaActualizada}}</td>
                         <td>{{documento.TipoDocumento}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
@@ -174,6 +178,8 @@ export default {
         nombre: "",
         descripcion: "",
         ubicacion: "",
+        fechaCreada: "",
+        fechaActualizada: "",
         idTipoDocumento: "",
         palabraClave: ""
       })
@@ -325,7 +331,7 @@ export default {
                 {
                   searchable: false,
                   orderable: false,
-                  targets: 5
+                  targets: 7
                 }
               ]
             });
