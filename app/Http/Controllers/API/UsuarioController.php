@@ -144,6 +144,14 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::where('idUsuario', $id)->first();
+        $currentPhoto = $user->foto;
+        $userPhoto = public_path('img/usuarios/').$currentPhoto;
+        if(file_exists($userPhoto)){
+            if($currentPhoto != 'default.png'){
+                @unlink($userPhoto);
+            }
+        }
         DB::delete('CALL sp_eliminarUsuario(?)', [$id]);
         return ['message' => 'El Usuario fue Eliminado con Exito!'];
     }

@@ -45,14 +45,21 @@ class NoticiaController extends Controller
         $this->validate($request, [
             'titulo' => 'required|max:191|unique:Noticia',
             'contenido' =>'required',
-            'imagenPortada' => 'required',
+            //'imagenPortada' => 'required',
             'idTipoNoticia' => 'required' // ID not required
         ]);
+        $nombreImagenPortada = ''; // ? test if not needed
+        if($request->imagenPortada){
+            $nombreImagenPortada = time().'.' . explode('/', explode(':', substr($request->imagenPortada, 0, strpos($request->imagenPortada, ';')))[1])[1];
+            \Image::make($request->imagenPortada)->save(public_path('img/noticias/').$nombreImagenPortada);
+        }else{
+            $nombreImagenPortada = 'default.png';
+        }
         $values = 
         [ 
             $request->titulo,
             $request->contenido,
-            $request->imagenPortada,
+            $nombreImagenPortada,
             Carbon::now(),
             null,
             $request->idTipoNoticia
@@ -91,12 +98,27 @@ class NoticiaController extends Controller
             //'imagenPortada' => 'required',
             'idTipoNoticia' => 'required',
         ]);
+        $nombreImagenPortada = ''; // ? test if not needed
+        $noticia = Noticia::find($id);
+        $currentImagenPortada = $noticia->imagenPortada;
+        if($request->imagenPortada != $currentImagenPortada){
+            $nombreImagenPortada = time().'.' . explode('/', explode(':', substr($request->imagenPortada, 0, strpos($request->imagenPortada, ';')))[1])[1];
+            \Image::make($request->imagenPortada)->save(public_path('img/noticias/').$nombreImagenPortada);
+            $noticiaImagenPortada = public_path('img/noticias/').$currentImagenPortada;
+            if(file_exists($noticiaImagenPortada)){
+                if($currentImagenPortada != 'default.png'){
+                    @unlink($noticiaImagenPortada);
+                }
+            }
+        }else{
+            $nombreImagenPortada = $currentImagenPortada;
+        }
         $values = 
         [
             $id,
             $request->titulo,
             $request->contenido,
-            $request->imagenPortada,
+            $nombreImagenPortada,
             $request->fechaCreada,
             Carbon::now(),
             $request->idTipoNoticia
@@ -114,6 +136,14 @@ class NoticiaController extends Controller
      */
     public function destroy($id)
     {
+        $noticia = Noticia::find($id);
+        $currentImagenPortada = $noticia->imagenPortada;
+        $noticiaImagenPortada = public_path('img/noticias/').$currentImagenPortada;
+        if(file_exists($noticiaImagenPortada)){
+            if($currentImagenPortada != 'default.png'){
+                @unlink($noticiaImagenPortada);
+            }
+        }
         DB::delete('CALL sp_eliminarNoticia(?)', [$id]);
         return ['message' => 'El Noticia fue Eliminado con Exito!'];
     }

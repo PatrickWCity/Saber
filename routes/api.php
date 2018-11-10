@@ -43,5 +43,5 @@ Route::apiResources([
     'dashboard' => 'API\DashboardController'
 ]);
 
-Route::get('profile', 'API\UserController@profile');
-Route::put('profile', 'API\UserController@updateProfile');
+Route::get('cuenta', 'API\UserController@cuenta');
+Route::put('cuenta', 'API\UserController@actualizarCuenta');

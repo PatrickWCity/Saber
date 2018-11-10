@@ -79,7 +79,8 @@ Vue.use(VueRouter)
 
 Vue.filter('myDate', function(created){
     moment.locale('es');
-    return moment(created).format('LLLL');
+    //return moment(created).format('LLLL');
+    return created ? moment(created).format('LLLL') : null;
 })
 
 import VueProgressBar from 'vue-progressbar'

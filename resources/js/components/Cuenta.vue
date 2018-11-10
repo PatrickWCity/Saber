@@ -113,20 +113,20 @@
                                 <div class="form-group">
                                     <label for="foto" class="col-sm-2 control-label">Foto de Usuario</label>
                                     <div class="col-sm-12">
-                                        <input type="file" @change="updateProfile" name="foto" class="form-input">
+                                        <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif" @change="updateProfile" name="foto" class="form-input">
                                     </div>
 
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password" class="col-sm-12 control-label">Clave (incompleto)</label>
+                                    <label for="password" class="col-sm-12 control-label">Clave Nueva</label>
 
                                     <div class="col-sm-12">
                                     <input type="password"
                                         v-model="form.password"
                                         class="form-control"
                                         id="password"
-                                        placeholder="Password"
+                                        placeholder="Clave Nueva"
                                         :class="{ 'is-invalid': form.errors.has('password') }"
                                     >
                                      <has-error :form="form" field="password"></has-error>
@@ -185,8 +185,7 @@
         methods:{
             getProfilePhoto(){
               if(this.form.foto.length){
-              let foto = (this.form.foto.length > 200) ? this.form.foto : "img/profile/"+ this.form.foto ;
-              //let foto = (this.form.foto.length < 200) ? "img/profile/user.jpg" : "img/profile/"+ this.form.foto ;
+              let foto = (this.form.foto.length > 200) ? this.form.foto : "img/usuarios/"+ this.form.foto ;
               return foto;
               }
             },
@@ -195,7 +194,7 @@
                 if(this.form.password == ''){
                     this.form.password = undefined;
                 }
-                this.form.put('api/profile')
+                this.form.put('api/cuenta')
                 .then(()=>{
                      Fire.$emit('AfterCreate');
                     this.$Progress.finish();
@@ -207,7 +206,7 @@
             updateProfile(e){
                 // console.log('uploading');
                     let file = e.target.files[0];
-                    console.log(file);
+                  //  console.log(file);
                     let reader = new FileReader();
                     // let vm = this;
                     if(file['size'] < 2111775){
@@ -226,7 +225,7 @@
             }
         },
         created() {
-            axios.get("api/profile")
+            axios.get("api/cuenta")
             .then(({ data }) => (
               (this.form.fill(data.user)),
               (this.user = data.user),

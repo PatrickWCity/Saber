@@ -55,10 +55,10 @@
                       <tr v-for="noticia in noticias" :key="noticia.idNoticia">
                         <td>{{noticia.idNoticia}}</td>
                         <td>{{noticia.titulo}}</td>
-                        <td>{{noticia.contenido}}</td>
+                        <td class="text-truncate" style="max-width: 150px;">{{noticia.contenido}}</td>
                         <td>{{noticia.imagenPortada}}</td>
-                        <td>{{noticia.fechaCreada}}</td>
-                        <td>{{noticia.fechaActualizada}}</td>
+                        <td>{{noticia.fechaCreada | myDate}}</td>
+                        <td>{{noticia.fechaActualizada | myDate}}</td>
                         <td>{{noticia.TipoNoticia}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
@@ -110,11 +110,11 @@
               </div>
               <div class="form-group">
                 <label for="imagenPortada">Imagen de Portada</label>
-                <input v-model="form.imagenPortada" type="text" name="imagenPortada" class="form-control" :class="{ 'is-invalid': form.errors.has('imagenPortada') }" placeholder="Imagen de Portada de Noticia">
+                <div class="col-sm-12">
+                <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif" @change="updateProfile" name="imagenPortada" class="form-input" :class="{ 'is-invalid': form.errors.has('imagenPortada') }" placeholder="Imagen de Portada de Noticia">
+                </div>
                 <has-error :form="form" field="imagenPortada"></has-error>
-              </div>
-
-              
+              </div>              
               <div class="form-group">
                 <label for="idTipoNoticia">Tipo de Noticia</label>
                 <div class="form-row">
@@ -191,6 +191,26 @@ export default {
   }
 },
   methods: {
+    updateProfile(e){
+        // console.log('uploading');
+        let file = e.target.files[0];
+        //console.log(file);
+        let reader = new FileReader();
+        // let vm = this;
+        if(file['size'] < 2111775){
+          reader.onloadend = (file) => {
+            // console.log('RESULT', reader.result)
+            this.form.imagenPortada = reader.result;
+          }
+          reader.readAsDataURL(file);
+        }else{
+          swal({
+          type: 'error',
+          title: 'Oops...',
+          text: 'You are uploading a large file',
+        })
+      }
+    },
     actualizarNoticia() {
       this.$Progress.start();
       this.form
@@ -331,7 +351,7 @@ export default {
                 {
                   searchable: false,
                   orderable: false,
-                  targets: 5
+                  targets: 7
                 }
               ]
             });

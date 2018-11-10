@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $this->middleware('auth:api');
     }
-    public function updateProfile(Request $request)
+    public function actualizarCuenta(Request $request)
     {
         $user = auth('api')->user();
         $this->validate($request,[
@@ -30,14 +30,12 @@ class UserController extends Controller
         $currentPhoto = $user->foto;
         if($request->foto != $currentPhoto){
             $name = time().'.' . explode('/', explode(':', substr($request->foto, 0, strpos($request->foto, ';')))[1])[1];
-            \Image::make($request->foto)->save(public_path('img/profile/').$name);
+            \Image::make($request->foto)->save(public_path('img/usuarios/').$name);
             $request->merge(['foto' => $name]);
-            $userPhoto = public_path('img/profile/').$currentPhoto;
+            $userPhoto = public_path('img/usuarios/').$currentPhoto;
             if(file_exists($userPhoto)){
                 if($currentPhoto != 'default.png'){
-                    @unlink($userPhoto); 
-                @unlink($userPhoto);
-                    @unlink($userPhoto); 
+                    @unlink($userPhoto);
                 }
             }
         }
@@ -50,7 +48,7 @@ class UserController extends Controller
         $user->update($request->all());
         return ['message' => "Success"];
     }
-    public function profile()
+    public function cuenta()
     {
         return $data = [
             'user' => auth('api')->user(),

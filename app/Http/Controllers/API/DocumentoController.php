@@ -114,6 +114,12 @@ class DocumentoController extends Controller
      */
     public function destroy($id)
     {
+        $documento = Documento::find($id);
+        $currentUbicacion = $documento->ubicacion;
+        $documentoUbicacion = public_path('docs/').$currentUbicacion;
+        if(file_exists($documentoUbicacion)){
+            @unlink($documentoUbicacion);
+        }
         DB::delete('CALL sp_eliminarDocumento(?)', [$id]);
         return ['message' => 'El Documento fue Eliminado con Exito!'];
     }

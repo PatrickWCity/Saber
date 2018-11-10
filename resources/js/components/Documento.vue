@@ -57,8 +57,8 @@
                         <td>{{documento.nombre}}</td>
                         <td>{{documento.descripcion}}</td>
                         <td>{{documento.ubicacion}}</td>
-                        <td>{{noticia.fechaCreada}}</td>
-                        <td>{{noticia.fechaActualizada}}</td>
+                        <td>{{noticia.fechaCreada | myDate}}</td>
+                        <td>{{noticia.fechaActualizada | myDate}}</td>
                         <td>{{documento.TipoDocumento}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">

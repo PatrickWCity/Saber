@@ -17,7 +17,7 @@ class CreateNoticiaTable extends Migration
             $table->increments('idNoticia')->comment('Identificador de Noticia');
             $table->string('titulo')->unique()->comment('Titulo de Noticia');
             $table->longText('contenido')->comment('Contenido de Noticia');
-            $table->string('imagenPortada')->comment('Imagen de Portada de Noticia');
+            $table->string('imagenPortada')->default('default.png')->comment('Imagen de Portada de Noticia');
             $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Noticia');//->useCurrent();
             $table->timestamp('fechaActualizada')->nullable()->comment('Fecha de Actualización de Noticia');//->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unsignedInteger('idTipoNoticia')->nullable()->default(null)->comment('Identificador de Tipo de Noticia');
