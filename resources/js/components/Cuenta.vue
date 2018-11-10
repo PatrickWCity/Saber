@@ -1,3 +1,17 @@
+<style>
+.widget-user-header{
+    background-position: center center;
+    background-size: cover;
+    height: 230px !important;
+}
+.widget-user .card-footer{
+    padding: 0;
+}
+.widget-user .widget-user-image{
+    top: 70px;
+}
+</style>
+
 <template>
   <!-- Content Wrapper. Contains page content -->
   <div>
@@ -27,40 +41,44 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div v-if="user.length > 0" class="card card-widget widget-user">
+            <div class="card card-widget widget-user">
               <!-- Add the bg color to the header using any of the bg-* classes -->
-              <div class="widget-user-header text-white" style="background: url('./img/user-cover.png') center center;">
-                <h3 class="widget-user-username"></h3>
-                <h5 class="widget-user-desc">Web Designer</h5>
+              <div class="widget-user-header text-white" style="background-color: #343a40;">
+                <h3 class="widget-user-username">{{this.form.username}}</h3>
+                <h5 class="widget-user-desc">{{this.usuario.nombre+" "+this.usuario.appat+" "+ (this.usuario.apmat? this.usuario.apmat : "") }}<br>{{this.usuario.run}} </h5>
               </div>
               <div class="widget-user-image">
                 <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
               </div>
               <div class="card-footer">
                 <div class="row">
-                  <div class="col-sm-4 border-right">
+                  <div class="col-sm-12">
                     <div class="description-block">
-                      <h5 class="description-header">3,200</h5>
-                      <span class="description-text">SALES</span>
+                      <h5 class="description-header">Cuenta de Usuario</h5>
+                      <span class="description-text">{{this.usuario.nombre+" "+this.usuario.appat+" "+ (this.usuario.apmat? this.usuario.apmat : "") }}</span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
+                  <!--
                   <div class="col-sm-4 border-right">
                     <div class="description-block">
                       <h5 class="description-header">13,000</h5>
                       <span class="description-text">FOLLOWERS</span>
                     </div>
-                    <!-- /.description-block -->
-                  </div>
+                    <! /.description-block -->
+                  <!--</div>
+                  -->
                   <!-- /.col -->
+                  <!--
                   <div class="col-sm-4">
                     <div class="description-block">
                       <h5 class="description-header">35</h5>
                       <span class="description-text">PRODUCTS</span>
                     </div>
-                    <!-- /.description-block -->
-                  </div>
+                    <! /.description-block -->
+                  <!--</div>
+                  -->
                   <!-- /.col -->
                 </div>
                 <!-- /.row -->
@@ -77,11 +95,11 @@
                   <div class="tab-pane active show" id="settings">
                     <form class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                    <label for="inputUsername" class="col-sm-2 control-label">Username</label>
 
                                     <div class="col-sm-12">
-                                    <input type="" v-model="form.name" class="form-control" id="inputName" placeholder="Name" :class="{ 'is-invalid': form.errors.has('name') }">
-                                     <has-error :form="form" field="name"></has-error>
+                                    <input type="" v-model="form.username" class="form-control" id="inputUsername" placeholder="Username" :class="{ 'is-invalid': form.errors.has('username') }">
+                                     <has-error :form="form" field="username"></has-error>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,17 +110,8 @@
                                      <has-error :form="form" field="email"></has-error>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                                    <div class="col-sm-12">
-                                    <textarea  v-model="form.bio" class="form-control" id="inputExperience" placeholder="Experience" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                                     <has-error :form="form" field="bio"></has-error>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="foto" class="col-sm-2 control-label">Profile Photo</label>
+                                    <label for="foto" class="col-sm-2 control-label">Foto de Usuario</label>
                                     <div class="col-sm-12">
                                         <input type="file" @change="updateProfile" name="foto" class="form-input">
                                     </div>
@@ -110,14 +119,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password" class="col-sm-12 control-label">Passport (leave empty if not changing)</label>
+                                    <label for="password" class="col-sm-12 control-label">Clave (incompleto)</label>
 
                                     <div class="col-sm-12">
                                     <input type="password"
                                         v-model="form.password"
                                         class="form-control"
                                         id="password"
-                                        placeholder="Passport"
+                                        placeholder="Password"
                                         :class="{ 'is-invalid': form.errors.has('password') }"
                                     >
                                      <has-error :form="form" field="password"></has-error>
@@ -151,26 +160,35 @@
     export default {
         data(){
             return {
+              usuario: {
+                run: '',
+                nombre: '',
+                appat: '',
+                apmat: ''
+              },
               user: {},
                  form: new Form({
-                    id:'',
-                    name : '',
+                    idUsuario: '',
+                    idAcceso: '',
+                    username: '',
                     email: '',
+                    email_verified_at: '',
+                    fechaCaducidad: '',
+                    estadoInicial: '',
+                    estadoAcceso: '',
+                    diasClave: '',
                     password: '',
-                    type: '',
-                    bio: '',
                     foto: ''
                 })
             }
         },
-        mounted() {
-            console.log('Component mounted.')
-        },
         methods:{
             getProfilePhoto(){
+              if(this.form.foto.length){
               let foto = (this.form.foto.length > 200) ? this.form.foto : "img/profile/"+ this.form.foto ;
               //let foto = (this.form.foto.length < 200) ? "img/profile/user.jpg" : "img/profile/"+ this.form.foto ;
               return foto;
+              }
             },
             updateInfo(){
                 this.$Progress.start();
@@ -210,8 +228,9 @@
         created() {
             axios.get("api/profile")
             .then(({ data }) => (
-              (this.form.fill(data)),
-              (this.user = data)));
+              (this.form.fill(data.user)),
+              (this.user = data.user),
+              (this.usuario = data.usuario)));
         }
     }
 </script>

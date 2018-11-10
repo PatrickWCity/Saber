@@ -54,4 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles()->where('nombre', $role)->count() == 1;
     }
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
+    }
 }
