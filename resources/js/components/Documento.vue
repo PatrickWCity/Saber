@@ -57,8 +57,8 @@
                         <td>{{documento.nombre}}</td>
                         <td>{{documento.descripcion}}</td>
                         <td>{{documento.ubicacion}}</td>
-                        <td>{{noticia.fechaCreada | myDate}}</td>
-                        <td>{{noticia.fechaActualizada | myDate}}</td>
+                        <td>{{documento.fechaCreada | myDate}}</td>
+                        <td>{{documento.fechaActualizada | myDate}}</td>
                         <td>{{documento.TipoDocumento}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
@@ -110,11 +110,9 @@
               </div>
               <div class="form-group">
                 <label for="ubicacion">Ubicación</label>
-                <input v-model="form.ubicacion" type="text" name="ubicacion" class="form-control" :class="{ 'is-invalid': form.errors.has('ubicacion') }" placeholder="Ubicación de Documento">
+                <input type="file" name="ubicacion" v-on:change="onImageChange" class="form-control-file" :class="{ 'is-invalid': form.errors.has('ubicacion') }" placeholder="Ubicación de Documento">
                 <has-error :form="form" field="ubicacion"></has-error>
               </div>
-
-              
               <div class="form-group">
                 <label for="idTipoDocumento">Tipo de Documento</label>
                 <div class="form-row">
@@ -191,10 +189,16 @@ export default {
   }
 },
   methods: {
+    onImageChange(e){
+      this.form.ubicacion = e.target.files[0];
+    },
     actualizarDocumento() {
       this.$Progress.start();
-      this.form
-        .put("api/documento/" + this.form.idDocumento)
+      this.form.submit('post', 'api/documento/' + this.form.idDocumento,{headers: {'Content-Type': undefined}}, {
+        transformRequest: [function (data, headers){return objectToFormData(data)}]
+      })
+      //this.form
+       // .put("api/documento/" + this.form.idDocumento)
         .then(() => {
           Fire.$emit("RefrescarListadoDocumento");
           $("#documentoModal").modal("hide");
@@ -341,8 +345,13 @@ export default {
     },
     crearDocumento() {
       this.$Progress.start();
-      this.form
-        .post("api/documento")
+      this.form.submit('post', 'api/documento', {
+        transformRequest: [function (data, headers){
+          return objectToFormData(data)
+        }]
+      })
+     // this.form
+     //   .post("api/documento")
         .then(() => {
           Fire.$emit("RefrescarListadoDocumento");
           $("#documentoModal").modal("hide");

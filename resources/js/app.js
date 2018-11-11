@@ -90,6 +90,9 @@ Vue.use(VueProgressBar, {
     thickness: '4px'
   })
 
+import objectToFormData from 'object-to-formdata'
+window.objectToFormData = objectToFormData;
+
 let routes = [
     { path: '/home', component: require('./components/Dashboard.vue') },
     { path: '/dashboard', component: require('./components/Dashboard.vue') },

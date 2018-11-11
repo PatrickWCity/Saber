@@ -45,7 +45,7 @@ class NoticiaController extends Controller
         $this->validate($request, [
             'titulo' => 'required|max:191|unique:Noticia',
             'contenido' =>'required',
-            //'imagenPortada' => 'required',
+            'imagenPortada' => 'max:2000',
             'idTipoNoticia' => 'required' // ID not required
         ]);
         $nombreImagenPortada = ''; // ? test if not needed
@@ -95,7 +95,7 @@ class NoticiaController extends Controller
         $this->validate($request, [
             'titulo' => 'required|max:191|unique:Noticia,idNoticia'.$request->id,
             'contenido' =>'required',
-            //'imagenPortada' => 'required',
+            'imagenPortada' => 'max:2000',
             'idTipoNoticia' => 'required',
         ]);
         $nombreImagenPortada = ''; // ? test if not needed

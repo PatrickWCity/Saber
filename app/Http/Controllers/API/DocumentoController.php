@@ -45,14 +45,21 @@ class DocumentoController extends Controller
         $this->validate($request, [
             'nombre' => 'required|max:60|unique:Documento',
             'descripcion' => 'max:255',
-            'ubicacion' => 'required|max:60|unique:Documento',
+            'ubicacion' => 'required|max:64000',
             'idTipoDocumento' => 'required' // ID not required
         ]);
+        $imageName = '';
+        if($request->ubicacion){
+            $imageName = time().'.'.$request->ubicacion->getClientOriginalExtension();
+            $request->ubicacion->move(public_path('docs/'), $imageName);
+        }else{
+            $imageName = '';
+        }
         $values = 
         [ 
             $request->nombre,
             $request->descripcion,
-            $request->ubicacion,
+            $imageName,
             Carbon::now(),
             null,
             $request->idTipoDocumento
@@ -91,12 +98,25 @@ class DocumentoController extends Controller
             'ubicacion' => 'required|max:60|unique:Documento,idDocumento'.$request->id,
             'idTipoDocumento' => 'required',
         ]);
+        $imageName = '';
+        $documento = Documento::find($id);
+        $currentUbicacion = $documento->ubicacion;
+        if($request->ubicacion != $currentUbicacion && $request->ubicacion !=''){
+            $imageName = time().'.'.$request->ubicacion->getClientOriginalExtension();
+            $request->ubicacion->move(public_path('docs/'), $imageName);
+            $DocumentoUbicacion = public_path('img/noticias/').$currentUbicacion;
+            if(file_exists($DocumentoUbicacion)){
+                @unlink($DocumentoUbicacion);
+            }
+        }else{
+            $imageName = $currentUbicacion;
+        }
         $values = 
         [
             $id,
             $request->nombre,
             $request->descripcion,
-            $request->ubicacion,
+            $imageName,
             $request->fechaCreada,
             Carbon::now(),
             $request->idTipoDocumento
