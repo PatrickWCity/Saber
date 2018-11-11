@@ -44,7 +44,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Ubicación</th>
+                        <th>Archivo</th>
                         <th>Fecha Creada</th>
                         <th>Fecha Actualizada</th>
                         <th>Tipo de Documento</th>
@@ -56,7 +56,7 @@
                         <td>{{documento.idDocumento}}</td>
                         <td>{{documento.nombre}}</td>
                         <td>{{documento.descripcion}}</td>
-                        <td>{{documento.ubicacion}}</td>
+                        <td>{{documento.archivo}}</td>
                         <td>{{documento.fechaCreada | myDate}}</td>
                         <td>{{documento.fechaActualizada | myDate}}</td>
                         <td>{{documento.TipoDocumento}}</td>
@@ -109,9 +109,9 @@
                 <has-error :form="form" field="descripcion"></has-error>
               </div>
               <div class="form-group">
-                <label for="ubicacion">Ubicación</label>
-                <input type="file" name="ubicacion" v-on:change="onImageChange" class="form-control-file" :class="{ 'is-invalid': form.errors.has('ubicacion') }" placeholder="Ubicación de Documento">
-                <has-error :form="form" field="ubicacion"></has-error>
+                <label for="archivo">Archivo</label>
+                <input type="file" name="archivo" v-on:change="onImageChange" class="form-control-file" :class="{ 'is-invalid': form.errors.has('archivo') }" placeholder="Archivo de Documento">
+                <has-error :form="form" field="archivo"></has-error>
               </div>
               <div class="form-group">
                 <label for="idTipoDocumento">Tipo de Documento</label>
@@ -175,7 +175,7 @@ export default {
         idDocumento: "",
         nombre: "",
         descripcion: "",
-        ubicacion: "",
+        archivo: "",
         fechaCreada: "",
         fechaActualizada: "",
         idTipoDocumento: "",
@@ -190,7 +190,7 @@ export default {
 },
   methods: {
     onImageChange(e){
-      this.form.ubicacion = e.target.files[0];
+      this.form.archivo = e.target.files[0];
     },
     actualizarDocumento() {
       this.$Progress.start();

@@ -45,21 +45,21 @@ class DocumentoController extends Controller
         $this->validate($request, [
             'nombre' => 'required|max:60|unique:Documento',
             'descripcion' => 'max:255',
-            'ubicacion' => 'required|max:64000',
+            'archivo' => 'required|max:64000',
             'idTipoDocumento' => 'required' // ID not required
         ]);
-        $imageName = '';
-        if($request->ubicacion){
-            $imageName = time().'.'.$request->ubicacion->getClientOriginalExtension();
-            $request->ubicacion->move(public_path('docs/'), $imageName);
+        $nombreArchivo = '';
+        if($request->archivo){
+            $nombreArchivo = time().'.'.$request->archivo->getClientOriginalExtension();
+            $request->archivo->move(public_path('docs/'), $nombreArchivo);
         }else{
-            $imageName = '';
+            $nombreArchivo = '';
         }
         $values = 
         [ 
             $request->nombre,
             $request->descripcion,
-            $imageName,
+            $nombreArchivo,
             Carbon::now(),
             null,
             $request->idTipoDocumento
@@ -95,28 +95,28 @@ class DocumentoController extends Controller
         $this->validate($request, [
             'nombre' => 'required|max:60|unique:Documento,idDocumento'.$request->id,
             'descripcion' => 'max:255',
-            'ubicacion' => 'required|max:60|unique:Documento,idDocumento'.$request->id,
+            'archivo' => 'required|max:60|unique:Documento,idDocumento'.$request->id,
             'idTipoDocumento' => 'required',
         ]);
-        $imageName = '';
+        $nombreArchivo = '';
         $documento = Documento::find($id);
-        $currentUbicacion = $documento->ubicacion;
-        if($request->ubicacion != $currentUbicacion && $request->ubicacion !=''){
-            $imageName = time().'.'.$request->ubicacion->getClientOriginalExtension();
-            $request->ubicacion->move(public_path('docs/'), $imageName);
-            $DocumentoUbicacion = public_path('img/noticias/').$currentUbicacion;
-            if(file_exists($DocumentoUbicacion)){
-                @unlink($DocumentoUbicacion);
+        $currentArchivo = $documento->archivo;
+        if($request->archivo != $currentArchivo && $request->archivo !=''){
+            $nombreArchivo = time().'.'.$request->archivo->getClientOriginalExtension();
+            $request->archivo->move(public_path('docs/'), $nombreArchivo);
+            $DocumentoArchivo = public_path('img/noticias/').$currentArchivo;
+            if(file_exists($DocumentoArchivo)){
+                @unlink($DocumentoArchivo);
             }
         }else{
-            $imageName = $currentUbicacion;
+            $nombreArchivo = $currentArchivo;
         }
         $values = 
         [
             $id,
             $request->nombre,
             $request->descripcion,
-            $imageName,
+            $nombreArchivo,
             $request->fechaCreada,
             Carbon::now(),
             $request->idTipoDocumento
@@ -135,10 +135,10 @@ class DocumentoController extends Controller
     public function destroy($id)
     {
         $documento = Documento::find($id);
-        $currentUbicacion = $documento->ubicacion;
-        $documentoUbicacion = public_path('docs/').$currentUbicacion;
-        if(file_exists($documentoUbicacion)){
-            @unlink($documentoUbicacion);
+        $currentArchivo = $documento->archivo;
+        $documentoArchivo = public_path('docs/').$currentArchivo;
+        if(file_exists($documentoArchivo)){
+            @unlink($documentoArchivo);
         }
         DB::delete('CALL sp_eliminarDocumento(?)', [$id]);
         return ['message' => 'El Documento fue Eliminado con Exito!'];

@@ -17,7 +17,7 @@ class CreateDocumentoTable extends Migration
             $table->increments('idDocumento')->comment('Identificador de Documento');
             $table->string('nombre', 60)->unique()->comment('Nombre de Documento');
             $table->string('descripcion')->nullable()->default(null)->comment('Descripción de Documento');
-            $table->string('ubicacion')->unique()->comment('Ubicación de Documento');
+            $table->string('archivo')->unique()->comment('Archivo de Documento');
             $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Documento');
             $table->timestamp('fechaActualizada')->nullable()->comment('Fecha de Actualización de Documento');
             $table->unsignedInteger('idTipoDocumento')->nullable()->default(null)->comment('Identificador de Tipo de Documento');

@@ -901,28 +901,28 @@ class CreateStoredProcedure extends Migration
             IN `idDocumento` INT,
             IN `nombre` VARCHAR(60),
             IN `descripcion` VARCHAR(255),
-            IN `ubicacion` VARCHAR(255),
+            IN `archivo` VARCHAR(255),
             IN `fechaCreada` TIMESTAMP,
             IN `fechaActualizada` TIMESTAMP,
             IN `idTipoDocumento` INT
         )
         BEGIN
         UPDATE Documento
-        SET nombre = nombre, descripcion = descripcion, ubicacion = ubicacion, fechaCreada = fechaCreada, fechaActualizada = fechaActualizada, idTipoDocumento = idTipoDocumento
+        SET nombre = nombre, descripcion = descripcion, archivo = archivo, fechaCreada = fechaCreada, fechaActualizada = fechaActualizada, idTipoDocumento = idTipoDocumento
         WHERE Documento.idDocumento = idDocumento;
         END;
         
         CREATE PROCEDURE `sp_agregarDocumento`(
             IN `nombre` VARCHAR(60),
             IN `descripcion` VARCHAR(255),
-            IN `ubicacion` VARCHAR(255),
+            IN `archivo` VARCHAR(255),
             IN `fechaCreada` TIMESTAMP,
             IN `fechaActualizada` TIMESTAMP,
             IN `idTipoDocumento` INT
         )
         BEGIN
-        INSERT INTO Documento (nombre, descripcion, ubicacion, fechaCreada, fechaActualizada, idTipoDocumento)
-        VALUES(nombre, descripcion, ubicacion, fechaCreada, fechaActualizada, idTipoDocumento);
+        INSERT INTO Documento (nombre, descripcion, archivo, fechaCreada, fechaActualizada, idTipoDocumento)
+        VALUES(nombre, descripcion, archivo, fechaCreada, fechaActualizada, idTipoDocumento);
         END;
 
         CREATE PROCEDURE `sp_consultarUnDocumento`(

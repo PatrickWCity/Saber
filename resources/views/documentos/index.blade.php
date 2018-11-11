@@ -11,7 +11,7 @@
             <tr class="text-center">
                 <th class="align-middle">Nombre</th>
                 <th class="align-middle">Descripcion</th>
-                <th class="align-middle">Ubicacion</th>
+                <th class="align-middle">Archivo</th>
                 <th class="align-middle">Fecha de Creacion</th>
                 <th class="align-middle">Fecha de Actualizacion</th>
                 <th class="align-middle">Tipo de Documento</th>
@@ -23,7 +23,7 @@
             <tr>
                 <td class="align-middle">{{$documento->nombre}}</td>
                 <td class="align-middle">{{$documento->descripcion}}</td>
-                <td class="align-middle">{{$documento->ubicacion}}</td>
+                <td class="align-middle">{{$documento->archivo}}</td>
                 <td class="align-middle">{{Date::parse($documento->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 <td class="align-middle">{{Date::parse($documento->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 <td class="align-middle">{{$documento->TipoDocumento}}</td>
