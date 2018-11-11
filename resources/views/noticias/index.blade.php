@@ -25,7 +25,11 @@
                 <td class="align-middle">{{$noticia->contenido}}</td>
                 <td class="align-middle">{{$noticia->imagenPortada}}</td>
                 <td class="align-middle">{{Date::parse($noticia->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</td>
+                @if(!$noticia->fechaActualizada)
+                <td class="align-middle"></td>
+                @else
                 <td class="align-middle">{{Date::parse($noticia->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</td>
+                @endif
                 <td class="align-middle">{{$noticia->TipoNoticia}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">
@@ -81,7 +85,7 @@
             ],
           destroy: true,
           language: esp,
-          order: [[ 0, "desc" ]],
+          order: [[ 3, "desc" ]],
           columnDefs: [
             {
               searchable: false,

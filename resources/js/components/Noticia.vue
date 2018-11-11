@@ -110,9 +110,7 @@
               </div>
               <div class="form-group">
                 <label for="imagenPortada">Imagen de Portada</label>
-                <div class="col-sm-12">
-                <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif" @change="updateProfile" name="imagenPortada" class="form-input" :class="{ 'is-invalid': form.errors.has('imagenPortada') }" placeholder="Imagen de Portada de Noticia">
-                </div>
+                <input type="file" accept="image/jpg,image/png,image/jpeg,image/gif" @change="updateProfile" name="imagenPortada" class="form-control-file" :class="{ 'is-invalid': form.errors.has('imagenPortada') }" placeholder="Imagen de Portada de Noticia">
                 <has-error :form="form" field="imagenPortada"></has-error>
               </div>              
               <div class="form-group">

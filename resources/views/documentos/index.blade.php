@@ -25,7 +25,11 @@
                 <td class="align-middle">{{$documento->descripcion}}</td>
                 <td class="align-middle">{{$documento->archivo}}</td>
                 <td class="align-middle">{{Date::parse($documento->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</td>
+                @if(!$documento->fechaActualizada)
+                <td class="align-middle"></td>
+                @else
                 <td class="align-middle">{{Date::parse($documento->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</td>
+                @endif
                 <td class="align-middle">{{$documento->TipoDocumento}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">
@@ -81,7 +85,7 @@
             ],
           destroy: true,
           language: esp,
-          order: [[ 0, "desc" ]],
+          order: [[ 3, "desc" ]],
           columnDefs: [
             {
               searchable: false,
