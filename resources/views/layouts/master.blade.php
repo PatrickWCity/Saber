@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <router-link to="/home" class="brand-link">
       <img src="./img/logo-navbar.png" alt="CMS Logo" class="brand-image img-circle"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">CMS v0.4.12</span>
+      <span class="brand-text font-weight-light">Panel</span>
     </router-link>
 
     <!-- Sidebar -->
@@ -108,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </router-link>
                 </li>
                 @endcanany
-              @can('esAdmin')
+              @canany(['esAdmin','esDocumentalista'])
               
               <li class="nav-item">
                   <router-link to="/documento" class="nav-link" active-class="active">
@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </p>
                   </router-link>
                 </li>
-                @endcan
+                @endcanany
                 @canany(['esAdmin','esOrganizador'])
                 <li class="nav-item">
                     <router-link to="/evento" class="nav-link" active-class="active">
@@ -234,8 +234,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                     </ul>
                 </li>
-                
-
                 <li class="nav-item has-treeview">
                   <a href="#" class="nav-link" :class="{'active': subIsActive(['/habilitarusuario', '/deshabilitarusuario', '/usuariopendiente'])}">
                     <i class="nav-icon fas fa-clipboard-list"></i>
@@ -308,10 +306,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      CMS v0.4.12
+      Construyendo Mis Sueños v0.5.19
     </div>
     <!-- Default to the left -->
-    <strong>Segundo Estado de Avance <i class="fas fa-chess-knight"></i> <a href="https://dev.patrickwcity.com">Proyecto de Titulo</a>.</strong> Hecha de manera Clara, Precisa y Concisa con <i class="fas fa-heart"></i>.
+    <strong>Tercer Estado de Avance <i class="fas fa-chess-knight"></i> <a href="https://dev.patrickwcity.com">Proyecto de Titulo</a>.</strong> Hecha de manera Clara, Precisa y Concisa con <i class="fas fa-heart"></i>.
   </footer>
 </div>
 <!-- ./wrapper -->

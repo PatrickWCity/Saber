@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- Content Wrapper. Contains page content -->
-  <div v-if="$gate.esAdmin()">
+  <div v-if="$gate.esAdmin() || $gate.esDocumentalista()">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -112,7 +112,7 @@
     </div>
   </div>
   <!-- /.content-wrapper -->
-  <unauthorized v-if="!$gate.esAdmin()"></unauthorized>
+  <unauthorized v-if="(!$gate.esAdmin() && !$gate.esDocumentalista()) || (!$gate.esDocumentalista() && $gate.esAdmin()) && ($gate.esDocumentalista() && !$gate.esAdmin())"></unauthorized>
 </div>
 </template>
 
@@ -215,7 +215,7 @@ export default {
       }
     },
     loadTipoDocumentos() {
-      if(this.$gate.esAdmin()){
+      if(this.$gate.esAdmin() || this.$gate.esDocumentalista()){
       axios
         .get("api/tipodocumento")
         .then(({ data }) => (this.tipoDocumentos = data))

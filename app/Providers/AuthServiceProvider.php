@@ -55,7 +55,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('esOrganizador', function ($user) {
-            return $user->tienePerfil('Comunicador');
+            return $user->tienePerfil('Ogranizador de Eventos');
+        });
+
+        Gate::define('esDocumentalista', function ($user) {
+            return $user->tienePerfil('Gestor de Documentos');
         });
         
         Passport::routes();

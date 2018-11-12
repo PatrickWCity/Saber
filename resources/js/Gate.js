@@ -90,12 +90,24 @@ export default class Gate{
         var i, x = "";
         for (i in this.user) {
             x += this.user[i].nombre;
-            if(this.user[i].nombre === 'Comunicador')
+            if(this.user[i].nombre === 'Ogranizador de Eventos')
             {
-                return this.user[i].nombre === 'Comunicador'
+                return this.user[i].nombre === 'Ogranizador de Eventos'
                 break;
             }
         }
         //return this.user.nombre === 'Organizador'
+    }
+    esDocumentalista(){
+        var i, x = "";
+        for (i in this.user) {
+            x += this.user[i].nombre;
+            if(this.user[i].nombre === 'Gestor de Documentos')
+            {
+                return this.user[i].nombre === 'Gestor de Documentos'
+                break;
+            }
+        }
+        //return this.user.nombre === 'Gestor de Documentos'
     }
 }

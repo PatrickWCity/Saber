@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- Content Wrapper. Contains page content -->
-  <div v-if="$gate.esAdmin() || $gate.esAutor()">
+  <div v-if="$gate.esAdmin() || $gate.esDocumentalista()">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -143,7 +143,7 @@
     </div>
   </div>
   <!-- /.content-wrapper -->
-  <unauthorized v-if="(!$gate.esAdmin() && !$gate.esAutor()) || (!$gate.esAutor() && $gate.esAdmin()) && ($gate.esAutor() && !$gate.esAdmin())"></unauthorized>
+  <unauthorized v-if="(!$gate.esAdmin() && !$gate.esDocumentalista()) || (!$gate.esDocumentalista() && $gate.esAdmin()) && ($gate.esDocumentalista() && !$gate.esAdmin())"></unauthorized>
 </div>
 </template>
 
@@ -278,7 +278,7 @@ export default {
       Fire.$emit("RefrescarListadoDocumento");
     },
     loadDocumentos() {
-      if(this.$gate.esAdmin() || this.$gate.esAutor()){
+      if(this.$gate.esAdmin() || this.$gate.esDocumentalista()){
       axios
         .get("api/documento")
         .then(

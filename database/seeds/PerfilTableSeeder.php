@@ -17,20 +17,24 @@ class PerfilTableSeeder extends Seeder
                 'descripcion' => 'El Administrador Administra el Sistema.',
             ],
             [
-                'nombre' => 'Desarrollador',
-                'descripcion' => 'El Desarrollador Desarrolla el Sistema.',
-            ],
-            [
                 'nombre' => 'Usuario',
                 'descripcion' => 'El Usuario tiene acceso basico en el Sistema.',
+            ],
+            [
+                'nombre' => 'Ogranizador de Eventos',
+                'descripcion' => 'El Encargado de Comunicaciones es el que Organiza los Eventos dentro del Sistema.',
             ],
             [
                 'nombre' => 'Autor',
                 'descripcion' => 'El Autor crea las Noticias en el Sistema.',
             ],
             [
-                'nombre' => 'Comunicador',
-                'descripcion' => 'El Encargado de Comunicaciones es el que Organiza los Eventos dento del Sistema.',
+                'nombre' => 'Gestor de Documentos',
+                'descripcion' => 'El Gestor de Documentos es el que Gestiona los Documentos dentro del Sistema.',
+            ],
+            [
+                'nombre' => 'Desarrollador',
+                'descripcion' => 'El Desarrollador Desarrolla el Sistema.',
             ],
             [
                 'nombre' => 'Voluntario',
