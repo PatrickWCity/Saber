@@ -144,7 +144,7 @@
       </div>
       <!-- /.container-fluid -->
     </div>
-        <div class="container-fluid" v-if="$gate.esAdmin() || $gate.esAutor()">
+        <div class="container-fluid" v-if="$gate.esAdmin() || $gate.esDocumentalista()">
         <h4 class="mb-2">Seccion de Documentos</h4>
         <div class="row">
           <div class="col-lg-3 col-6">
