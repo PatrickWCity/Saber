@@ -101,10 +101,10 @@ class DocumentoController extends Controller
         $nombreArchivo = '';
         $documento = Documento::find($id);
         $currentArchivo = $documento->archivo;
-        if($request->archivo != $currentArchivo && $request->archivo !=''){
+        if($request->archivo != $currentArchivo){
             $nombreArchivo = time().'.'.$request->archivo->getClientOriginalExtension();
             $request->archivo->move(public_path('docs/'), $nombreArchivo);
-            $DocumentoArchivo = public_path('img/noticias/').$currentArchivo;
+            $DocumentoArchivo = public_path('docs/').$currentArchivo;
             if(file_exists($DocumentoArchivo)){
                 @unlink($DocumentoArchivo);
             }

@@ -179,7 +179,8 @@ export default {
         fechaCreada: "",
         fechaActualizada: "",
         idTipoDocumento: "",
-        palabraClave: ""
+        palabraClave: "",
+        _method: "",
       })
     };
   },
@@ -194,7 +195,8 @@ export default {
     },
     actualizarDocumento() {
       this.$Progress.start();
-      this.form.submit('post', 'api/documento/' + this.form.idDocumento,{headers: {'Content-Type': undefined}}, {
+      this.form._method='PATCH';
+      this.form.submit('post', 'api/documento/' + this.form.idDocumento, {
         transformRequest: [function (data, headers){return objectToFormData(data)}]
       })
       //this.form
