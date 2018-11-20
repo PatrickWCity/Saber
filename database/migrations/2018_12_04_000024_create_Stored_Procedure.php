@@ -102,6 +102,9 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarUnNoticia`;
         DROP PROCEDURE IF EXISTS `sp_eliminarNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarUltimasNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumentoPorTipoDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticiaPorTipoNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosEventoPorTipoEvento`;
         ');
 
         DB::unprepared("
@@ -1012,6 +1015,42 @@ class CreateStoredProcedure extends Migration
         WHERE Noticia.idTipoNoticia = TipoNoticia.idTipoNoticia
         ORDER BY idNoticia DESC LIMIT 0,4;
         END;
+
+        CREATE PROCEDURE `sp_consultarTodosDocumentoPorTipoDocumento`(
+            IN `idDocumento` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT Documento.*, TipoDocumento.nombre as TipoDocumento
+        FROM Documento, TipoDocumento
+        WHERE Documento.idTipoDocumento = TipoDocumento.idTipoDocumento
+        AND Documento.idTipoDocumento = idDocumento;
+        END;
+
+        CREATE PROCEDURE `sp_consultarTodosNoticiaPorTipoNoticia`(
+            IN `idNoticia` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT Noticia.*, TipoNoticia.nombre as TipoNoticia
+        FROM Noticia, TipoNoticia
+        WHERE Noticia.idTipoNoticia = TipoNoticia.idTipoNoticia
+        AND Noticia.idTipoNoticia = idNoticia;
+        END;
+
+        CREATE PROCEDURE `sp_consultarTodosEventoPorTipoEvento`(
+            IN `idEvento` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT Evento.*, TipoEvento.nombre as TipoEvento, Sede.nombre as Sede, Area.nombre as Area, CONCAT_WS(' ',Expositor.nombre,Expositor.appat,Expositor.apmat) as Expositor
+        FROM Evento, Sede, Area, Expositor, TipoEvento
+		WHERE Evento.idTipoEvento = TipoEvento.idTipoEvento
+		AND Evento.idSede = Sede.idSede
+		AND Evento.idArea = Area.idArea
+        AND Evento.idExpositor = Expositor.idExpositor
+        AND Evento.idTipoEvento = idEvento;
+        END;
         ");
     }
 
@@ -1111,6 +1150,9 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarUnNoticia`;
         DROP PROCEDURE IF EXISTS `sp_eliminarNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarUltimasNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumentoPorTipoDocumento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticiaPorTipoNoticia`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosEventoPorTipoEvento`;
         ');
     }
 }

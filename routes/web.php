@@ -19,9 +19,15 @@ Route::get('/', 'WelcomeController@index');
 
 Route::resource('eventos','EventoController');
 
+Route::resource('tipoeventos','TipoEventoController');
+
 Route::resource('noticias','NoticiaController');
 
+Route::resource('tiponoticias','TipoNoticiaController');
+
 Route::resource('documentos','DocumentoController');
+
+Route::resource('tipodocumentos','TipoDocumentoController');
 
 Auth::routes(['verify' => true]);
 
