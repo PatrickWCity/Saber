@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(tipoEvento)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoEvento(tipoEvento.idTipoEvento)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoEvento(tipoEvento.idTipoEvento, tipoEvento.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -171,11 +171,11 @@ export default {
       $("#tipoEventoModal").modal("show");
       this.form.fill(tipoEvento);
     },
-    eliminarTipoEvento(idTipoEvento) {
+    eliminarTipoEvento(idTipoEvento, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Tipo de Evento de ID: " + idTipoEvento + "?",
-        text: "¡No podrás revertir esta acción!",
+          "¿Está seguro que desea eliminar el Tipo de Evento " + nombre + "?",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

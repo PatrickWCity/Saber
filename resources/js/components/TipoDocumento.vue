@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(tipoDocumento)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoDocumento(tipoDocumento.idTipoDocumento)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoDocumento(tipoDocumento.idTipoDocumento, tipoDocumento.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -171,11 +171,11 @@ export default {
       $("#tipoDocumentoModal").modal("show");
       this.form.fill(tipoDocumento);
     },
-    eliminarTipoDocumento(idTipoDocumento) {
+    eliminarTipoDocumento(idTipoDocumento,nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Tipo de Documento de ID: " + idTipoDocumento + "?",
-        text: "¡No podrás revertir esta acción!",
+          "¿Está seguro que desea eliminar el Tipo de Documento " + nombre + "?",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

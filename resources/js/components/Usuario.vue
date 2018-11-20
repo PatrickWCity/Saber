@@ -212,7 +212,7 @@ export default {
           "¿Está seguro que desea eliminar el Usuario de ID: " +
           idUsuario +
           "?",
-        text: "¡No podrás revertir esta acción!",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(tipoNoticia)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoNoticia(tipoNoticia.idTipoNoticia)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoNoticia(tipoNoticia.idTipoNoticia, tipoNoticia.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -171,13 +171,13 @@ export default {
       $("#tipoNoticiaModal").modal("show");
       this.form.fill(tipoNoticia);
     },
-    eliminarTipoNoticia(idTipoNoticia) {
+    eliminarTipoNoticia(idTipoNoticia, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Tipo de Noticia de ID: " +
-          idTipoNoticia +
+          "¿Está seguro que desea eliminar el Tipo de Noticia " +
+          nombre +
           "?",
-        text: "¡No podrás revertir esta acción!",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

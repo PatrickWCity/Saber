@@ -65,7 +65,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(documento)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarDocumento(documento.idDocumento)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarDocumento(documento.idDocumento, documento.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -231,11 +231,11 @@ export default {
       $("#documentoModal").modal("show");
       this.form.fill(documento);
     },
-    eliminarDocumento(idDocumento) {
+    eliminarDocumento(idDocumento,nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Documento de ID: " +
-          idDocumento +
+          "¿Está seguro que desea eliminar el Documento " +
+          nombre +
           "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",

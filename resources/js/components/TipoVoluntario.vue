@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(tipoVoluntario)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoVoluntario(tipoVoluntario.idTipoVoluntario)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarTipoVoluntario(tipoVoluntario.idTipoVoluntario, tipoVoluntario.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -171,13 +171,13 @@ export default {
       $("#tipoVoluntarioModal").modal("show");
       this.form.fill(tipoVoluntario);
     },
-    eliminarTipoVoluntario(idTipoVoluntario) {
+    eliminarTipoVoluntario(idTipoVoluntario, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Tipo de Voluntario de ID: " +
-          idTipoVoluntario +
+          "¿Está seguro que desea eliminar el Tipo de Voluntario " +
+          nombre +
           "?",
-        text: "¡No podrás revertir esta acción!",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

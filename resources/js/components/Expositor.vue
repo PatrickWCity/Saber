@@ -193,7 +193,7 @@ export default {
           "¿Está seguro que desea eliminar el Expositor de ID: " +
           idExpositor +
           "?",
-        text: "¡No podrás revertir esta acción!",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

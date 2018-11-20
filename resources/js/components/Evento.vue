@@ -69,7 +69,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(evento)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarEvento(evento.idEvento)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarEvento(evento.idEvento, evento.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -305,10 +305,10 @@ export default {
     eliminarEvento(idEvento) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Evento de ID: " +
-          idEvento +
+          "¿Está seguro que desea eliminar el Evento " +
+          nombre +
           "?",
-        text: "¡No podrás revertir esta acción!",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

@@ -170,7 +170,7 @@ export default {
       swal({
         title:
           "¿Está seguro que desea eliminar el Perfil de ID: " + idPerfil + "?",
-        text: "¡No podrás revertir esta acción!",
+        //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
