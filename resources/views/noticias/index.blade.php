@@ -23,7 +23,7 @@
             <tr>
                 <td class="align-middle">{{$noticia->titulo}}</td>
                 <td class="align-middle">{{$noticia->contenido}}</td>
-                <td class="align-middle">{{$noticia->imagenPortada}}</td>
+                <td class="align-middle"><a href="/img/noticias/{{$noticia->imagenPortada}}">{{$noticia->imagenPortada}}</a></td>
                 <td class="align-middle">{{Date::parse($noticia->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 @if(!$noticia->fechaActualizada)
                 <td class="align-middle"></td>

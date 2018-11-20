@@ -16,7 +16,8 @@
         <dd class="col-8">{!!$noticia->contenido!!}</dd>
         @endif
         <dt class="col-4">Imagen de Portada:</dt>
-        <dd class="col-8">{{$noticia->imagenPortada}}</dd>
+        <dd class="col-8"><a href="/img/noticias/{{$noticia->imagenPortada}}">{{$noticia->imagenPortada}}</a>
+        <img style="width:100%" src="/img/noticias/{{$noticia->imagenPortada}}"></dd>
         <dt class="col-4">Fecha de Creacion:</dt>
         <dd class="col-8">{{Date::parse($noticia->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
         <dt class="col-4">Fecha de Creacion:</dt>

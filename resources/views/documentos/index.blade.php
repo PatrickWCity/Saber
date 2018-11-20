@@ -23,7 +23,7 @@
             <tr>
                 <td class="align-middle">{{$documento->nombre}}</td>
                 <td class="align-middle">{{$documento->descripcion}}</td>
-                <td class="align-middle">{{$documento->archivo}}</td>
+                <td class="align-middle"><a href="/docs/{{$documento->archivo}}">{{$documento->archivo}}</a></td>
                 <td class="align-middle">{{Date::parse($documento->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 @if(!$documento->fechaActualizada)
                 <td class="align-middle"></td>

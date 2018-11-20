@@ -16,7 +16,7 @@
         <dd class="col-8">{{$documento->descripcion}}</dd>
         @endif
         <dt class="col-4">Archivo:</dt>
-        <dd class="col-8">{{$documento->archivo}}</dd>
+        <dd class="col-8"><a href="/docs/{{$documento->archivo}}">{{$documento->archivo}}</a></dd>
         <dt class="col-4">Fecha de Creacion:</dt>
         <dd class="col-8">{{Date::parse($documento->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
         <dt class="col-4">Fecha de Creacion:</dt>

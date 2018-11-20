@@ -95,7 +95,7 @@ class DocumentoController extends Controller
         $this->validate($request, [
             'nombre' => 'required|max:60|unique:Documento,idDocumento'.$request->id,
             'descripcion' => 'max:255',
-            'archivo' => 'required|max:60|unique:Documento,idDocumento'.$request->id,
+            'archivo' => 'required|max:64000|unique:Documento,idDocumento'.$request->id,
             'idTipoDocumento' => 'required',
         ]);
         $nombreArchivo = '';
