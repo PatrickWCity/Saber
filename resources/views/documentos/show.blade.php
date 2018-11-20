@@ -21,12 +21,12 @@
         <dd class="col-8">{{Date::parse($documento->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
         <dt class="col-4">Fecha de Creacion:</dt>
         <dd class="col-8">{{Date::parse($documento->fechaCreada)->ago()}}</dd>
+        @if (empty($documento->fechaActualizada))
+        
+        @else
         <dt class="col-4">Fecha de Actualizacion:</dt>
         <dd class="col-8">{{Date::parse($documento->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
-        <dt class="col-4">Fecha de Actualizacion:</dt>
-        <dd class="col-8">{{Date::parse($documento->fechaActualizada)->ago()}}</dd>
-        <dt class="col-4">Duracion:</dt>
-        <dd class="col-8">{{Date::parse($documento->fechaCreada)->timespan($documento->fechaActualizada)}}</dd>
+        @endif
         <dt class="col-4">Tipo de Documento:</dt>
         <dd class="col-8">{{$documento->TipoDocumento}}</dd>
     </dl>

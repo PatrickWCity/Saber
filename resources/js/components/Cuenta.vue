@@ -218,8 +218,8 @@
                     }else{
                          swal({
                             type: 'error',
-                            title: 'Oops...',
-                            text: 'You are uploading a large file',
+                            title: '¡Ups!,',
+                            text: 'Usted está cargando un archivo grande, el tamaño máximo del archivo es de 2 MB',
                         })
                     }
             }

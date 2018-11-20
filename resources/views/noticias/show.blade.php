@@ -22,12 +22,12 @@
         <dd class="col-8">{{Date::parse($noticia->fechaCreada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
         <dt class="col-4">Fecha de Creacion:</dt>
         <dd class="col-8">{{Date::parse($noticia->fechaCreada)->ago()}}</dd>
+        @if (empty($noticia->fechaActualizada))
+        
+        @else
         <dt class="col-4">Fecha de Actualizacion:</dt>
         <dd class="col-8">{{Date::parse($noticia->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
-        <dt class="col-4">Fecha de Actualizacion:</dt>
-        <dd class="col-8">{{Date::parse($noticia->fechaActualizada)->ago()}}</dd>
-        <dt class="col-4">Duracion:</dt>
-        <dd class="col-8">{{Date::parse($noticia->fechaCreada)->timespan($noticia->fechaActualizada)}}</dd>
+        @endif
         <dt class="col-4">Tipo de Noticia:</dt>
         <dd class="col-8">{{$noticia->TipoNoticia}}</dd>
     </dl>

@@ -46,11 +46,20 @@
                             <li class="nav-item {{ Request::is('/noticias') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('/noticias') }}">Noticias</a>
                               </li>
+                              <li class="nav-item {{ Request::is('/tiponoticias') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/tiponoticias') }}">TipoNoticias</a>
+                              </li>
                             <li class="nav-item {{ Request::is('/documentos') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('/documentos') }}">Documentos</a>
                               </li>
+                              <li class="nav-item {{ Request::is('/tipodocumentos') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/tipodocumentos') }}">TipoDocumentos</a>
+                              </li>
                           <li class="nav-item {{ Request::is('/eventos') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ url('/eventos') }}">Eventos</a>
+                          </li>
+                          <li class="nav-item {{ Request::is('/tipoeventos') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/tipoeventos') }}">TipoEventos</a>
                           </li>
                     </ul>
 
