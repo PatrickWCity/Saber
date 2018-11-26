@@ -46,17 +46,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="habilitados in habilitados" :key="habilitados.idUsuario">
-                        <td>{{habilitados.idUsuario}}</td>
-                        <td>{{habilitados.username}}</td>
-                        <td>{{habilitados.email}}</td>
+                      <tr v-for="habilitado in habilitados" :key="habilitado.idUsuario">
+                        <td>{{habilitado.idUsuario}}</td>
+                        <td>{{habilitado.username}}</td>
+                        <td>{{habilitado.email}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
                            <input type="hidden" v-model="form.idUsuario"> 
-                            <button type="submit" style="width:50%" class="btn btn-link" @click="habilitar(habilitados)">
+                            <button type="submit" style="width:50%" class="btn btn-link" @click="habilitar(habilitado)">
                               <i class="fas fa-user-times"></i>
                             </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarUsuario(habilitados.idUsuario, habilitados.username)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarUsuario(habilitado.idUsuario, habilitado.username)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -94,11 +94,11 @@ export default {
     };
   },
   methods: {
-    habilitar(habilitados) {
-      this.form.idUsuario = habilitados.idUsuario;
+    habilitar(habilitado) {
+      this.form.idUsuario = habilitado.idUsuario;
       this.$Progress.start();
       this.form
-        .put("api/deshabilitarusuario/" + habilitados.idUsuario)
+        .put("api/deshabilitarusuario/" + habilitado.idUsuario)
         .then(() => {
           Fire.$emit("RefrescarListado");
           toast({
