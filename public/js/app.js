@@ -1759,11 +1759,11 @@ $(document).ready(function () {
       $("#areaModal").modal("show");
       this.form.fill(area);
     },
-    eliminarArea: function eliminarArea(idArea) {
+    eliminarArea: function eliminarArea(idArea, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar la Area de ID: " + idArea + "?",
+        title: "¿Está seguro que desea eliminar la Area " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -2336,6 +2336,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2348,7 +2401,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       noticias: 0,
       tiponoticias: 0,
       documentos: 0,
-      tipodocumentos: 0
+      tipodocumentos: 0,
+      voluntarios: 0,
+      tipovoluntarios: 0,
+      profesiones: 0
     };
   },
 
@@ -2359,7 +2415,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.$gate.esAdmin() || this.$gate.esOrganizador()) {
         axios.get("api/dashboard").then(function (_ref) {
           var data = _ref.data;
-          return _this.eventos = data.Eventos, _this.tipoeventos = data.TipoEventos, _this.sedes = data.Sedes, _this.areas = data.Areas, _this.expositores = data.Expositores, _this.noticias = data.Noticias, _this.tiponoticias = data.TipoNoticias, _this.documentos = data.Documentos, _this.tipodocumentos = data.TipoDocumentos;
+          return _this.eventos = data.Eventos, _this.tipoeventos = data.TipoEventos, _this.sedes = data.Sedes, _this.areas = data.Areas, _this.expositores = data.Expositores, _this.noticias = data.Noticias, _this.tiponoticias = data.TipoNoticias, _this.documentos = data.Documentos, _this.tipodocumentos = data.TipoDocumentos, _this.voluntarios = data.Voluntarios, _this.tipovoluntarios = data.TipoVoluntarios, _this.profesiones = data.Profesiones;
         });
       }
     }
@@ -2475,12 +2531,12 @@ var table;
   },
 
   methods: {
-    habilitar: function habilitar(habilitados) {
+    habilitar: function habilitar(habilitado) {
       var _this = this;
 
-      this.form.idUsuario = habilitados.idUsuario;
+      this.form.idUsuario = habilitado.idUsuario;
       this.$Progress.start();
-      this.form.put("api/deshabilitarusuario/" + habilitados.idUsuario).then(function () {
+      this.form.put("api/deshabilitarusuario/" + habilitado.idUsuario).then(function () {
         Fire.$emit("RefrescarListado");
         toast({
           type: "success",
@@ -2495,11 +2551,11 @@ var table;
         _this.$Progress.fail();
       });
     },
-    eliminarUsuario: function eliminarUsuario(idUsuario) {
+    eliminarUsuario: function eliminarUsuario(idUsuario, username) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Usuario de ID: " + idUsuario + "?",
+        title: "¿Está seguro que desea eliminar el Usuario " + username + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -3671,11 +3727,11 @@ $(document).ready(function () {
       $("#expositorModal").modal("show");
       this.form.fill(expositor);
     },
-    eliminarExpositor: function eliminarExpositor(idExpositor) {
+    eliminarExpositor: function eliminarExpositor(idExpositor, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Expositor de ID: " + idExpositor + "?",
+        title: "¿Está seguro que desea eliminar el Expositor " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -3931,11 +3987,11 @@ var table;
         _this.$Progress.fail();
       });
     },
-    eliminarUsuario: function eliminarUsuario(idUsuario) {
+    eliminarUsuario: function eliminarUsuario(idUsuario, username) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Usuario de ID: " + idUsuario + "?",
+        title: "¿Está seguro que desea eliminar el Usuario " + username + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -4206,11 +4262,11 @@ var table;
       $("#moduloModal").modal("show");
       this.form.fill(modulo);
     },
-    eliminarModulo: function eliminarModulo(idModulo) {
+    eliminarModulo: function eliminarModulo(idModulo, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Módulo de ID: " + idModulo + "?",
+        title: "¿Está seguro que desea eliminar el Módulo " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -5184,11 +5240,11 @@ var table;
       $("#perfilModal").modal("show");
       this.form.fill(perfil);
     },
-    eliminarPerfil: function eliminarPerfil(idPerfil) {
+    eliminarPerfil: function eliminarPerfil(idPerfil, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Perfil de ID: " + idPerfil + "?",
+        title: "¿Está seguro que desea eliminar el Perfil " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -5604,6 +5660,322 @@ var tableCon;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Profesion.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var table;
+$(document).ready(function () {
+  if (window.location.href.indexOf('#profesionModal') != -1) {
+    $('#profesionModal').modal('show');
+  }
+});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      esEditar: false,
+      profesiones: {},
+      form: new Form({
+        idProfesion: "",
+        nombre: "",
+        descripcion: "",
+        palabraClave: ""
+      })
+    };
+  },
+
+  methods: {
+    actualizarProfesion: function actualizarProfesion() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.put("api/profesion/" + this.form.idProfesion).then(function () {
+        Fire.$emit("RefrescarListadoProfesion");
+        $("#profesionModal").modal("hide");
+        toast({
+          type: "success",
+          title: "¡La Profesión fue Actualizado con Exito!"
+        });
+        _this.$Progress.finish();
+      }).catch(function () {
+        toast({
+          type: "warning",
+          title: "¡La Profesión no pudo ser Actualizado con Exito!"
+        });
+        _this.$Progress.fail();
+      });
+    },
+    crearModal: function crearModal() {
+      this.esEditar = false;
+      this.form.reset();
+      this.form.clear();
+      $("#profesionModal").modal("show");
+    },
+    editarModal: function editarModal(profesion) {
+      this.esEditar = true;
+      this.form.reset();
+      this.form.clear();
+      $("#profesionModal").modal("show");
+      this.form.fill(profesion);
+    },
+    eliminarProfesion: function eliminarProfesion(idProfesion, nombre) {
+      var _this2 = this;
+
+      swal({
+        title: "¿Está seguro que desea eliminar el Profesion " + nombre + "?",
+        //text: "¡No podrás revertir esta acción!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "¡No, Cancelar!",
+        confirmButtonText: "¡Si, Eliminar Profesion!"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$Progress.start();
+          _this2.form.delete("api/profesion/" + idProfesion).then(function () {
+            Fire.$emit("RefrescarListadoProfesion");
+            toast({
+              type: "success",
+              title: "¡La Profesión fue Eliminado con Exito!"
+            });
+            _this2.$Progress.finish();
+          }).catch(function () {
+            toast({
+              type: "warning",
+              title: "¡La Profesión no pudo ser Eliminado con Exito!"
+            });
+            _this2.$Progress.fail();
+          });
+        }
+      });
+    },
+    buscarProfesion: function buscarProfesion() {
+      var _this3 = this;
+
+      if (palabraClave == null || palabraClave == "") {
+        axios.get("api/profesion").then(function (_ref) {
+          var data = _ref.data;
+          return _this3.profesiones = data;
+        });
+      } else {
+        axios.get("api/profesion/" + palabraClave).then(function (_ref2) {
+          var data = _ref2.data;
+          return _this3.profesiones = data;
+        });
+      }
+    },
+    loadProfesiones: function loadProfesiones() {
+      var _this4 = this;
+
+      if (this.$gate.esAdmin()) {
+        axios.get("api/profesion").then(function (_ref3) {
+          var data = _ref3.data;
+          return _this4.profesiones = data;
+        }).then(function () {
+          $(document).ready(function () {
+            table = $("#listado").DataTable({
+              dom: "lBfrtip",
+              buttons: [{
+                extend: "copy",
+                title: null,
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "csv",
+                title: "Listado de Profesiónes",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "excel",
+                title: "Listado de Profesiónes",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "pdf",
+                title: "Listado de Profesiónes",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "print",
+                title: "Listado de Profesiónes",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }],
+              destroy: true,
+              language: esp,
+              order: [[0, "desc"]],
+              columnDefs: [{
+                searchable: false,
+                orderable: false,
+                targets: 3
+              }]
+            });
+          });
+        });
+      }
+    },
+    crearProfesion: function crearProfesion() {
+      var _this5 = this;
+
+      this.$Progress.start();
+      this.form.post("api/profesion").then(function () {
+        Fire.$emit("RefrescarListadoProfesion");
+        $("#profesionModal").modal("hide");
+        toast({
+          type: "success",
+          title: "¡La Profesión fue Creada con Exito!"
+        });
+        _this5.$Progress.finish();
+      }).catch(function () {
+        toast({
+          type: "warning",
+          title: "¡La Profesión no pudo ser Ingresada con Exito!"
+        });
+        _this5.$Progress.fail();
+      });
+    }
+  },
+  created: function created() {
+    var _this6 = this;
+
+    this.$Progress.start();
+    this.loadProfesiones();
+    Fire.$on("RefrescarListadoProfesion", function () {
+      table.destroy();
+      _this6.loadProfesiones();
+    });
+    this.$Progress.finish();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Sede.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5790,11 +6162,11 @@ $(document).ready(function () {
       $("#sedeModal").modal("show");
       this.form.fill(sede);
     },
-    eliminarSede: function eliminarSede(idSede) {
+    eliminarSede: function eliminarSede(idSede, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar la Sede de ID: " + idSede + "?",
+        title: "¿Está seguro que desea eliminar la Sede " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -6109,11 +6481,11 @@ var table;
       $("#submoduloModal").modal("show");
       this.form.fill(submodulo);
     },
-    eliminarSubmodulo: function eliminarSubmodulo(idSubmodulo) {
+    eliminarSubmodulo: function eliminarSubmodulo(idSubmodulo, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Submódulo de ID: " + idSubmodulo + "?",
+        title: "¿Está seguro que desea eliminar el Submódulo " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -7998,11 +8370,11 @@ var table;
       $("#usuarioModal").modal("show");
       this.form.fill(usuario);
     },
-    eliminarUsuario: function eliminarUsuario(idUsuario) {
+    eliminarUsuario: function eliminarUsuario(idUsuario, nombre) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Usuario de ID: " + idUsuario + "?",
+        title: "¿Está seguro que desea eliminar el Usuario " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -8258,11 +8630,11 @@ var table;
         _this.$Progress.fail();
       });
     },
-    eliminarUsuario: function eliminarUsuario(idUsuario) {
+    eliminarUsuario: function eliminarUsuario(idUsuario, username) {
       var _this2 = this;
 
       swal({
-        title: "¿Está seguro que desea eliminar el Usuario de ID: " + idUsuario + "?",
+        title: "¿Está seguro que desea eliminar el Usuario " + username + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,
@@ -8353,6 +8725,424 @@ var table;
     Fire.$on("RefrescarListado", function () {
       table.destroy();
       _this4.loadUsuariosPendiente();
+    });
+    this.$Progress.finish();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Voluntario.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var table;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      esEditar: false,
+      voluntarios: {},
+      tipovoluntarios: {},
+      profesions: {},
+      form: new Form({
+        idVoluntario: "",
+        run: "",
+        nombre: "",
+        appat: "",
+        apmat: "",
+        direccion: "",
+        telefono: "",
+        email: "",
+        idTipoVoluntario: "",
+        idProfesion: "",
+        palabraClave: ""
+      })
+    };
+  },
+
+  computed: {
+    desctipovoluntarios: function desctipovoluntarios() {
+      return _.orderBy(this.tipovoluntarios, 'idTipoVoluntario', 'desc');
+    },
+    descprofesions: function descprofesions() {
+      return _.orderBy(this.profesions, 'idProfesion', 'desc');
+    }
+  },
+  methods: {
+    actualizarVoluntario: function actualizarVoluntario() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.put("api/voluntario/" + this.form.idVoluntario).then(function () {
+        Fire.$emit("RefrescarListadoVoluntario");
+        $("#voluntarioModal").modal("hide");
+        toast({
+          type: "success",
+          title: "¡El Voluntario fue Actualizado con Exito!"
+        });
+        _this.$Progress.finish();
+      }).catch(function () {
+        toast({
+          type: "warning",
+          title: "¡El Voluntario no pudo ser Actualizado con Exito!"
+        });
+        _this.$Progress.fail();
+      });
+    },
+    crearModal: function crearModal() {
+      this.esEditar = false;
+      this.form.reset();
+      this.form.clear();
+      $("#voluntarioModal").modal("show");
+    },
+    editarModal: function editarModal(voluntario) {
+      this.esEditar = true;
+      this.form.reset();
+      this.form.clear();
+      $("#voluntarioModal").modal("show");
+      this.form.fill(voluntario);
+    },
+    eliminarVoluntario: function eliminarVoluntario(idVoluntario, nombre) {
+      var _this2 = this;
+
+      swal({
+        title: "¿Está seguro que desea eliminar el Voluntario " + nombre + "?",
+        //text: "¡No podrás revertir esta acción!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "¡No, Cancelar!",
+        confirmButtonText: "¡Si, Eliminar Voluntario!"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.$Progress.start();
+          _this2.form.delete("api/voluntario/" + idVoluntario).then(function () {
+            Fire.$emit("RefrescarListadoVoluntario");
+            toast({
+              type: "success",
+              title: "¡El Voluntario fue Eliminado con Exito!"
+            });
+            _this2.$Progress.finish();
+          }).catch(function () {
+            toast({
+              type: "warning",
+              title: "¡El Voluntario no pudo ser Eliminado con Exito!"
+            });
+            _this2.$Progress.fail();
+          });
+        }
+      });
+    },
+    buscarVoluntario: function buscarVoluntario() {
+      var _this3 = this;
+
+      if (palabraClave == null || palabraClave == "") {
+        axios.get("api/voluntario").then(function (_ref) {
+          var data = _ref.data;
+          return _this3.voluntarios = data;
+        });
+      } else {
+        axios.get("api/voluntario/" + palabraClave).then(function (_ref2) {
+          var data = _ref2.data;
+          return _this3.voluntarios = data;
+        });
+      }
+    },
+    reloadVoluntarios: function reloadVoluntarios() {
+      Fire.$emit("RefrescarListadoVoluntario");
+    },
+    loadVoluntarios: function loadVoluntarios() {
+      var _this4 = this;
+
+      if (this.$gate.esAdmin() || this.$gate.esOrganizador()) {
+        axios.get("api/voluntario").then(function (_ref3) {
+          var data = _ref3.data;
+          return _this4.voluntarios = data.Voluntarios, _this4.tipovoluntarios = data.TipoVoluntarios, _this4.profesions = data.Profesiones;
+        }).then(function () {
+          $(document).ready(function () {
+            table = $("#listado").DataTable({
+              dom: "lBfrtip",
+              buttons: [{
+                extend: "copy",
+                title: null,
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "csv",
+                title: "Listado de Voluntarios",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "excel",
+                title: "Listado de Voluntarios",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "pdf",
+                title: "Listado de Voluntarios",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }, {
+                extend: "print",
+                title: "Listado de Voluntarios",
+                exportOptions: {
+                  columns: "th:not(:last-child)"
+                }
+              }],
+              destroy: true,
+              language: esp,
+              order: [[0, "desc"]],
+              columnDefs: [{
+                searchable: false,
+                orderable: false,
+                targets: 10
+              }]
+            });
+          });
+        });
+      }
+    },
+    crearVoluntario: function crearVoluntario() {
+      var _this5 = this;
+
+      this.$Progress.start();
+      this.form.post("api/voluntario").then(function () {
+        Fire.$emit("RefrescarListadoVoluntario");
+        $("#voluntarioModal").modal("hide");
+        toast({
+          type: "success",
+          title: "¡El Voluntario fue Creado con Exito!"
+        });
+        _this5.$Progress.finish();
+      }).catch(function () {
+        toast({
+          type: "warning",
+          title: "¡El Voluntario no pudo ser Ingresado con Exito!"
+        });
+        _this5.$Progress.fail();
+      });
+    }
+  },
+  created: function created() {
+    var _this6 = this;
+
+    this.$Progress.start();
+    $(function () {
+      $('#dtpInicio').datetimepicker();
+      $('#dtpTermino').datetimepicker();
+      $("#dtpInicio").on("dp.change", function (e) {
+        $('#dtpTermino').data("DateTimePicker").minDate(e.date);
+      });
+      $("#dtpTermino").on("dp.change", function (e) {
+        $('#dtpInicio').data("DateTimePicker").maxDate(e.date);
+      });
+    });
+    this.loadVoluntarios();
+    Fire.$on("RefrescarListadoVoluntario", function () {
+      table.destroy();
+      _this6.loadVoluntarios();
     });
     this.$Progress.finish();
   }
@@ -68333,6 +69123,103 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
+      _vm.$gate.esAdmin()
+        ? _c("div", { staticClass: "container-fluid" }, [
+            _c("h4", { staticClass: "mb-2" }, [
+              _vm._v("Seccion de Voluntarios")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "small-box bg-primary" },
+                  [
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.voluntarios))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Voluntarios")])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/voluntario" }
+                      },
+                      [
+                        _vm._v("Ver Listado "),
+                        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "small-box bg-success" },
+                  [
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.tipovoluntarios))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Tipo de Voluntarios")])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/tipovoluntario" }
+                      },
+                      [
+                        _vm._v("Ver Listado "),
+                        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "small-box bg-danger" },
+                  [
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.profesiones))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Profesiones")])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/profesion" }
+                      },
+                      [
+                        _vm._v("Ver Listado "),
+                        _c("i", { staticClass: "fa fa-arrow-circle-right" })
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _vm.$gate.esAdmin() || _vm.$gate.esAutor()
         ? _c("div", { staticClass: "container-fluid" }, [
             _c("h4", { staticClass: "mb-2" }, [_vm._v("Seccion de Noticias")]),
@@ -68349,7 +69236,7 @@ var render = function() {
                       _c("p", [_vm._v("Noticias")])
                     ]),
                     _vm._v(" "),
-                    _vm._m(6),
+                    _vm._m(9),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -68378,7 +69265,7 @@ var render = function() {
                       _c("p", [_vm._v("Tipo de Noticias")])
                     ]),
                     _vm._v(" "),
-                    _vm._m(7),
+                    _vm._m(10),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -68417,7 +69304,7 @@ var render = function() {
                       _c("p", [_vm._v("Documentos")])
                     ]),
                     _vm._v(" "),
-                    _vm._m(8),
+                    _vm._m(11),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -68446,7 +69333,7 @@ var render = function() {
                       _c("p", [_vm._v("Tipo de Documentos")])
                     ]),
                     _vm._v(" "),
-                    _vm._m(9),
+                    _vm._m(12),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -68534,6 +69421,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "fas fa-user-tie" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "far fa-calendar-check" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-calendar" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-building" })
     ])
   },
   function() {
@@ -68782,7 +69693,14 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     _vm.eliminarUsuario(
-                                                      usuario.idUsuario
+                                                      usuario.idUsuario,
+                                                      usuario.nombre +
+                                                        " " +
+                                                        usuario.appat +
+                                                        " " +
+                                                        (usuario.apmat
+                                                          ? usuario.apmat
+                                                          : "")
                                                     )
                                                   }
                                                 }
@@ -70449,21 +71367,21 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "tbody",
-                                _vm._l(_vm.habilitados, function(habilitados) {
+                                _vm._l(_vm.habilitados, function(habilitado) {
                                   return _c(
                                     "tr",
-                                    { key: habilitados.idUsuario },
+                                    { key: habilitado.idUsuario },
                                     [
                                       _c("td", [
-                                        _vm._v(_vm._s(habilitados.idUsuario))
+                                        _vm._v(_vm._s(habilitado.idUsuario))
                                       ]),
                                       _vm._v(" "),
                                       _c("td", [
-                                        _vm._v(_vm._s(habilitados.username))
+                                        _vm._v(_vm._s(habilitado.username))
                                       ]),
                                       _vm._v(" "),
                                       _c("td", [
-                                        _vm._v(_vm._s(habilitados.email))
+                                        _vm._v(_vm._s(habilitado.email))
                                       ]),
                                       _vm._v(" "),
                                       _c(
@@ -70514,7 +71432,7 @@ var render = function() {
                                                   attrs: { type: "submit" },
                                                   on: {
                                                     click: function($event) {
-                                                      _vm.habilitar(habilitados)
+                                                      _vm.habilitar(habilitado)
                                                     }
                                                   }
                                                 },
@@ -70535,7 +71453,8 @@ var render = function() {
                                                   on: {
                                                     click: function($event) {
                                                       _vm.eliminarUsuario(
-                                                        habilitados.idUsuario
+                                                        habilitado.idUsuario,
+                                                        habilitado.username
                                                       )
                                                     }
                                                   }
@@ -70649,7 +71568,895 @@ var render = function() {
     "div",
     [
       _vm.$gate.esAdmin()
-        ? _c("div", [_vm._m(0), _vm._v(" "), _vm._m(1)])
+        ? _c("div", [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "content" }, [
+              _c("div", { staticClass: "container-fluid" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-header" }, [
+                        _c("h3", { staticClass: "card-title" }, [
+                          _vm._v("Listado de Voluntarios")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-tools" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary center-block",
+                              attrs: { type: "button" },
+                              on: { click: _vm.crearModal }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-plus" }),
+                              _vm._v(" Crear")
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { staticClass: "table-responsive" }, [
+                          _c(
+                            "table",
+                            {
+                              staticClass: "table table-bordered table-striped",
+                              attrs: { id: "listado" }
+                            },
+                            [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c(
+                                "tbody",
+                                _vm._l(_vm.voluntarios, function(voluntario) {
+                                  return _c(
+                                    "tr",
+                                    { key: voluntario.idVoluntario },
+                                    [
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.idVoluntario))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.run))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.nombre))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.appat))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.apmat))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.direccion))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.telefono))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.email))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
+                                          _vm._s(voluntario.TipoVoluntario)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(voluntario.Profesion))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { attrs: { role: "text-center" } },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "btn-group",
+                                              staticStyle: { width: "100%" }
+                                            },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn btn-link",
+                                                  staticStyle: { width: "50%" },
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.editarModal(
+                                                        voluntario
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass: "fas fa-edit"
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn btn-link",
+                                                  staticStyle: { width: "50%" },
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.eliminarVoluntario(
+                                                        voluntario.idVoluntario,
+                                                        voluntario.nombre +
+                                                          " " +
+                                                          voluntario.appat +
+                                                          " " +
+                                                          (voluntario.apmat
+                                                            ? voluntario.apmat
+                                                            : "")
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass: "fas fa-trash"
+                                                  })
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                })
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "voluntarioModal",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-labelledby": "voluntarioModalTitulo",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered modal-lg",
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c(
+                          "h5",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.esEditar,
+                                expression: "esEditar"
+                              }
+                            ],
+                            staticClass: "modal-title",
+                            attrs: { id: "voluntarioModalTitulo" }
+                          },
+                          [_vm._v("Actualizar Voluntario")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "h5",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.esEditar,
+                                expression: "!esEditar"
+                              }
+                            ],
+                            staticClass: "modal-title",
+                            attrs: { id: "voluntarioModalTitulo" }
+                          },
+                          [_vm._v("Crear Voluntario")]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2)
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              _vm.esEditar
+                                ? _vm.actualizarVoluntario()
+                                : _vm.crearVoluntario()
+                            },
+                            keydown: function($event) {
+                              _vm.form.onKeydown($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-body" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "run" } }, [
+                                  _vm._v("RUN")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.run,
+                                      expression: "form.run"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("run")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "run",
+                                    placeholder: "RUN de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.run },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "run",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "run" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "nombre" } }, [
+                                  _vm._v("Nombre")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.nombre,
+                                      expression: "form.nombre"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("nombre")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "nombre",
+                                    placeholder: "Nombre de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.nombre },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "nombre",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "nombre" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "appat" } }, [
+                                  _vm._v("Apellido Paterno")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.appat,
+                                      expression: "form.appat"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("appat")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "appat",
+                                    placeholder:
+                                      "Apellido Paterno de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.appat },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "appat",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "appat" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "apmat" } }, [
+                                  _vm._v("Apellido Materno")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.apmat,
+                                      expression: "form.apmat"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("apmat")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "apmat",
+                                    placeholder:
+                                      "Apellido Materno de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.apmat },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "apmat",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "apmat" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "direccion" } }, [
+                                  _vm._v("Dirección")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.direccion,
+                                      expression: "form.direccion"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "direccion"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "direccion",
+                                    placeholder: "Dirección de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.direccion },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "direccion",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "direccion" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "telefono" } }, [
+                                  _vm._v("Teléfono")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.telefono,
+                                      expression: "form.telefono"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "telefono"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "telefono",
+                                    placeholder: "Teléfono de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.telefono },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "telefono",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "telefono" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "email" } }, [
+                                  _vm._v("Correo Electrónico")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.email,
+                                      expression: "form.email"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("email")
+                                  },
+                                  attrs: {
+                                    type: "email",
+                                    name: "email",
+                                    placeholder:
+                                      "Correo Electrónico de Voluntario"
+                                  },
+                                  domProps: { value: _vm.form.email },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "email",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "email" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                { attrs: { for: "idTipoVoluntario" } },
+                                [_vm._v("Tipo de Voluntario")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-row" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.idTipoVoluntario,
+                                          expression: "form.idTipoVoluntario"
+                                        }
+                                      ],
+                                      staticClass: "form-control col-lg-11",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "idTipoVoluntario"
+                                        )
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "idTipoVoluntario",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [
+                                          _vm._v(
+                                            "Seleccione un Tipo de Voluntario"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.desctipovoluntarios, function(
+                                        tipovoluntario
+                                      ) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key:
+                                              tipovoluntario.idTipoVoluntario,
+                                            domProps: {
+                                              value:
+                                                tipovoluntario.idTipoVoluntario
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(tipovoluntario.nombre)
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "idTipoVoluntario"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group col-lg-1",
+                                      staticStyle: { width: "100%" }
+                                    },
+                                    [
+                                      _vm._m(3),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-link",
+                                          staticStyle: { width: "50%" },
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.reloadVoluntarios()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-redo"
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "idProfesion" } }, [
+                                _vm._v("Profesion")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-row" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.idProfesion,
+                                          expression: "form.idProfesion"
+                                        }
+                                      ],
+                                      staticClass: "form-control col-lg-11",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "idProfesion"
+                                        )
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "idProfesion",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Seleccione una Profesion")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.descprofesions, function(
+                                        profesion
+                                      ) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: profesion.idProfesion,
+                                            domProps: {
+                                              value: profesion.idProfesion
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(profesion.nombre))]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "idProfesion"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn-group col-lg-1",
+                                      staticStyle: { width: "100%" }
+                                    },
+                                    [
+                                      _vm._m(4),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-link",
+                                          staticStyle: { width: "50%" },
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.reloadVoluntarios()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-redo"
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal-footer" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-secondary",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                }
+                              },
+                              [_vm._v("Cerrar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: !_vm.esEditar,
+                                    expression: "!esEditar"
+                                  }
+                                ],
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Ingresar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.esEditar,
+                                    expression: "esEditar"
+                                  }
+                                ],
+                                staticClass: "btn btn-success",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Actualizar")]
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
+          ])
         : _vm._e(),
       _vm._v(" "),
       !_vm.$gate.esAdmin() ? _c("unauthorized") : _vm._e()
@@ -70666,7 +72473,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "row mb-2" }, [
           _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Voluntario")])
+            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Voluntarios")])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-6" }, [
@@ -70676,7 +72483,7 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Voluntario")
+                _vm._v("Voluntarios")
               ])
             ])
           ])
@@ -70688,27 +72495,82 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _c("h3", { staticClass: "card-title text-center" }, [
-                  _c("i", { staticClass: "fas fa-exclamation-triangle" }),
-                  _vm._v("  ¡En Construcción!  "),
-                  _c("i", { staticClass: "fas fa-exclamation-triangle" })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body text-center" }, [
-                _vm._v(" ¡Pagina en Desarrollo!\r\n              ")
-              ])
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("RUN")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Apellido Paterno")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Apellido Materno")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Dirrecion")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Telefono")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tipo de Voluntario")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Profesion")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Operaciones")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-link",
+        staticStyle: { width: "50%" },
+        attrs: {
+          type: "button",
+          onclick: "window.open('/tipovoluntario#tipoVoluntarioModal')"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-plus" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-link",
+        staticStyle: { width: "50%" },
+        attrs: {
+          type: "button",
+          onclick: "window.open('/profesion#profesionModal')"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-plus" })]
+    )
   }
 ]
 render._withStripped = true
@@ -70962,7 +72824,8 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     _vm.eliminarPerfil(
-                                                      perfil.idPerfil
+                                                      perfil.idPerfil,
+                                                      perfil.nombre
                                                     )
                                                   }
                                                 }
@@ -71513,7 +73376,14 @@ var render = function() {
                                                   on: {
                                                     click: function($event) {
                                                       _vm.eliminarExpositor(
-                                                        expositor.idExpositor
+                                                        expositor.idExpositor,
+                                                        expositor.nombre +
+                                                          " " +
+                                                          expositor.appat +
+                                                          " " +
+                                                          (expositor.apmat
+                                                            ? expositor.apmat
+                                                            : "")
                                                       )
                                                     }
                                                   }
@@ -73508,7 +75378,8 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     _vm.eliminarArea(
-                                                      area.idArea
+                                                      area.idArea,
+                                                      area.nombre
                                                     )
                                                   }
                                                 }
@@ -73957,7 +75828,8 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     _vm.eliminarSede(
-                                                      sede.idSede
+                                                      sede.idSede,
+                                                      sede.nombre
                                                     )
                                                   }
                                                 }
@@ -74456,7 +76328,8 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     _vm.eliminarModulo(
-                                                      modulo.idModulo
+                                                      modulo.idModulo,
+                                                      modulo.nombre
                                                     )
                                                   }
                                                 }
@@ -76602,7 +78475,8 @@ var render = function() {
                                                   on: {
                                                     click: function($event) {
                                                       _vm.eliminarUsuario(
-                                                        deshabilitado.idUsuario
+                                                        deshabilitado.idUsuario,
+                                                        deshabilitado.username
                                                       )
                                                     }
                                                   }
@@ -77291,7 +79165,8 @@ var render = function() {
                                                   on: {
                                                     click: function($event) {
                                                       _vm.eliminarUsuario(
-                                                        pendiente.idUsuario
+                                                        pendiente.idUsuario,
+                                                        pendiente.username
                                                       )
                                                     }
                                                   }
@@ -77389,6 +79264,457 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-71391f15", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-77cb0286\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Profesion.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.$gate.esAdmin()
+        ? _c("div", [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "content" }, [
+              _c("div", { staticClass: "container-fluid" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-header" }, [
+                        _c("h3", { staticClass: "card-title" }, [
+                          _vm._v("Listado de Profesiónes")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-tools" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary center-block",
+                              attrs: { type: "button" },
+                              on: { click: _vm.crearModal }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-plus" }),
+                              _vm._v(" Crear")
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { staticClass: "table-responsive" }, [
+                          _c(
+                            "table",
+                            {
+                              staticClass: "table table-bordered table-striped",
+                              attrs: { id: "listado" }
+                            },
+                            [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c(
+                                "tbody",
+                                _vm._l(_vm.profesiones, function(profesion) {
+                                  return _c(
+                                    "tr",
+                                    { key: profesion.idProfesion },
+                                    [
+                                      _c("td", [
+                                        _vm._v(_vm._s(profesion.idProfesion))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(profesion.nombre))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(profesion.descripcion))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "td",
+                                        { attrs: { role: "text-center" } },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "btn-group",
+                                              staticStyle: { width: "100%" }
+                                            },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn btn-link",
+                                                  staticStyle: { width: "50%" },
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.editarModal(profesion)
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass: "fas fa-edit"
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn btn-link",
+                                                  staticStyle: { width: "50%" },
+                                                  attrs: { type: "button" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      _vm.eliminarProfesion(
+                                                        profesion.idProfesion,
+                                                        profesion.nombre
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass: "fas fa-trash"
+                                                  })
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                })
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "profesionModal",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-labelledby": "profesionModalTitulo",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered",
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c(
+                          "h5",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.esEditar,
+                                expression: "esEditar"
+                              }
+                            ],
+                            staticClass: "modal-title",
+                            attrs: { id: "profesionModalTitulo" }
+                          },
+                          [_vm._v("Actualizar Profesion")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "h5",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.esEditar,
+                                expression: "!esEditar"
+                              }
+                            ],
+                            staticClass: "modal-title",
+                            attrs: { id: "profesionModalTitulo" }
+                          },
+                          [_vm._v("Crear Profesion")]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(2)
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              _vm.esEditar
+                                ? _vm.actualizarProfesion()
+                                : _vm.crearProfesion()
+                            },
+                            keydown: function($event) {
+                              _vm.form.onKeydown($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-body" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "nombre" } }, [
+                                  _vm._v("Nombre")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.nombre,
+                                      expression: "form.nombre"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("nombre")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "nombre",
+                                    placeholder: "Nombre de Profesion"
+                                  },
+                                  domProps: { value: _vm.form.nombre },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "nombre",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "nombre" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "descripcion" } }, [
+                                  _vm._v("Descripción")
+                                ]),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.descripcion,
+                                      expression: "form.descripcion"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "descripcion"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "descripcion",
+                                    placeholder: "Descripción de Profesion"
+                                  },
+                                  domProps: { value: _vm.form.descripcion },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "descripcion",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "descripcion"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal-footer" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-secondary",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                }
+                              },
+                              [_vm._v("Cerrar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: !_vm.esEditar,
+                                    expression: "!esEditar"
+                                  }
+                                ],
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Ingresar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.esEditar,
+                                    expression: "esEditar"
+                                  }
+                                ],
+                                staticClass: "btn btn-success",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Actualizar")]
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.$gate.esAdmin() ? _c("unauthorized") : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Profesiónes")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "/home" } }, [_vm._v("Inicio")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Profesiónes")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Operaciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-77cb0286", module.exports)
   }
 }
 
@@ -79270,7 +81596,8 @@ var render = function() {
                                                   on: {
                                                     click: function($event) {
                                                       _vm.eliminarSubmodulo(
-                                                        submodulo.idSubmodulo
+                                                        submodulo.idSubmodulo,
+                                                        submodulo.nombre
                                                       )
                                                     }
                                                   }
@@ -83738,7 +86065,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_6_vue_progressbar___default.a, {
 
 window.objectToFormData = __WEBPACK_IMPORTED_MODULE_7_object_to_formdata___default.a;
 
-var routes = [{ path: '/home', component: __webpack_require__("./resources/js/components/Dashboard.vue") }, { path: '/dashboard', component: __webpack_require__("./resources/js/components/Dashboard.vue") }, { path: '/cuenta', component: __webpack_require__("./resources/js/components/Cuenta.vue") }, { path: '/desarrollador', component: __webpack_require__("./resources/js/components/Desarrollador.vue") }, { path: '/usuario', component: __webpack_require__("./resources/js/components/Usuario.vue") }, { path: '/perfil', component: __webpack_require__("./resources/js/components/Perfil.vue") }, { path: '/submodulo', component: __webpack_require__("./resources/js/components/Submodulo.vue") }, { path: '/modulo', component: __webpack_require__("./resources/js/components/Modulo.vue") }, { path: '/perfilusuario', component: __webpack_require__("./resources/js/components/PerfilUsuario.vue") }, { path: '/moduloperfil', component: __webpack_require__("./resources/js/components/ModuloPerfil.vue") }, { path: '/submodulomodulo', component: __webpack_require__("./resources/js/components/SubmoduloModulo.vue") }, { path: '/documento', component: __webpack_require__("./resources/js/components/Documento.vue") }, { path: '/tipodocumento', component: __webpack_require__("./resources/js/components/TipoDocumento.vue") }, { path: '/noticia', component: __webpack_require__("./resources/js/components/Noticia.vue") }, { path: '/tiponoticia', component: __webpack_require__("./resources/js/components/TipoNoticia.vue") }, { path: '/evento', component: __webpack_require__("./resources/js/components/Evento.vue") }, { path: '/tipoevento', component: __webpack_require__("./resources/js/components/TipoEvento.vue") }, { path: '/habilitarusuario', component: __webpack_require__("./resources/js/components/HabilitarUsuario.vue") }, { path: '/deshabilitarusuario', component: __webpack_require__("./resources/js/components/DeshabilitarUsuario.vue") }, { path: '/usuariopendiente', component: __webpack_require__("./resources/js/components/UsuarioPendiente.vue") }, { path: '/voluntario', component: __webpack_require__("./resources/js/components/Voluntario.vue") }, { path: '/sede', component: __webpack_require__("./resources/js/components/Sede.vue") }, { path: '/area', component: __webpack_require__("./resources/js/components/Area.vue") }, { path: '/expositor', component: __webpack_require__("./resources/js/components/Expositor.vue") }, { path: '/tipovoluntario', component: __webpack_require__("./resources/js/components/TipoVoluntario.vue") }, { path: '/403', component: __webpack_require__("./resources/js/components/Unauthorized.vue") }, { path: '/404', component: __webpack_require__("./resources/js/components/NotFound.vue") }, { path: '/500', component: __webpack_require__("./resources/js/components/Error.vue") }, { path: '/503', component: __webpack_require__("./resources/js/components/Maintenance.vue") }, { path: '*', component: __webpack_require__("./resources/js/components/NotFound.vue") }];
+var routes = [{ path: '/home', component: __webpack_require__("./resources/js/components/Dashboard.vue") }, { path: '/dashboard', component: __webpack_require__("./resources/js/components/Dashboard.vue") }, { path: '/cuenta', component: __webpack_require__("./resources/js/components/Cuenta.vue") }, { path: '/desarrollador', component: __webpack_require__("./resources/js/components/Desarrollador.vue") }, { path: '/usuario', component: __webpack_require__("./resources/js/components/Usuario.vue") }, { path: '/perfil', component: __webpack_require__("./resources/js/components/Perfil.vue") }, { path: '/submodulo', component: __webpack_require__("./resources/js/components/Submodulo.vue") }, { path: '/modulo', component: __webpack_require__("./resources/js/components/Modulo.vue") }, { path: '/perfilusuario', component: __webpack_require__("./resources/js/components/PerfilUsuario.vue") }, { path: '/moduloperfil', component: __webpack_require__("./resources/js/components/ModuloPerfil.vue") }, { path: '/submodulomodulo', component: __webpack_require__("./resources/js/components/SubmoduloModulo.vue") }, { path: '/documento', component: __webpack_require__("./resources/js/components/Documento.vue") }, { path: '/tipodocumento', component: __webpack_require__("./resources/js/components/TipoDocumento.vue") }, { path: '/noticia', component: __webpack_require__("./resources/js/components/Noticia.vue") }, { path: '/tiponoticia', component: __webpack_require__("./resources/js/components/TipoNoticia.vue") }, { path: '/evento', component: __webpack_require__("./resources/js/components/Evento.vue") }, { path: '/tipoevento', component: __webpack_require__("./resources/js/components/TipoEvento.vue") }, { path: '/habilitarusuario', component: __webpack_require__("./resources/js/components/HabilitarUsuario.vue") }, { path: '/deshabilitarusuario', component: __webpack_require__("./resources/js/components/DeshabilitarUsuario.vue") }, { path: '/usuariopendiente', component: __webpack_require__("./resources/js/components/UsuarioPendiente.vue") }, { path: '/voluntario', component: __webpack_require__("./resources/js/components/Voluntario.vue") }, { path: '/sede', component: __webpack_require__("./resources/js/components/Sede.vue") }, { path: '/area', component: __webpack_require__("./resources/js/components/Area.vue") }, { path: '/expositor', component: __webpack_require__("./resources/js/components/Expositor.vue") }, { path: '/tipovoluntario', component: __webpack_require__("./resources/js/components/TipoVoluntario.vue") }, { path: '/profesion', component: __webpack_require__("./resources/js/components/Profesion.vue") }, { path: '/403', component: __webpack_require__("./resources/js/components/Unauthorized.vue") }, { path: '/404', component: __webpack_require__("./resources/js/components/NotFound.vue") }, { path: '/500', component: __webpack_require__("./resources/js/components/Error.vue") }, { path: '/503', component: __webpack_require__("./resources/js/components/Maintenance.vue") }, { path: '*', component: __webpack_require__("./resources/js/components/NotFound.vue") }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_5_vue_router__["a" /* default */]({
     mode: 'history',
@@ -84734,6 +87061,54 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/components/Profesion.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Profesion.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-77cb0286\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Profesion.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Profesion.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-77cb0286", Component.options)
+  } else {
+    hotAPI.reload("data-v-77cb0286", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Sede.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -85224,7 +87599,7 @@ module.exports = Component.exports
 var disposed = false
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Voluntario.vue")
 /* template */
 var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-28fe398a\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Voluntario.vue")
 /* template functional */
