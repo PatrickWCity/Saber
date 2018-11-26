@@ -71,7 +71,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(voluntario)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarVoluntario(voluntario.idVoluntario, voluntario.nombre+' '+voluntario.appat+' '+voluntario.apmat)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarVoluntario(voluntario.idVoluntario, voluntario.nombre+' '+voluntario.appat+' '+(voluntario.apmat? voluntario.apmat : ''))">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -260,7 +260,7 @@ export default {
       $("#voluntarioModal").modal("show");
       this.form.fill(voluntario);
     },
-    eliminarVoluntario(idVoluntario) {
+    eliminarVoluntario(idVoluntario, nombre) {
       swal({
         title:
           "¿Está seguro que desea eliminar el Voluntario " +

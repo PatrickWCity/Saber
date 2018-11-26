@@ -243,7 +243,7 @@ export default {
       $("#noticiaModal").modal("show");
       this.form.fill(noticia);
     },
-    eliminarNoticia(idNoticia,titulo) {
+    eliminarNoticia(idNoticia, titulo) {
       swal({
         title:
           "¿Está seguro que desea eliminar la Noticia " +

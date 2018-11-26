@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(area)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarArea(area.idArea)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarArea(area.idArea, area.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -171,10 +171,10 @@ export default {
       $("#areaModal").modal("show");
       this.form.fill(area);
     },
-    eliminarArea(idArea) {
+    eliminarArea(idArea, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar la Area de ID: " + idArea + "?",
+          "¿Está seguro que desea eliminar la Area " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,

@@ -67,7 +67,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(usuario)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarUsuario(usuario.idUsuario)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarUsuario(usuario.idUsuario,  usuario.nombre+' '+usuario.appat+' '+(usuario.apmat? usuario.apmat : ''))">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -206,11 +206,11 @@ export default {
       $("#usuarioModal").modal("show");
       this.form.fill(usuario);
     },
-    eliminarUsuario(idUsuario) {
+    eliminarUsuario(idUsuario, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Usuario de ID: " +
-          idUsuario +
+          "¿Está seguro que desea eliminar el Usuario " +
+          nombre +
           "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",

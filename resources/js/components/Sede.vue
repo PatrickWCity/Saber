@@ -59,7 +59,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(sede)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarSede(sede.idSede)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarSede(sede.idSede, sede.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -179,11 +179,11 @@ export default {
       $("#sedeModal").modal("show");
       this.form.fill(sede);
     },
-    eliminarSede(idSede) {
+    eliminarSede(idSede, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar la Sede de ID: " +
-          idSede +
+          "¿Está seguro que desea eliminar la Sede " +
+          nombre +
           "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",

@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(modulo)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarModulo(modulo.idModulo)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarModulo(modulo.idModulo, modulo.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -166,10 +166,10 @@ export default {
       $("#moduloModal").modal("show");
       this.form.fill(modulo);
     },
-    eliminarModulo(idModulo) {
+    eliminarModulo(idModulo, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Módulo de ID: " + idModulo + "?",
+          "¿Está seguro que desea eliminar el Módulo " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,

@@ -56,7 +56,7 @@
                             <button type="submit" style="width:50%" class="btn btn-link" @click="habilitar(deshabilitado)">
                               <i class="fas fa-user-check"></i>
                             </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarUsuario(deshabilitado.idUsuario)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarUsuario(deshabilitado.idUsuario, deshabilitado.username)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -115,11 +115,11 @@ export default {
           this.$Progress.fail();
         });
     },
-    eliminarUsuario(idUsuario) {
+    eliminarUsuario(idUsuario, username) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Usuario de ID: " +
-          idUsuario +
+          "¿Está seguro que desea eliminar el Usuario " +
+          username +
           "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",

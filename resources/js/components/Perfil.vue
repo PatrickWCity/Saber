@@ -57,7 +57,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(perfil)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarPerfil(perfil.idPerfil)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarPerfil(perfil.idPerfil, perfil.nombre)">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -166,10 +166,10 @@ export default {
       $("#perfilModal").modal("show");
       this.form.fill(perfil);
     },
-    eliminarPerfil(idPerfil) {
+    eliminarPerfil(idPerfil, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Perfil de ID: " + idPerfil + "?",
+          "¿Está seguro que desea eliminar el Perfil " + nombre + "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
         showCancelButton: true,

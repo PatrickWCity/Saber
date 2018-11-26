@@ -61,7 +61,7 @@
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(expositor)">
                             <i class="fas fa-edit"></i>
                           </button>
-                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarExpositor(expositor.idExpositor)">
+                            <button type="button" style="width:50%" class="btn btn-link" @click="eliminarExpositor(expositor.idExpositor, expositor.nombre+' '+expositor.appat+' '+(expositor.apmat? expositor.apmat : ''))">
                             <i class="fas fa-trash"></i>
                           </button>
                           </div>
@@ -187,11 +187,11 @@ export default {
       $("#expositorModal").modal("show");
       this.form.fill(expositor);
     },
-    eliminarExpositor(idExpositor) {
+    eliminarExpositor(idExpositor, nombre) {
       swal({
         title:
-          "¿Está seguro que desea eliminar el Expositor de ID: " +
-          idExpositor +
+          "¿Está seguro que desea eliminar el Expositor " +
+          nombre +
           "?",
         //text: "¡No podrás revertir esta acción!",
         type: "warning",
