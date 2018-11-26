@@ -26,7 +26,11 @@ class VoluntarioController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosVoluntario()');
+        return $data = [
+            'Voluntarios'       => DB::select('CALL sp_consultarTodosVoluntario()'),
+            'TipoVoluntarios'   => DB::select('CALL sp_consultarTodosTipoVoluntario()'),
+            'Profesiones'         => DB::select('CALL sp_consultarTodosProfesion()')
+        ];
     }
 
     /**
@@ -37,7 +41,33 @@ class VoluntarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Stores Voluntario from Create View
+        $this->validate($request, [
+            'run' => 'max:10|nullable|unique:Usuario',
+            'nombre' => 'min:3|required|max:60',
+            'appat' => 'min:3|required|max:60',
+            'apmat' => 'max:60',
+            'direccion' => 'required|max:255',
+            'telefono' => 'required|between:9,15|unique:Usuario',
+            'email' => 'required|max:255|unique:Usuario',
+            'idTipoVoluntario' => 'sometimes', // ID not required
+            'idProfesion' => 'sometimes'
+        ]);
+        $values = 
+        [ 
+            $request->run,
+            $request->nombre,
+            $request->appat,
+            $request->apmat,
+            $request->direccion,
+            $request->telefono,
+            $request->email,
+            $request->idTipoVoluntario,
+            $request->idProfesion
+        ];
+        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?)', $values);
+
+        return ['message' => 'El Voluntario fue Ingresado con Exito!'];
     }
 
     /**
@@ -48,7 +78,9 @@ class VoluntarioController extends Controller
      */
     public function show($id)
     {
-        //
+        $numero = null;
+        $numero = (int)$id;
+        return DB::select('CALL sp_consultarUnVoluntario(?,?)', [$numero,$id]);
     }
 
     /**
@@ -60,7 +92,32 @@ class VoluntarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Stores Voluntario from Update View
+        $this->validate($request, [
+            'run' => 'max:10|unique:Usuario,idUsuario'.$request->id,
+            'nombre' => 'required|max:60',
+            'appat' => 'required|max:60',
+            'apmat' => 'max:60',
+            'direccion' => 'required|max:255',
+            'telefono' => 'required|between:9,15|unique:Usuario,idUsuario'.$request->id,
+            'email' => 'required|max:255|unique:Usuario,idUsuario'.$request->id
+        ]);
+        $values = 
+        [
+            $id,
+            $request->run,
+            $request->nombre,
+            $request->appat,
+            $request->apmat,
+            $request->direccion,
+            $request->telefono,
+            $request->email,
+            $request->idTipoVoluntario,
+            $request->idProfesion
+        ];
+        DB::update('CALL sp_actualizarVoluntario(?,?,?,?,?,?,?,?,?,?)', $values);
+        
+        return ['message' => 'El Voluntario fue Actualizado con Exito!'];
     }
 
     /**
@@ -71,6 +128,7 @@ class VoluntarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::delete('CALL sp_eliminarVoluntario(?)', [$id]);
+        return ['message' => 'El Voluntario fue Eliminado con Exito!'];
     }
 }

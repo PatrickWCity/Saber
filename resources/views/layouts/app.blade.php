@@ -55,6 +55,9 @@
                       <li class="nav-item {{ Request::is('/tipoeventos') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/tipoeventos') }}">TipoEventos</a>
                       </li>
+                      <li class="nav-item {{ Request::is('/voluntarios') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/voluntarios') }}">Voluntario</a>
+                      </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

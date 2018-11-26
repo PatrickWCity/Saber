@@ -119,6 +119,7 @@ let routes = [
     { path: '/area', component: require('./components/Area.vue') },
     { path: '/expositor', component: require('./components/Expositor.vue') },
     { path: '/tipovoluntario', component: require('./components/TipoVoluntario.vue') },
+    { path: '/profesion', component: require('./components/Profesion.vue') },
     { path: '/403', component: require('./components/Unauthorized.vue') },
     { path: '/404', component: require('./components/NotFound.vue') },
     { path: '/500', component: require('./components/Error.vue') },

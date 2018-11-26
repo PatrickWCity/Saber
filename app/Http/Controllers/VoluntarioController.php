@@ -1,24 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use DB;
-use App\Evento;
-use App\TipoEvento;
-use App\Sede;
-use App\Area;
-use App\Expositor;
-use App\Noticia;
-use App\TipoNoticia;
-use App\Documento;
-use App\TipoDocumento;
-use App\Voluntario;
-use App\TipoVoluntario;
-use App\Profesion;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class VoluntarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,20 +13,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return $data = [
-            'Eventos'        => Evento::count(),
-            'TipoEventos'    => TipoEvento::count(),
-            'Sedes'          => Sede::count(),
-            'Areas'          => Area::count(),
-            'Expositores'    => Expositor::count(),
-            'Noticias'       => Noticia::count(),
-            'TipoNoticias'   => TipoNoticia::count(),
-            'Documentos'     => Documento::count(),
-            'TipoDocumentos' => TipoDocumento::count(),
-            'Voluntarios'    => Voluntario::count(),
-            'TipoVoluntarios'=> TipoVoluntario::count(),
-            'Profesiones'    => Profesion::count()
-        ];
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -61,6 +44,17 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

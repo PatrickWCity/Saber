@@ -105,6 +105,16 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumentoPorTipoDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticiaPorTipoNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosEventoPorTipoEvento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_agregarProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_agregarVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarVoluntario`;
         ');
 
         DB::unprepared("
@@ -1051,6 +1061,114 @@ class CreateStoredProcedure extends Migration
         AND Evento.idExpositor = Expositor.idExpositor
         AND Evento.idTipoEvento = idEvento;
         END;
+
+        CREATE PROCEDURE `sp_consultarTodosProfesion`()
+        BEGIN
+        SELECT *
+        FROM Profesion;
+        END;
+
+        CREATE PROCEDURE `sp_actualizarProfesion`(
+            IN `idProfesion` INT,
+            IN `nombre` VARCHAR(60),
+            IN `descripcion` VARCHAR(255)
+        )
+        BEGIN
+        UPDATE Profesion
+        SET nombre = nombre, descripcion = descripcion
+        WHERE Profesion.idProfesion = idProfesion;
+        END;
+
+        CREATE PROCEDURE `sp_agregarProfesion`(
+            IN `nombre` VARCHAR(60),
+            IN `descripcion` VARCHAR(255)
+        )
+        BEGIN
+        INSERT INTO Profesion (nombre, descripcion)
+        VALUES(nombre, descripcion);
+        END;
+
+        CREATE PROCEDURE `sp_consultarUnProfesion`(
+            IN `idProfesion` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT *
+        FROM Profesion 
+        WHERE Profesion.idProfesion = idProfesion
+        OR nombre LIKE CONCAT('%',palabraClave,'%')
+        OR descripcion LIKE CONCAT('%',palabraClave,'%');
+        END;
+
+        CREATE PROCEDURE `sp_eliminarProfesion`(
+            IN `idProfesion` INT
+        )
+        BEGIN
+        DELETE FROM Profesion
+        WHERE Profesion.idProfesion = idProfesion;
+        END;
+
+        CREATE PROCEDURE `sp_actualizarVoluntario`(
+            IN `idVoluntario` INT,
+            IN `run` VARCHAR(10),
+            IN `nombre` VARCHAR(60),
+            IN `appat` VARCHAR(60),
+            IN `apmat` VARCHAR(60),
+            IN `direccion` VARCHAR(255),
+            IN `telefono` VARCHAR(20),
+            IN `email` VARCHAR(255),
+            IN `idTipoVoluntario` INT,
+            IN `idProfesion` INT
+        )
+        BEGIN
+        UPDATE Voluntario
+        SET run = run, nombre = nombre, appat = appat, apmat = apmat, direccion = direccion, telefono = telefono, email = email, idTipoVoluntario = idTipoVoluntario, idProfesion = idProfesion
+        WHERE Voluntario.idVoluntario = idVoluntario;
+        END;
+        
+        CREATE PROCEDURE `sp_agregarVoluntario`(
+            IN `run` VARCHAR(10),
+            IN `nombre` VARCHAR(60),
+            IN `appat` VARCHAR(60),
+            IN `apmat` VARCHAR(60),
+            IN `direccion` VARCHAR(255),
+            IN `telefono` VARCHAR(20),
+            IN `email` VARCHAR(255),
+            IN `idTipoVoluntario` INT,
+            IN `idProfesion` INT
+        )
+        BEGIN
+        INSERT INTO Voluntario (run, nombre, appat, apmat, direccion, telefono, email, idTipoVoluntario, idProfesion)
+        VALUES(run, nombre, appat, apmat, direccion, telefono, email, idTipoVoluntario, idProfesion);
+        END;
+        
+        CREATE PROCEDURE `sp_consultarTodosVoluntario`()
+        BEGIN
+        SELECT Voluntario.*, TipoVoluntario.nombre as TipoVoluntario, Profesion.nombre as Profesion
+        FROM Voluntario, Profesion, TipoVoluntario
+		WHERE Voluntario.idTipoVoluntario = TipoVoluntario.idTipoVoluntario
+		AND Voluntario.idProfesion = Profesion.idProfesion;
+        END;
+        
+        CREATE PROCEDURE `sp_consultarUnVoluntario`(
+            IN `idVoluntario` INT,
+            IN `palabraClave` VARCHAR(255)
+        )
+        BEGIN
+        SELECT Voluntario.*, TipoVoluntario.nombre as TipoVoluntario, Profesion.nombre as Profesion
+        FROM Voluntario, Profesion, TipoVoluntario
+		WHERE Voluntario.idTipoVoluntario = TipoVoluntario.idTipoVoluntario
+		AND Voluntario.idProfesion = Profesion.idProfesion
+        AND Voluntario.idVoluntario = idVoluntario;
+        END;
+        
+        CREATE PROCEDURE `sp_eliminarVoluntario`(
+            IN `idVoluntario` INT
+        )
+        BEGIN
+        DELETE FROM Voluntario
+        WHERE Voluntario.idVoluntario = idVoluntario;
+        END;
         ");
     }
 
@@ -1153,6 +1271,16 @@ class CreateStoredProcedure extends Migration
         DROP PROCEDURE IF EXISTS `sp_consultarTodosDocumentoPorTipoDocumento`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosNoticiaPorTipoNoticia`;
         DROP PROCEDURE IF EXISTS `sp_consultarTodosEventoPorTipoEvento`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_agregarProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarProfesion`;
+        DROP PROCEDURE IF EXISTS `sp_consultarTodosVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_actualizarVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_agregarVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_consultarUnVoluntario`;
+        DROP PROCEDURE IF EXISTS `sp_eliminarVoluntario`;
         ');
     }
 }

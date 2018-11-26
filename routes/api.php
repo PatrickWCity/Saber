@@ -40,6 +40,7 @@ Route::apiResources([
     'user' => 'API\UserController',
     'expositor' => 'API\ExpositorController',
     'tipovoluntario' => 'API\TipoVoluntarioController',
+    'profesion' => 'API\ProfesionController',
     'dashboard' => 'API\DashboardController'
 ]);
 

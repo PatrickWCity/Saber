@@ -29,6 +29,8 @@ Route::resource('documentos','DocumentoController');
 
 Route::resource('tipodocumentos','TipoDocumentoController');
 
+Route::resource('voluntarios','VoluntarioController');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

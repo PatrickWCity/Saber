@@ -19,11 +19,19 @@ class CreateVoluntarioTable extends Migration
             $table->string('nombre', 60)->comment('Nombre de Voluntario');
             $table->string('appat', 60)->comment('Apellido Paterno de Voluntario');
             $table->string('apmat', 60)->nullable()->default(null)->comment('Apellido Materno de Voluntario');
+            $table->string('direccion')->comment('Dirección de Voluntario');
+            $table->string('telefono', 20)->unique()->comment('Teléfono de Voluntario');
+            $table->string('email')->unique()->comment('Correo Electrónico de Voluntario');
             $table->unsignedInteger('idTipoVoluntario')->nullable()->default(null)->comment('Identificador de Tipo de Voluntario');
+            $table->unsignedInteger('idProfesion')->nullable()->default(null)->comment('Identificador de Profesión');
             //$table->unsignedInteger('idUsuario')->nullable()->default(null)->comment('Identificador de Usuario');
 
             $table->foreign('idTipoVoluntario')
                   ->references('idTipoVoluntario')->on('TipoVoluntario')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreign('idProfesion')
+                  ->references('idProfesion')->on('Profesion')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             //$table->foreign('idUsuario')

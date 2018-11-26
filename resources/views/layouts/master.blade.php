@@ -90,6 +90,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </router-link>
               </li>
+              @can('esAdmin')
+              <li class="nav-item">
+                <router-link to="/voluntario" class="nav-link" active-class="active">
+                  <i class="nav-icon far fa-newspaper"></i>
+                  <p>
+                    Voluntarios
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/tipovoluntario" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-newspaper"></i>
+                  <p>
+                    Tipo de Voluntarios
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/profesion" class="nav-link" active-class="active">
+                  <i class="nav-icon fas fa-newspaper"></i>
+                  <p>
+                    Profesiones
+                  </p>
+                </router-link>
+              </li>
+              @endcan
               @canany(['esAdmin','esAutor'])
                 <li class="nav-item">
                   <router-link to="/noticia" class="nav-link" active-class="active">

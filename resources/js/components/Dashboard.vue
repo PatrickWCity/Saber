@@ -107,6 +107,59 @@
       </div>
       <!-- /.container-fluid -->
     </div>
+    <div class="container-fluid" v-if="$gate.esAdmin()">
+        <h4 class="mb-2">Seccion de Voluntarios</h4>
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>{{voluntarios}}</h3>
+
+                <p>Voluntarios</p>
+              </div>
+              <div class="icon">
+                <i class="far fa-calendar-check"></i>
+              </div>
+              <router-link to="/voluntario" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{tipovoluntarios}}</h3>
+
+                <p>Tipo de Voluntarios</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-calendar"></i>
+              </div>
+              <router-link to="/tipovoluntario" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{profesiones}}</h3>
+
+                <p>Profesiones</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-building"></i>
+              </div>
+              <router-link to="/profesion" class="small-box-footer">Ver Listado <i class="fa fa-arrow-circle-right"></i></router-link>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- ./col -->
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
     <div class="container-fluid" v-if="$gate.esAdmin() || $gate.esAutor()">
         <h4 class="mb-2">Seccion de Noticias</h4>
         <div class="row">
@@ -198,7 +251,10 @@ export default {
       noticias: 0,
       tiponoticias: 0,
       documentos: 0,
-      tipodocumentos: 0
+      tipodocumentos: 0,
+      voluntarios: 0,
+      tipovoluntarios: 0,
+      profesiones: 0,
     };
   },
   methods: {
@@ -216,7 +272,10 @@ export default {
             (this.noticias = data.Noticias),
             (this.tiponoticias = data.TipoNoticias),
             (this.documentos = data.Documentos),
-            (this.tipodocumentos = data.TipoDocumentos)
+            (this.tipodocumentos = data.TipoDocumentos),
+            (this.voluntarios = data.Voluntarios),
+            (this.tipovoluntarios = data.TipoVoluntarios),
+            (this.profesiones = data.Profesiones)
           )
         )
       }
