@@ -43,13 +43,13 @@ class VoluntarioController extends Controller
     {
         // Stores Voluntario from Create View
         $this->validate($request, [
-            'run' => 'max:10|nullable|unique:Usuario',
+            'run' => 'max:10|nullable|unique:Voluntario',
             'nombre' => 'min:3|required|max:60',
             'appat' => 'min:3|required|max:60',
             'apmat' => 'max:60',
             'direccion' => 'required|max:255',
-            'telefono' => 'required|between:9,15|unique:Usuario',
-            'email' => 'required|max:255|unique:Usuario',
+            'telefono' => 'required|between:9,15|unique:Voluntario',
+            'email' => 'required|max:255|unique:Voluntario',
             'idTipoVoluntario' => 'sometimes', // ID not required
             'idProfesion' => 'sometimes'
         ]);
@@ -94,13 +94,13 @@ class VoluntarioController extends Controller
     {
         // Stores Voluntario from Update View
         $this->validate($request, [
-            'run' => 'max:10|unique:Usuario,idUsuario'.$request->id,
+            'run' => 'max:10|unique:Voluntario,idVoluntario'.$request->id,
             'nombre' => 'required|max:60',
             'appat' => 'required|max:60',
             'apmat' => 'max:60',
             'direccion' => 'required|max:255',
-            'telefono' => 'required|between:9,15|unique:Usuario,idUsuario'.$request->id,
-            'email' => 'required|max:255|unique:Usuario,idUsuario'.$request->id
+            'telefono' => 'required|between:9,15|unique:Voluntario,idVoluntario'.$request->id,
+            'email' => 'required|max:255|unique:Voluntario,idVoluntario'.$request->id
         ]);
         $values = 
         [
