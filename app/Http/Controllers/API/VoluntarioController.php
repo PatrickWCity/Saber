@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use DB;
 use App\Voluntario;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -62,10 +63,11 @@ class VoluntarioController extends Controller
             $request->direccion,
             $request->telefono,
             $request->email,
+            Carbon::now(),
             $request->idTipoVoluntario,
             $request->idProfesion
         ];
-        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?)', $values);
+        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?,?)', $values);
 
         return ['message' => 'El Voluntario fue Ingresado con Exito!'];
     }
@@ -112,10 +114,11 @@ class VoluntarioController extends Controller
             $request->direccion,
             $request->telefono,
             $request->email,
+            $request->fechaCreada,
             $request->idTipoVoluntario,
             $request->idProfesion
         ];
-        DB::update('CALL sp_actualizarVoluntario(?,?,?,?,?,?,?,?,?,?)', $values);
+        DB::update('CALL sp_actualizarVoluntario(?,?,?,?,?,?,?,?,?,?,?)', $values);
         
         return ['message' => 'El Voluntario fue Actualizado con Exito!'];
     }

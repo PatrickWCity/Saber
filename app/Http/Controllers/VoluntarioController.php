@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TipoVoluntario;
 use App\Profesion;
+use Carbon\Carbon;
 use DB;
 
 class VoluntarioController extends Controller
@@ -60,10 +61,11 @@ class VoluntarioController extends Controller
             $request->direccion,
             $request->telefono,
             $request->email,
+            Carbon::now(),
             $request->idTipoVoluntario,
             $request->idProfesion
         ];
-        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?)', $values);
+        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?,?)', $values);
 
         return redirect('/voluntarios')->with('success', '¡Voluntario a sido Ingresado con Exito!');
     }

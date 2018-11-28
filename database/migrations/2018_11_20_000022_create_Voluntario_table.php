@@ -22,6 +22,7 @@ class CreateVoluntarioTable extends Migration
             $table->string('direccion')->comment('Dirección de Voluntario');
             $table->string('telefono', 20)->unique()->comment('Teléfono de Voluntario');
             $table->string('email')->unique()->comment('Correo Electrónico de Voluntario');
+            $table->timestamp('fechaCreada')->nullable()->comment('Fecha de Creación de Voluntario');//->useCurrent();
             $table->unsignedInteger('idTipoVoluntario')->nullable()->default(null)->comment('Identificador de Tipo de Voluntario');
             $table->unsignedInteger('idProfesion')->nullable()->default(null)->comment('Identificador de Profesión');
             //$table->unsignedInteger('idUsuario')->nullable()->default(null)->comment('Identificador de Usuario');

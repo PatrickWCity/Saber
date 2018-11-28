@@ -1117,12 +1117,13 @@ class CreateStoredProcedure extends Migration
             IN `direccion` VARCHAR(255),
             IN `telefono` VARCHAR(20),
             IN `email` VARCHAR(255),
+            IN `fechaCreada` TIMESTAMP,
             IN `idTipoVoluntario` INT,
             IN `idProfesion` INT
         )
         BEGIN
         UPDATE Voluntario
-        SET run = run, nombre = nombre, appat = appat, apmat = apmat, direccion = direccion, telefono = telefono, email = email, idTipoVoluntario = idTipoVoluntario, idProfesion = idProfesion
+        SET run = run, nombre = nombre, appat = appat, apmat = apmat, direccion = direccion, telefono = telefono, email = email, fechaCreada = fechaCreada, idTipoVoluntario = idTipoVoluntario, idProfesion = idProfesion
         WHERE Voluntario.idVoluntario = idVoluntario;
         END;
         
@@ -1134,12 +1135,13 @@ class CreateStoredProcedure extends Migration
             IN `direccion` VARCHAR(255),
             IN `telefono` VARCHAR(20),
             IN `email` VARCHAR(255),
+            IN `fechaCreada` TIMESTAMP,
             IN `idTipoVoluntario` INT,
             IN `idProfesion` INT
         )
         BEGIN
-        INSERT INTO Voluntario (run, nombre, appat, apmat, direccion, telefono, email, idTipoVoluntario, idProfesion)
-        VALUES(run, nombre, appat, apmat, direccion, telefono, email, idTipoVoluntario, idProfesion);
+        INSERT INTO Voluntario (run, nombre, appat, apmat, direccion, telefono, email, fechaCreada, idTipoVoluntario, idProfesion)
+        VALUES(run, nombre, appat, apmat, direccion, telefono, email, fechaCreada, idTipoVoluntario, idProfesion);
         END;
         
         CREATE PROCEDURE `sp_consultarTodosVoluntario`()

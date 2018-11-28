@@ -49,6 +49,7 @@
                         <th>Dirrecion</th>
                         <th>Telefono</th>
                         <th>Email</th>
+                        <th>Fecha de Creación</th>
                         <th>Tipo de Voluntario</th>
                         <th>Profesion</th>
                         <th class="text-center">Operaciones</th>
@@ -64,6 +65,7 @@
                         <td>{{voluntario.direccion}}</td>
                         <td>{{voluntario.telefono}}</td>
                         <td>{{voluntario.email}}</td>
+                        <td>{{voluntario.fechaCreada | myDate}}</td>
                         <td>{{voluntario.TipoVoluntario}}</td>
                         <td>{{voluntario.Profesion}}</td>
                         <td role="text-center">
@@ -211,6 +213,7 @@ export default {
         direccion: "",
         telefono: "",
         email: "",
+        fechaCreada: "",
         idTipoVoluntario: "",
         idProfesion: "",
         palabraClave: ""
