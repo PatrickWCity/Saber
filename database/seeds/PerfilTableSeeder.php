@@ -35,18 +35,6 @@ class PerfilTableSeeder extends Seeder
             [
                 'nombre' => 'Desarrollador',
                 'descripcion' => 'El Desarrollador Desarrolla el Sistema.',
-            ],
-            [
-                'nombre' => 'Voluntario',
-                'descripcion' => 'El Voluntario tiene acceso como Voluntario el Sistema.',
-            ],
-            [
-                'nombre' => 'Participante',
-                'descripcion' => 'El Participante es el que participa en los Eventos publicados en el Sistema.',
-            ],
-            [
-                'nombre' => 'Suscriptor',
-                'descripcion' => 'El Suscriptor es el que recibe los Correos de Publicidades y Eventos el Sistema.',
             ]
         ]);
     }

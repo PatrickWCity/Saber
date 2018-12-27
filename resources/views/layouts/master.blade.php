@@ -332,10 +332,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Construyendo Mis Sueños v0.5.19
+      Construyendo Mis Sueños v1.0.4
     </div>
     <!-- Default to the left -->
-    <strong>Tercer Estado de Avance <i class="fas fa-chess-knight"></i> <a href="https://dev.patrickwcity.com">Proyecto de Titulo</a>.</strong> Hecha de manera Clara, Precisa y Concisa con <i class="fas fa-heart"></i>.
+    <strong>Ultimo Estado de Avance <i class="fas fa-chess-knight"></i> <a href="http://construyendomissuenos.cl/">Proyecto de Titulo</a>.</strong> Hecha de manera Clara, Precisa y Concisa con <i class="fas fa-heart"></i>.
   </footer>
 </div>
 <!-- ./wrapper -->

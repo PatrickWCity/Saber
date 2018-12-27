@@ -17,4 +17,12 @@ class WelcomeController extends Controller
         $noticias = DB::select('CALL sp_consultarUltimasNoticia()');
         return view('welcome')->with('noticias', $noticias);
     }
+    public function quienessomos()
+    {
+        return view('quienessomos');
+    }
+    public function contactanos()
+    {
+        return view('contactanos');
+    }
 }

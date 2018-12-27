@@ -4828,6 +4828,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var table;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4871,6 +4885,12 @@ var table;
     }
   },
   methods: {
+    getProfilePhoto: function getProfilePhoto() {
+      if (this.form.imagenPortada.length) {
+        var foto = this.form.imagenPortada.length > 200 ? this.form.imagenPortada : "img/noticias/" + this.form.imagenPortada;
+        return foto;
+      }
+    },
     updateProfile: function updateProfile(e) {
       var _this = this;
 
@@ -8932,6 +8952,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 var table;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8950,6 +8972,7 @@ var table;
         direccion: "",
         telefono: "",
         email: "",
+        fechaCreada: "",
         idTipoVoluntario: "",
         idProfesion: "",
         palabraClave: ""
@@ -71649,6 +71672,16 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("td", [
                                         _vm._v(
+                                          _vm._s(
+                                            _vm._f("myDate")(
+                                              voluntario.fechaCreada
+                                            )
+                                          )
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(
                                           _vm._s(voluntario.TipoVoluntario)
                                         )
                                       ]),
@@ -72512,6 +72545,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Telefono")]),
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Fecha de Creación")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tipo de Voluntario")]),
         _vm._v(" "),
@@ -81316,6 +81351,53 @@ var render = function() {
                                 ],
                                 1
                               )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("h5", [_vm._v("Previa de Noticia")]),
+                              _vm._v(" "),
+                              _c("dl", { staticClass: "row" }, [
+                                _c("dt", { staticClass: "col-4" }, [
+                                  _vm._v("Titulo:")
+                                ]),
+                                _vm._v(" "),
+                                _c("dd", { staticClass: "col-8" }, [
+                                  _vm._v(_vm._s(_vm.form.titulo))
+                                ]),
+                                _vm._v(" "),
+                                _c("dt", { staticClass: "col-4" }, [
+                                  _vm._v("Contenido:")
+                                ]),
+                                _vm._v(" "),
+                                _c("dd", { staticClass: "col-8" }, [
+                                  _vm._v(_vm._s(_vm.form.contenido))
+                                ]),
+                                _vm._v(" "),
+                                _c("dt", { staticClass: "col-4" }, [
+                                  _vm._v("Imagen de Portada:")
+                                ]),
+                                _vm._v(" "),
+                                _c("dd", { staticClass: "col-8" }, [
+                                  _c("img", {
+                                    staticStyle: {
+                                      height: "200px",
+                                      width: "auto"
+                                    },
+                                    attrs: {
+                                      src: _vm.getProfilePhoto(),
+                                      alt: "User Avatar"
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("dt", { staticClass: "col-4" }, [
+                                  _vm._v("ID de Tipo de Noticia:")
+                                ]),
+                                _vm._v(" "),
+                                _c("dd", { staticClass: "col-8" }, [
+                                  _vm._v(_vm._s(_vm.form.idTipoNoticia))
+                                ])
+                              ])
                             ])
                           ]),
                           _vm._v(" "),

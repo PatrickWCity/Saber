@@ -15,37 +15,15 @@ class AccesoTableSeeder extends Seeder
     {
         DB::table('Acceso')->insert([
             [
-                'username' => 'PatrickWCity',
-                'password' => Hash::make('123456'),
+                'username' => 'administrador',
+                'password' => Hash::make('CMS2018**'),
                 'diasClave' => '14',
                 'fechaCaducidad' => Carbon::now()->addDays(14),
-                'email' => 'PatrickWCity@gmail.com',
+                'email' => 'comunicaciones@construyendomissuenos.cl',
                 'estadoInicial' => '1',
                 'email_verified_at' => Carbon::now(),
                 'foto' => 'default.png',
                 'idUsuario' => '1',
-            ],
-            [
-                'username' => 'CrossSensei',
-                'password' => Hash::make('123456'),
-                'diasClave' => '14',
-                'fechaCaducidad' => Carbon::now()->addDays(14),
-                'email' => 'ARodriguezA89@gmail.com',
-                'estadoInicial' => '1',
-                'email_verified_at' => Carbon::now(),
-                'foto' => 'default.png',
-                'idUsuario' => '2',
-            ],
-            [
-                'username' => 'Vixo',
-                'password' => Hash::make('123456'),
-                'diasClave' => '14',
-                'fechaCaducidad' => Carbon::now()->addDays(14),
-                'email' => 'HellBlazer25@gmail.com',
-                'estadoInicial' => '1',
-                'email_verified_at' => Carbon::now(),
-                'foto' => 'default.png',
-                'idUsuario' => '3',
             ]
         ]);
     }

@@ -31,10 +31,10 @@
 <body>
     <div id="app">
         <!--<nav class="navbar navbar-expand-md navbar-light navbar-laravel">-->
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-laravel">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-laravel py-4 py-md-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ url('/img/logo.png') }}" alt="logo" style="height:27px;">
+                    <img src="{{ url('/img/logo.png') }}" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -43,27 +43,47 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                            <li class="nav-item {{ Request::is('/noticias') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('/noticias') }}">Noticias</a>
-                              </li>
-                              <li class="nav-item {{ Request::is('/tiponoticias') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('/tiponoticias') }}">TipoNoticias</a>
-                              </li>
-                            <li class="nav-item {{ Request::is('/documentos') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('/documentos') }}">Documentos</a>
-                              </li>
-                              <li class="nav-item {{ Request::is('/tipodocumentos') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('/tipodocumentos') }}">TipoDocumentos</a>
-                              </li>
-                          <li class="nav-item {{ Request::is('/eventos') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('/eventos') }}">Eventos</a>
-                          </li>
-                          <li class="nav-item {{ Request::is('/tipoeventos') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('/tipoeventos') }}">TipoEventos</a>
-                          </li>
-                          <li class="nav-item {{ Request::is('/voluntarios/create') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ url('/voluntarios/create') }}">Voluntario</a>
-                          </li>
+                    <li class="nav-item {{ Request::is('/quienessomos') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/quienessomos') }}">Quiénes Somos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Noticias
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url('/noticias') }}" style="color: #212529 !important;">Noticias</a>
+                        <a class="dropdown-item" href="{{ url('/tiponoticias') }}" style="color: #212529 !important;">Tipo de Noticias</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Documentos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url('/documentos') }}" style="color: #212529 !important;">Documentos</a>
+                        <a class="dropdown-item" href="{{ url('/tipodocumentos') }}" style="color: #212529 !important;">Tipo de Documentos</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Eventos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ url('/eventos') }}" style="color: #212529 !important;">Eventos</a>
+                        <a class="dropdown-item" href="{{ url('/tipoeventos') }}" style="color: #212529 !important;">Tipo de Eventos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item {{ Request::is('/tiponoticias/1') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/tiponoticias/1') }}">Prensa</a>
+                    </li>
+                    <li class="nav-item {{ Request::is('/voluntarios/create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ url('/voluntarios/create') }}">¡Haste parte!</a>
+                    </li>
+                    <li class="nav-item {{ Request::is('/contactanos') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/contactanos') }}">Contáctanos</a>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -113,9 +133,10 @@
                 <img class="first-slide" src="img/carousel1.jpg" alt="First slide">
                 <div class="container">
                   <div class="carousel-caption text-left">
-                    <h1>Primer Ejemplo.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Ejemplo 1</a></p>
+                    <h1>Primera Imagen</h1>
+                    <p>Somos Construyendo Mis Sueños, una organización sin fines de lucro 
+que busca potenciar el emprendimiento en Chile. </p>
+                    <p><a class="btn btn-lg btn-primary" href="/quienessomos" role="button">Quiénes Somos</a></p>
                   </div>
                 </div>
               </div>
@@ -123,9 +144,10 @@
                 <img class="second-slide" src="img/carousel2.jpg" alt="Second slide">
                 <div class="container">
                   <div class="carousel-caption">
-                    <h1>Segundo Ejemplo.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Ejemplo 2</a></p>
+                    <h1>Segunda Imagen</h1>
+                    <p>Somos Construyendo Mis Sueños, una organización sin fines de lucro 
+que busca potenciar el emprendimiento en Chile. </p>
+                    <p><a class="btn btn-lg btn-primary" href="/quienessomos" role="button">Quiénes Somos</a></p>
                   </div>
                 </div>
               </div>
@@ -133,9 +155,10 @@
                 <img class="third-slide" src="img/carousel3.jpg" alt="Third slide">
                 <div class="container">
                   <div class="carousel-caption text-right">
-                    <h1>Tercer Ejemplo.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Ejemplo 3</a></p>
+                    <h1>Tercera Imagen</h1>
+                    <p>Somos Construyendo Mis Sueños, una organización sin fines de lucro 
+que busca potenciar el emprendimiento en Chile. </p>
+                    <p><a class="btn btn-lg btn-primary" href="/quienessomos" role="button">Quiénes Somos</a></p>
                   </div>
                 </div>
               </div>
@@ -178,5 +201,121 @@
     @endif
 
     </div>
+        <!-- Footer -->
+<footer class="page-footer font-small background-color: #6351ce;">
+
+<div style="background-color: #e4e4e4;">
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row py-4 d-flex align-items-center">
+
+      <!-- Grid column -->
+      <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+        <h6 class="mb-0">¡Conéctate con nosotros en las redes sociales!</h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+        <!-- Facebook -->
+        <a class="fb-ic" href="https://www.facebook.com/construyendomissuenos/">
+          <i class="fab fa-facebook white-text mr-4"></i>
+        </a>
+        <!-- Twitter -->
+        <a class="tw-ic" href="https://twitter.com/ConstruMisSue">
+          <i class="fab fa-twitter white-text mr-4"></i>
+        </a>
+        <!-- Google +-->
+        <a class="gplus-ic" href="https://www.youtube.com/channel/UCnPLIVX-9JlsM45Vb8JKstA">
+          <i class="fab fa-youtube white-text mr-4"></i>
+        </a>
+        <!--Instagram-->
+        <a class="ins-ic" href="https://www.instagram.com/construyendomissuenos/">
+          <i class="fab fa-instagram white-text"></i>
+        </a>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+</div>
+
+<!-- Footer Links -->
+<div class="container text-center text-md-left mt-5">
+
+  <!-- Grid row -->
+  <div class="row mt-3">
+
+    <!-- Grid column -->
+    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+      <!-- Content -->
+      <h6 class="text-uppercase font-weight-bold">Construyendo Mis Sueños
+</h6>
+      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+      <p>Organización sin fines de lucro que busca potenciar el emprendimiento en Chile.</p>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+      <!-- Links -->
+      <h6 class="text-uppercase font-weight-bold">
+ENLACES ÚTILES</h6>
+      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+      <p>
+        <a href="/quienessomos">Quiénes Somos</a>
+      </p>
+      <p>
+        <a href="/noticias">Noticias</a>
+      </p>
+      <p>
+        <a href="/documentos">Documentos</a>
+      </p>
+      <p>
+        <a href="/eventos">Eventos</a>
+      </p>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-md-5 col-lg-5 col-xl-4 mx-auto mb-md-0 mb-4">
+
+      <!-- Links -->
+      <h6 class="text-uppercase font-weight-bold">Contáctenos</h6>
+      <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+      <p>
+        <i class="fa fa-home mr-3"></i>Domeyko 2361, Santiago, Chile.</p>
+      <p>
+        <i class="fa fa-envelope mr-3"></i> comunicaciones@construyendomissuenos.cl</p>
+      <p>
+        <i class="fa fa-phone mr-3"></i> +56 2 2978 4060 – anexo 124</p>
+
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">© 2018 Copyright:
+  <a href="http://construyendomissuenos.cl/"> ConstruyendoMisSuenos.cl</a>
+</div>
+<!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
 </html>

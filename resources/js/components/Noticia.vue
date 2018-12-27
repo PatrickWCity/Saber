@@ -131,6 +131,20 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group">
+              <h5>Previa de Noticia</h5>
+            <dl class="row">
+        <dt class="col-4">Titulo:</dt>
+        <dd class="col-8">{{ form.titulo }}</dd>
+        <dt class="col-4">Contenido:</dt>
+        <dd class="col-8">{{ form.contenido }}</dd>
+        <dt class="col-4">Imagen de Portada:</dt>
+        <dd class="col-8">
+        <img style="height: 200px; width:auto;" :src="getProfilePhoto()" alt="User Avatar"></dd>
+        <dt class="col-4">ID de Tipo de Noticia:</dt>
+        <dd class="col-8">{{ form.idTipoNoticia }}</dd>
+    </dl>
+            </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -189,6 +203,12 @@ export default {
   }
 },
   methods: {
+    getProfilePhoto(){
+              if(this.form.imagenPortada.length){
+              let foto = (this.form.imagenPortada.length > 200) ? this.form.imagenPortada: "img/noticias/"+ this.form.imagenPortada ;
+              return foto;
+              }
+            },
     updateProfile(e){
         // console.log('uploading');
         let file = e.target.files[0];

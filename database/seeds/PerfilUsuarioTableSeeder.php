@@ -18,18 +18,6 @@ class PerfilUsuarioTableSeeder extends Seeder
                 'estado' => '1',
                 'idPerfil' => '1',
                 'idUsuario' => '1',
-            ],
-            [
-                'fecha' => Carbon::now(),
-                'estado' => '1',
-                'idPerfil' => '1',
-                'idUsuario' => '2',
-            ],
-            [
-                'fecha' => Carbon::now(),
-                'estado' => '1',
-                'idPerfil' => '1',
-                'idUsuario' => '3',
             ]
         ]);
     }

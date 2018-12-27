@@ -17,6 +17,10 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('/quienessomos', 'WelcomeController@quienessomos');
+
+Route::get('/contactanos', 'WelcomeController@contactanos');
+
 Route::resource('eventos','EventoController');
 
 Route::resource('tipoeventos','TipoEventoController');

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-1 pt-1">
-    <h1>Ingresar Voluntario</h1>
+    <h1>¡Haste parte!</h1>
     {!! Form::open(['action' => 'VoluntarioController@store','method' => 'post']) !!}
         <div class="form-group">
             {{Form::label('run', 'RUN')}}
@@ -33,7 +33,7 @@
             {{Form::text('email','', ['class'=> 'form-control', 'placeholder'=>'Email de Voluntario'])}}
         </div>
         <div class="form-group">
-                {{Form::label('idTipoVoluntario', 'Tipo de Voluntario')}}
+                {{Form::label('idTipoVoluntario', '¿ Qué buscas en CMS ?')}}
                 {{Form::select('idTipoVoluntario', $tipoVoluntarios, null, ['class' => 'form-control'])}}
         </div>
         <div class="form-group">
