@@ -44,6 +44,8 @@ phpunit:
     - composer
   script:
     - phpunit --coverage-text --colors=never
+  only:
+    - tags
 
 staging:
   stage: deploy
