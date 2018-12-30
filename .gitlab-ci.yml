@@ -37,6 +37,8 @@ codestyle:
   dependencies: []
   script:
     - phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+  only:
+    - tags
     
 phpunit:
   stage: test
