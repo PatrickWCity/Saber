@@ -1,0 +1,69 @@
+image: lorisleiva/laravel-docker:latest
+    
+composer:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+  script:
+      - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+      - cp .env.example .env
+      - php artisan key:generate
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - vendor/
+      - .env
+
+npm:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-npm
+    paths:
+      - node_modules/
+  script:
+      - npm install
+      - npm run production
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - node_modules/
+      - public/css/
+      - public/js/
+
+codestyle:
+  stage: test
+  dependencies: []
+  script:
+    - phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+    
+phpunit:
+  stage: test
+  dependencies:
+    - composer
+  script:
+    - phpunit --coverage-text --colors=never
+
+staging:
+  stage: deploy
+  script:
+     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/construyendomissuenos.git
+     - git push -f heroku master
+  environment:
+    name: staging
+    url: https://construyendomissuenos.herokuapp.com/
+  only:
+    - master
+  
+production:
+  stage: deploy
+  script:
+     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/construyendomissuenos.git
+     - git push -f heroku master
+  environment:
+    name: production
+    url: https://construyendomissuenos.herokuapp.com/
+  when: manual
+  only:
+   - master
