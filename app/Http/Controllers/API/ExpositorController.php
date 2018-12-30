@@ -44,8 +44,8 @@ class ExpositorController extends Controller
             'appat' => 'min:3|required|max:60',
             'apmat' => 'max:60'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->run,
             $request->nombre,
             $request->appat,
@@ -87,7 +87,7 @@ class ExpositorController extends Controller
             'appat' => 'required|max:60',
             'apmat' => 'max:60'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->run,

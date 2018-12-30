@@ -44,9 +44,8 @@ class SubmoduloModuloController extends Controller
             'idModulo' => 'required',
             'idSubmodulo' => 'required'
         ]);
-        $values = 
-        [ 
-            
+        $values =
+        [
             $request->idSubmodulo,
             $request->idModulo
         ];
@@ -64,8 +63,8 @@ class SubmoduloModuloController extends Controller
     {
         return $data = [
             'Modulos'          => DB::select('CALL sp_consultarTodosModulo()'),
-            'SubmodulosSinModulo' => DB::select('CALL sp_consultarSubmodulosSinModulo(?)',[$id]),
-            'SubmodulosDeModulo'  => DB::select('CALL sp_consultarSubmodulosDeModulo(?)',[$id])
+            'SubmodulosSinModulo' => DB::select('CALL sp_consultarSubmodulosSinModulo(?)', [$id]),
+            'SubmodulosDeModulo'  => DB::select('CALL sp_consultarSubmodulosDeModulo(?)', [$id])
         ];
     }
 
@@ -82,8 +81,8 @@ class SubmoduloModuloController extends Controller
             'idModulo' => 'required',
             'idSubmodulo' => 'required'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->idSubmodulo,
             $request->idModulo
         ];

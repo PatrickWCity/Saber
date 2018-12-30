@@ -42,8 +42,8 @@ class ProfesionController extends Controller
             'nombre' => 'required|max:60|unique:Profesion',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class ProfesionController extends Controller
             'nombre' => 'required|max:60|unique:Profesion,idProfesion'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

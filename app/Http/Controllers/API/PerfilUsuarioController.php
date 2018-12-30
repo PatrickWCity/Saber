@@ -49,9 +49,8 @@ class PerfilUsuarioController extends Controller
             'idPerfil' => 'required',
             'idUsuario' => 'required'
         ]);
-        $values = 
-        [ 
-            
+        $values =
+        [
             $request->idUsuario,
             $request->idPerfil
         ];
@@ -72,8 +71,8 @@ class PerfilUsuarioController extends Controller
     {
         return $data = [
             'Perfiles'          => DB::select('CALL sp_consultarTodosPerfil()'),
-            'UsuariosSinPerfil' => DB::select('CALL sp_consultarUsuariosSinPerfil(?)',[$id]),
-            'UsuariosDePerfil'  => DB::select('CALL sp_consultarUsuariosDePerfil(?)',[$id])
+            'UsuariosSinPerfil' => DB::select('CALL sp_consultarUsuariosSinPerfil(?)', [$id]),
+            'UsuariosDePerfil'  => DB::select('CALL sp_consultarUsuariosDePerfil(?)', [$id])
         ];
     }
 
@@ -90,8 +89,8 @@ class PerfilUsuarioController extends Controller
             'idPerfil' => 'required',
             'idUsuario' => 'required'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->idUsuario,
             $request->idPerfil
         ];

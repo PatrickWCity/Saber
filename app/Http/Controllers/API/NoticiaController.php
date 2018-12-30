@@ -49,14 +49,14 @@ class NoticiaController extends Controller
             'idTipoNoticia' => 'required' // ID not required
         ]);
         $nombreImagenPortada = ''; // ? test if not needed
-        if($request->imagenPortada){
+        if ($request->imagenPortada) {
             $nombreImagenPortada = time().'.' . explode('/', explode(':', substr($request->imagenPortada, 0, strpos($request->imagenPortada, ';')))[1])[1];
             \Image::make($request->imagenPortada)->save(public_path('img/noticias/').$nombreImagenPortada);
-        }else{
+        } else {
             $nombreImagenPortada = 'default.png';
         }
-        $values = 
-        [ 
+        $values =
+        [
             $request->titulo,
             $request->contenido,
             $nombreImagenPortada,
@@ -101,19 +101,19 @@ class NoticiaController extends Controller
         $nombreImagenPortada = ''; // ? test if not needed
         $noticia = Noticia::find($id);
         $currentImagenPortada = $noticia->imagenPortada;
-        if($request->imagenPortada != $currentImagenPortada){
+        if ($request->imagenPortada != $currentImagenPortada) {
             $nombreImagenPortada = time().'.' . explode('/', explode(':', substr($request->imagenPortada, 0, strpos($request->imagenPortada, ';')))[1])[1];
             \Image::make($request->imagenPortada)->save(public_path('img/noticias/').$nombreImagenPortada);
             $noticiaImagenPortada = public_path('img/noticias/').$currentImagenPortada;
-            if(file_exists($noticiaImagenPortada)){
-                if($currentImagenPortada != 'default.png'){
+            if (file_exists($noticiaImagenPortada)) {
+                if ($currentImagenPortada != 'default.png') {
                     @unlink($noticiaImagenPortada);
                 }
             }
-        }else{
+        } else {
             $nombreImagenPortada = $currentImagenPortada;
         }
-        $values = 
+        $values =
         [
             $id,
             $request->titulo,
@@ -139,8 +139,8 @@ class NoticiaController extends Controller
         $noticia = Noticia::find($id);
         $currentImagenPortada = $noticia->imagenPortada;
         $noticiaImagenPortada = public_path('img/noticias/').$currentImagenPortada;
-        if(file_exists($noticiaImagenPortada)){
-            if($currentImagenPortada != 'default.png'){
+        if (file_exists($noticiaImagenPortada)) {
+            if ($currentImagenPortada != 'default.png') {
                 @unlink($noticiaImagenPortada);
             }
         }

@@ -16,7 +16,7 @@ class TipoDocumentoController extends Controller
     public function index()
     {
         $documentos = DB::select('CALL sp_consultarTodosTipoDocumento()');
-       return view('tipodocumentos.index')->with('documentos', $documentos);
+        return view('tipodocumentos.index')->with('documentos', $documentos);
     }
 
     /**

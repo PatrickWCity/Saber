@@ -54,8 +54,8 @@ class VoluntarioController extends Controller
             'idTipoVoluntario' => 'sometimes', // ID not required
             'idProfesion' => 'sometimes'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->run,
             $request->nombre,
             $request->appat,
@@ -104,7 +104,7 @@ class VoluntarioController extends Controller
             'telefono' => 'required|between:9,15|unique:Voluntario,idVoluntario'.$request->id,
             'email' => 'required|max:255|unique:Voluntario,idVoluntario'.$request->id
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->run,

@@ -42,8 +42,8 @@ class TipoDocumentoController extends Controller
             'nombre' => 'required|max:60|unique:TipoDocumento',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class TipoDocumentoController extends Controller
             'nombre' => 'required|max:60|unique:TipoDocumento,idTipoDocumento'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

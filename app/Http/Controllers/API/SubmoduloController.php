@@ -44,8 +44,8 @@ class SubmoduloController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Submodulo'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion,
             $request->ubicacion
@@ -83,7 +83,7 @@ class SubmoduloController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Submodulo,idSubmodulo'.$request->id,
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

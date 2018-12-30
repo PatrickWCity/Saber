@@ -16,7 +16,7 @@ class DocumentoController extends Controller
     public function index()
     {
         $documentos = DB::select('CALL sp_consultarTodosDocumento()');
-       return view('documentos.index')->with('documentos', $documentos);
+        return view('documentos.index')->with('documentos', $documentos);
     }
 
     /**

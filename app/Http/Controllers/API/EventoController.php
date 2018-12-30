@@ -54,8 +54,8 @@ class EventoController extends Controller
             'idArea' => 'sometimes', // ID not required
             'idExpositor' => 'sometimes' // ID not required
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion,
             $request->fechaInicio,
@@ -99,7 +99,7 @@ class EventoController extends Controller
             'fechaInicio' => 'required|date',
             'fechaTermino' => 'required|date'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

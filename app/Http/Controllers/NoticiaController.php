@@ -16,7 +16,7 @@ class NoticiaController extends Controller
     public function index()
     {
         $noticias = DB::select('CALL sp_consultarTodosNoticia()');
-       return view('noticias.index')->with('noticias', $noticias);
+        return view('noticias.index')->with('noticias', $noticias);
     }
 
     /**

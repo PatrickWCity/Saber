@@ -42,8 +42,8 @@ class TipoVoluntarioController extends Controller
             'nombre' => 'required|max:60|unique:TipoVoluntario',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class TipoVoluntarioController extends Controller
             'nombre' => 'required|max:60|unique:TipoVoluntario,idTipoVoluntario'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

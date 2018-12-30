@@ -43,8 +43,8 @@ class SedeController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Sede'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion,
             $request->ubicacion
@@ -82,7 +82,7 @@ class SedeController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Sede,idSede'.$request->id,
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

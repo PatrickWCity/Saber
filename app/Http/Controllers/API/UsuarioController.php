@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use DB;
 use App\User;
 use App\Usuario;
@@ -8,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\crearUsuario;
+use App\Mail\CrearUsuario;
 use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
@@ -51,9 +52,9 @@ class UsuarioController extends Controller
             'direccion' => 'required|max:255',
             'telefono' => 'required|between:9,15|unique:Usuario',
             'email' => 'required|max:255|unique:Usuario'
-        ]);
-        $values = 
-        [ 
+            ]);
+        $values =
+        [
             $request->run,
             $request->nombre,
             $request->appat,
@@ -65,11 +66,11 @@ class UsuarioController extends Controller
         DB::insert('CALL sp_agregarUsuario(?,?,?,?,?,?,?)', $values);
 
         $username = substr($request->nombre, 0, 3).'.'.substr($request->appat, 0, 3);
-        $counter = 0; 
+        $counter = 0;
         if (User::where('username', '=', $username)->exists()) {
             $counter += 1;
             $username = substr($request->nombre, 0, 3).'.'.substr($request->appat, 0, 3).$counter;
-         }
+        }
 
         User::create([
             'username' => $username,
@@ -83,7 +84,7 @@ class UsuarioController extends Controller
         ]);
         //return redirect('/usuario')->with('success', 'Usuario Ingresado');
         //return $request->all();
-        Mail::to($request->email)->send(new crearUsuario($username));
+        Mail::to($request->email)->send(new CrearUsuario($username));
 
         return ['message' => 'El Usuario fue Ingresado con Exito!'];
     }
@@ -120,7 +121,7 @@ class UsuarioController extends Controller
             'telefono' => 'required|between:9,15|unique:Usuario,idUsuario'.$request->id,
             'email' => 'required|max:255|unique:Usuario,idUsuario'.$request->id
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->run,
@@ -147,8 +148,8 @@ class UsuarioController extends Controller
         $user = User::where('idUsuario', $id)->first();
         $currentPhoto = $user->foto;
         $userPhoto = public_path('img/usuarios/').$currentPhoto;
-        if(file_exists($userPhoto)){
-            if($currentPhoto != 'default.png'){
+        if (file_exists($userPhoto)) {
+            if ($currentPhoto != 'default.png') {
                 @unlink($userPhoto);
             }
         }

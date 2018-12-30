@@ -16,7 +16,7 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = DB::select('CALL sp_consultarTodosEvento()');
-       return view('eventos.index')->with('eventos', $eventos);
+        return view('eventos.index')->with('eventos', $eventos);
     }
 
     /**

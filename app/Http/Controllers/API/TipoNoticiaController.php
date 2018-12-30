@@ -42,8 +42,8 @@ class TipoNoticiaController extends Controller
             'nombre' => 'required|max:60|unique:TipoNoticia',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class TipoNoticiaController extends Controller
             'nombre' => 'required|max:60|unique:TipoNoticia,idTipoNoticia'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

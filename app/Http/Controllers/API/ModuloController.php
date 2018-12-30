@@ -42,8 +42,8 @@ class ModuloController extends Controller
             'nombre' => 'required|max:60|unique:Modulo',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class ModuloController extends Controller
             'nombre' => 'required|max:60|unique:Modulo,idModulo'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

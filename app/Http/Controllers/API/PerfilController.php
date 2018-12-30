@@ -42,8 +42,8 @@ class PerfilController extends Controller
             'nombre' => 'required|max:60|unique:Perfil',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class PerfilController extends Controller
             'nombre' => 'required|max:60|unique:Perfil,idPerfil'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,

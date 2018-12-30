@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class crearUsuario extends Mailable
+class CrearUsuario extends Mailable
 {
     use Queueable, SerializesModels;
 

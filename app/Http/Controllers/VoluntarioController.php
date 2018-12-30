@@ -52,8 +52,8 @@ class VoluntarioController extends Controller
             'idTipoVoluntario' => 'sometimes', // ID not required
             'idProfesion' => 'sometimes'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->run,
             $request->nombre,
             $request->appat,

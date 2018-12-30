@@ -49,14 +49,14 @@ class DocumentoController extends Controller
             'idTipoDocumento' => 'required' // ID not required
         ]);
         $nombreArchivo = '';
-        if($request->archivo){
+        if ($request->archivo) {
             $nombreArchivo = time().'.'.$request->archivo->getClientOriginalExtension();
             $request->archivo->move(public_path('docs/'), $nombreArchivo);
-        }else{
+        } else {
             $nombreArchivo = '';
         }
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion,
             $nombreArchivo,
@@ -101,17 +101,17 @@ class DocumentoController extends Controller
         $nombreArchivo = '';
         $documento = Documento::find($id);
         $currentArchivo = $documento->archivo;
-        if($request->archivo != $currentArchivo){
+        if ($request->archivo != $currentArchivo) {
             $nombreArchivo = time().'.'.$request->archivo->getClientOriginalExtension();
             $request->archivo->move(public_path('docs/'), $nombreArchivo);
             $DocumentoArchivo = public_path('docs/').$currentArchivo;
-            if(file_exists($DocumentoArchivo)){
+            if (file_exists($DocumentoArchivo)) {
                 @unlink($DocumentoArchivo);
             }
-        }else{
+        } else {
             $nombreArchivo = $currentArchivo;
         }
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,
@@ -137,7 +137,7 @@ class DocumentoController extends Controller
         $documento = Documento::find($id);
         $currentArchivo = $documento->archivo;
         $documentoArchivo = public_path('docs/').$currentArchivo;
-        if(file_exists($documentoArchivo)){
+        if (file_exists($documentoArchivo)) {
             @unlink($documentoArchivo);
         }
         DB::delete('CALL sp_eliminarDocumento(?)', [$id]);

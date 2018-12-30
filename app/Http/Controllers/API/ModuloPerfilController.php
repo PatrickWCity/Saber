@@ -44,8 +44,8 @@ class ModuloPerfilController extends Controller
             'idPerfil' => 'required',
             'idModulo' => 'required'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             
             $request->idModulo,
             $request->idPerfil
@@ -64,8 +64,8 @@ class ModuloPerfilController extends Controller
     {
         return $data = [
             'Perfiles'          => DB::select('CALL sp_consultarTodosPerfil()'),
-            'ModulosSinPerfil' => DB::select('CALL sp_consultarModulosSinPerfil(?)',[$id]),
-            'ModulosDePerfil'  => DB::select('CALL sp_consultarModulosDePerfil(?)',[$id])
+            'ModulosSinPerfil' => DB::select('CALL sp_consultarModulosSinPerfil(?)', [$id]),
+            'ModulosDePerfil'  => DB::select('CALL sp_consultarModulosDePerfil(?)', [$id])
         ];
     }
 
@@ -82,8 +82,8 @@ class ModuloPerfilController extends Controller
             'idPerfil' => 'required',
             'idModulo' => 'required'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->idModulo,
             $request->idPerfil
         ];

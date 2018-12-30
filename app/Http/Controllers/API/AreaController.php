@@ -42,8 +42,8 @@ class AreaController extends Controller
             'nombre' => 'required|max:191|unique:Area',
             'descripcion' => 'max:255'
         ]);
-        $values = 
-        [ 
+        $values =
+        [
             $request->nombre,
             $request->descripcion
         ];
@@ -79,7 +79,7 @@ class AreaController extends Controller
             'nombre' => 'required|max:191|unique:Area,idArea'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values = 
+        $values =
         [
             $id,
             $request->nombre,
