@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +28,7 @@ class DeshabilitarController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarUsuariosHabilitados()');
+        return User::whereNotNull('email_verified_at')->where('estadoAcceso', null)->get();
     }
 
     /**
@@ -65,7 +67,12 @@ class DeshabilitarController extends Controller
             'idUsuario' => 'required'
         ]);
     
-        DB::update('CALL sp_deshabilitarAcceso(?)', [$id]);
+        $usuario = User::find($id);
+
+        $usuario->email_verified_at = null;
+        $usuario->estadoAcceso = Carbon::now();
+
+        $usuario->save();
         
         return ['message' => 'El Usuario fue Deshabilitado con Exito!'];
     }
@@ -78,7 +85,9 @@ class DeshabilitarController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarUsuario(?)', [$id]);
+        $usuario = Usuario::find($id);
+
+        $usuario->delete();
         return ['message' => 'El Usuario fue Eliminado con Exito!'];
     }
 }

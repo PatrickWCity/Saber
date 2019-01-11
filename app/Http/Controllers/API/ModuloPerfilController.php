@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\Perfil;
+use App\Modulo;
+use App\ModuloPerfil;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,9 +30,9 @@ class ModuloPerfilController extends Controller
     public function index()
     {
         return $data = [
-            'Perfiles'          => DB::select('CALL sp_consultarTodosPerfil()'),
-            'ModulosSinPerfil' => DB::select('CALL sp_consultarModulosSinPerfil(0)'),
-            'ModulosDePerfil'  => DB::select('CALL sp_consultarModulosDePerfil(0)')
+            'Perfiles'         => Perfil::all(),
+            'ModulosSinPerfil' => DB::table('Modulo')->whereNotIn('idModulo', function($q){$q->select('idModulo')->from('ModuloPerfil')->where('idPerfil', 0);})->get(),
+            'ModulosDePerfil'  => DB::table('Modulo')->join('ModuloPerfil', 'Modulo.idModulo', '=', 'ModuloPerfil.idModulo')->where('idPerfil', 0)->get()
         ];
     }
 
@@ -44,13 +48,16 @@ class ModuloPerfilController extends Controller
             'idPerfil' => 'required',
             'idModulo' => 'required'
         ]);
-        $values =
-        [
-            
-            $request->idModulo,
-            $request->idPerfil
-        ];
-        DB::insert('CALL sp_asignarModuloAPerfil(?,?)', $values);
+
+        $moduloperfil = new ModuloPerfil;
+
+        $moduloperfil->idPerfil = $request->idPerfil;
+        $moduloperfil->idModulo = $request->idModulo;
+        $moduloperfil->fecha = Carbon::now();
+        $moduloperfil->estado = 1;
+        
+        $moduloperfil->save();
+
         return ['message' => 'El Modulo fue Asignado al Perfil con Exito!'];
     }
 
@@ -63,9 +70,9 @@ class ModuloPerfilController extends Controller
     public function show($id)
     {
         return $data = [
-            'Perfiles'          => DB::select('CALL sp_consultarTodosPerfil()'),
-            'ModulosSinPerfil' => DB::select('CALL sp_consultarModulosSinPerfil(?)', [$id]),
-            'ModulosDePerfil'  => DB::select('CALL sp_consultarModulosDePerfil(?)', [$id])
+            'Perfiles'         => Perfil::all(),
+            'ModulosSinPerfil' => DB::table('Modulo')->whereNotIn('idModulo', function($q) use ($id) {$q->select('idModulo')->from('ModuloPerfil')->where('idPerfil', $id);})->get(),
+            'ModulosDePerfil'  => DB::table('Modulo')->join('ModuloPerfil', 'Modulo.idModulo', '=', 'ModuloPerfil.idModulo')->where('idPerfil', $id)->get()
         ];
     }
 
@@ -82,12 +89,10 @@ class ModuloPerfilController extends Controller
             'idPerfil' => 'required',
             'idModulo' => 'required'
         ]);
-        $values =
-        [
-            $request->idModulo,
-            $request->idPerfil
-        ];
-        DB::insert('CALL sp_desasignarModuloDePerfil(?,?)', $values);
+
+        $moduloperfil = ModuloPerfil::where('idPerfil',$request->idPerfil)->where('idModulo',$request->idModulo);
+        $moduloperfil->delete();
+
         return ['message' => 'El Modulo fue Desasignado del Perfil con Exito!'];
     }
 

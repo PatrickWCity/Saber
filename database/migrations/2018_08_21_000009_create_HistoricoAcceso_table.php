@@ -20,8 +20,8 @@ class CreateHistoricoAccesoTable extends Migration
             $table->unsignedInteger('idUsuario')->comment('Identificador de Usuario');
             
             $table->foreign('idUsuario')
-                  ->references('idUsuario')->on('Usuario');
-                  //->onDelete('cascade');
+                  ->references('idUsuario')->on('Usuario')
+                  ->onDelete('cascade');
         });
     }
 

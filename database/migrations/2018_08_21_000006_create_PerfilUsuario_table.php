@@ -24,8 +24,8 @@ class CreatePerfilUsuarioTable extends Migration
                   ->references('idPerfil')->on('Perfil');
                   //->onDelete('cascade');
             $table->foreign('idUsuario')
-                  ->references('idUsuario')->on('Usuario');
-                  //->onDelete('cascade');
+                  ->references('idUsuario')->on('Usuario')
+                  ->onDelete('cascade');
         });
     }
 

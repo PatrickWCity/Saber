@@ -28,8 +28,8 @@ class CreateAccesoTable extends Migration
             $table->unsignedInteger('idUsuario')->unique()->comment('Identificador del Usuario');
 
             $table->foreign('idUsuario')
-                  ->references('idUsuario')->on('Usuario');
-                  //->onDelete('cascade');
+                  ->references('idUsuario')->on('Usuario')
+                  ->onDelete('cascade');
         });
     }
 

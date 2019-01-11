@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\Perfil;
+use App\Usuario;
+use App\PerfilUsuario;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,9 +35,9 @@ class PerfilUsuarioController extends Controller
         //    $id = 0; // FIX if there's no Perfil then Return empty Perfil statement could be done on the client side but reuires uic fix on the api controller
         //}
         return $data = [
-            'Perfiles'          => DB::select('CALL sp_consultarTodosPerfil()'),
-            'UsuariosSinPerfil' => DB::select('CALL sp_consultarUsuariosSinPerfil(0)'),
-            'UsuariosDePerfil'  => DB::select('CALL sp_consultarUsuariosDePerfil(0)')
+            'Perfiles'          => Perfil::all(),
+            'UsuariosSinPerfil' => DB::table('Usuario')->whereNotIn('idUsuario', function($q){$q->select('idUsuario')->from('PerfilUsuario')->where('idPerfil', 0);})->get(),
+            'UsuariosDePerfil'  => DB::table('Usuario')->join('PerfilUsuario', 'Usuario.idUsuario', '=', 'PerfilUsuario.idUsuario')->where('idPerfil', 0)->get()
         ];
     }
 
@@ -49,12 +53,14 @@ class PerfilUsuarioController extends Controller
             'idPerfil' => 'required',
             'idUsuario' => 'required'
         ]);
-        $values =
-        [
-            $request->idUsuario,
-            $request->idPerfil
-        ];
-        DB::insert('CALL sp_asignarUsuarioAPerfil(?,?)', $values);
+        $perfilusuario = new PerfilUsuario;
+
+        $perfilusuario->idUsuario = $request->idUsuario;
+        $perfilusuario->idPerfil = $request->idPerfil;
+        $perfilusuario->fecha = Carbon::now();
+        $perfilusuario->estado = 1;
+        
+        $perfilusuario->save();
 
         //return redirect('/usuario')->with('success', 'Usuario Ingresado');
         //return $request->all();
@@ -70,9 +76,9 @@ class PerfilUsuarioController extends Controller
     public function show($id)
     {
         return $data = [
-            'Perfiles'          => DB::select('CALL sp_consultarTodosPerfil()'),
-            'UsuariosSinPerfil' => DB::select('CALL sp_consultarUsuariosSinPerfil(?)', [$id]),
-            'UsuariosDePerfil'  => DB::select('CALL sp_consultarUsuariosDePerfil(?)', [$id])
+            'Perfiles'          => Perfil::all(),
+            'UsuariosSinPerfil' => DB::table('Usuario')->whereNotIn('idUsuario', function($q) use ($id) {$q->select('idUsuario')->from('PerfilUsuario')->where('idPerfil', $id);})->get(),
+            'UsuariosDePerfil'  => DB::table('Usuario')->join('PerfilUsuario', 'Usuario.idUsuario', '=', 'PerfilUsuario.idUsuario')->where('idPerfil', $id)->get()
         ];
     }
 
@@ -89,12 +95,10 @@ class PerfilUsuarioController extends Controller
             'idPerfil' => 'required',
             'idUsuario' => 'required'
         ]);
-        $values =
-        [
-            $request->idUsuario,
-            $request->idPerfil
-        ];
-        DB::insert('CALL sp_desasignarUsuarioDePerfil(?,?)', $values);
+
+        $perfilusuario = PerfilUsuario::where('idUsuario',$request->idUsuario)->where('idPerfil',$request->idPerfil);
+        $perfilusuario->delete();
+
         return ['message' => 'El Usuario fue Desasignado del Perfil con Exito!'];
     }
 

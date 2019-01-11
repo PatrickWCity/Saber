@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +28,7 @@ class PendienteController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarUsuariosPendientes()');
+        return User::where('email_verified_at', null)->where('estadoAcceso', null)->get();
     }
 
     /**
@@ -64,8 +66,13 @@ class PendienteController extends Controller
         $this->validate($request, [
             'idUsuario' => 'required'
         ]);
-    
-        DB::update('CALL sp_habilitarAcceso(?)', [$id]);
+
+        $usuario = User::find($id);
+
+        $usuario->email_verified_at = Carbon::now();
+        $usuario->estadoAcceso = null;
+
+        $usuario->save();
         
         return ['message' => 'El Usuario fue Habilitado con Exito!'];
     }
@@ -78,7 +85,9 @@ class PendienteController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarUsuario(?)', [$id]);
+        $usuario = Usuario::find($id);
+
+        $usuario->delete();
         return ['message' => 'El Usuario fue Eliminado con Exito!'];
     }
 }

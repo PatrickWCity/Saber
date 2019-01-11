@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\Submodulo;
+use App\Modulo;
+use App\SubmoduloModulo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,9 +30,9 @@ class SubmoduloModuloController extends Controller
     public function index()
     {
         return $data = [
-            'Modulos'          => DB::select('CALL sp_consultarTodosModulo()'),
-            'SubmodulosSinModulo' => DB::select('CALL sp_consultarSubmodulosSinModulo(0)'),
-            'SubmodulosDeModulo'  => DB::select('CALL sp_consultarSubmodulosDeModulo(0)')
+            'Modulos'             => Modulo::all(),
+            'SubmodulosSinModulo' => DB::table('Submodulo')->whereNotIn('idSubmodulo', function($q){$q->select('idSubmodulo')->from('SubmoduloModulo')->where('idModulo', 0);})->get(),
+            'SubmodulosDeModulo'  => DB::table('Submodulo')->join('SubmoduloModulo', 'Submodulo.idSubmodulo', '=', 'SubmoduloModulo.idSubmodulo')->where('idModulo', 0)->get()
         ];
     }
 
@@ -44,12 +48,16 @@ class SubmoduloModuloController extends Controller
             'idModulo' => 'required',
             'idSubmodulo' => 'required'
         ]);
-        $values =
-        [
-            $request->idSubmodulo,
-            $request->idModulo
-        ];
-        DB::insert('CALL sp_asignarSubmoduloAModulo(?,?)', $values);
+
+        $submodulomodulo = new SubmoduloModulo;
+
+        $submodulomodulo->idSubmodulo = $request->idSubmodulo;
+        $submodulomodulo->idModulo = $request->idModulo;
+        $submodulomodulo->fecha = Carbon::now();
+        $submodulomodulo->estado = 1;
+        
+        $submodulomodulo->save();
+
         return ['message' => 'El Submódulo fue Asignado al Módulo con Exito!'];
     }
 
@@ -62,9 +70,9 @@ class SubmoduloModuloController extends Controller
     public function show($id)
     {
         return $data = [
-            'Modulos'          => DB::select('CALL sp_consultarTodosModulo()'),
-            'SubmodulosSinModulo' => DB::select('CALL sp_consultarSubmodulosSinModulo(?)', [$id]),
-            'SubmodulosDeModulo'  => DB::select('CALL sp_consultarSubmodulosDeModulo(?)', [$id])
+            'Modulos'             => Modulo::all(),
+            'SubmodulosSinModulo' => DB::table('Submodulo')->whereNotIn('idSubmodulo', function($q) use ($id) {$q->select('idSubmodulo')->from('SubmoduloModulo')->where('idModulo', $id);})->get(),
+            'SubmodulosDeModulo'  => DB::table('Submodulo')->join('SubmoduloModulo', 'Submodulo.idSubmodulo', '=', 'SubmoduloModulo.idSubmodulo')->where('idModulo', $id)->get()
         ];
     }
 
@@ -81,12 +89,10 @@ class SubmoduloModuloController extends Controller
             'idModulo' => 'required',
             'idSubmodulo' => 'required'
         ]);
-        $values =
-        [
-            $request->idSubmodulo,
-            $request->idModulo
-        ];
-        DB::insert('CALL sp_desasignarSubmoduloDeModulo(?,?)', $values);
+
+        $submodulomodulo = SubmoduloModulo::where('idSubmodulo',$request->idSubmodulo)->where('idModulo',$request->idModulo);
+        $submodulomodulo->delete();
+
         return ['message' => 'El Submódulo fue Desasignado del Módulo con Exito!'];
     }
 

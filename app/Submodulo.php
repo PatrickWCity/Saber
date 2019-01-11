@@ -12,4 +12,8 @@ class Submodulo extends Model
     public $primaryKey = 'idSubmodulo';
     // Timestamps
     public $timestamps = false;
+
+    public function submodulomodulo() {
+        return $this->belongsTo('App\SubmoduloModulo','idSubmoduloModulo');
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +28,7 @@ class HabilitarController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarUsuariosDeshabilitados()');
+        return User::where('email_verified_at', null)->whereNotNull('estadoAcceso')->get();
     }
 
     /**
@@ -65,7 +67,12 @@ class HabilitarController extends Controller
             'idUsuario' => 'required'
         ]);
     
-        DB::update('CALL sp_habilitarAcceso(?)', [$id]);
+        $usuario = User::find($id);
+
+        $usuario->email_verified_at = Carbon::now();
+        $usuario->estadoAcceso = null;
+
+        $usuario->save();
         
         return ['message' => 'El Usuario fue Habilitado con Exito!'];
     }

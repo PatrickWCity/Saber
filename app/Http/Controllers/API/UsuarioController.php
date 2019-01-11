@@ -32,7 +32,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosUsuario()');
+        return Usuario::all();
     }
 
     /**
@@ -52,18 +52,19 @@ class UsuarioController extends Controller
             'direccion' => 'required|max:255',
             'telefono' => 'required|between:9,15|unique:Usuario',
             'email' => 'required|max:255|unique:Usuario'
-            ]);
-        $values =
-        [
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat,
-            $request->direccion,
-            $request->telefono,
-            $request->email
-        ];
-        DB::insert('CALL sp_agregarUsuario(?,?,?,?,?,?,?)', $values);
+        ]);
+
+        $usuario = new Usuario;
+
+        $usuario->run = $request->run;
+        $usuario->nombre = $request->nombre;
+        $usuario->appat = $request->appat;
+        $usuario->apmat = $request->apmat;
+        $usuario->direccion = $request->direccion;
+        $usuario->telefono = $request->telefono;
+        $usuario->email = $request->email;
+
+        $usuario->save();
 
         $username = substr($request->nombre, 0, 3).'.'.substr($request->appat, 0, 3);
         $counter = 0;
@@ -97,9 +98,7 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnUsuario(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -121,18 +120,18 @@ class UsuarioController extends Controller
             'telefono' => 'required|between:9,15|unique:Usuario,idUsuario'.$request->id,
             'email' => 'required|max:255|unique:Usuario,idUsuario'.$request->id
         ]);
-        $values =
-        [
-            $id,
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat,
-            $request->direccion,
-            $request->telefono,
-            $request->email
-        ];
-        DB::update('CALL sp_actualizarUsuario(?,?,?,?,?,?,?,?)', $values);
+
+        $usuario = Usuario::find($id);
+
+        $usuario->run = $request->run;
+        $usuario->nombre = $request->nombre;
+        $usuario->appat = $request->appat;
+        $usuario->apmat = $request->apmat;
+        $usuario->direccion = $request->direccion;
+        $usuario->telefono = $request->telefono;
+        $usuario->email = $request->email;
+
+        $usuario->save();
         
         return ['message' => 'El Usuario fue Actualizado con Exito!'];
     }
@@ -153,7 +152,10 @@ class UsuarioController extends Controller
                 @unlink($userPhoto);
             }
         }
-        DB::delete('CALL sp_eliminarUsuario(?)', [$id]);
+        $usuario = Usuario::find($id);
+
+        $usuario->delete();
+        
         return ['message' => 'El Usuario fue Eliminado con Exito!'];
     }
 }
