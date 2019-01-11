@@ -4,9 +4,8 @@
 <div class="container mt-1 pt-1">
     <h1>Detalles de Evento</h1>
     <hr />
-    @if(count($eventos) > 0)
+    @if($evento)
     <dl class="row">
-        @foreach($eventos as $evento)
         <dt class="col-4">Nombre:</dt>
         <dd class="col-8">{{$evento->nombre}}</dd>
         <dt class="col-4">Descripcion:</dt>
@@ -26,16 +25,15 @@
         <dt class="col-4">Duracion:</dt>
         <dd class="col-8">{{Date::parse($evento->fechaInicio)->timespan($evento->fechaTermino)}}</dd>
         <dt class="col-4">Tipo de Evento:</dt>
-        <dd class="col-8">{{$evento->TipoEvento}}</dd>
+        <dd class="col-8">{{$evento->tipoevento->nombre}}</dd>
         <dt class="col-4">Sede:</dt>
-        <dd class="col-8">{{$evento->Sede}}</dd>
+        <dd class="col-8">{{$evento->sede->nombre}}</dd>
         <dt class="col-4">Area:</dt>
-        <dd class="col-8">{{$evento->Area}}</dd>
+        <dd class="col-8">{{$evento->area->nombre}}</dd>
         <dt class="col-4">Expositor:</dt>
-        <dd class="col-8">{{$evento->Expositor}}</dd>
+        <dd class="col-8">{{$evento->expositor->nombre}} {{$evento->expositor->appat}} {{$evento->expositor->apmat }}</dd>
     </dl>
     <a href="/eventos" class="btn btn-dark" title="Volver">Volver</a>
-    @endforeach
     @else
         <p>Evento no encontrado.</p>
     @endif

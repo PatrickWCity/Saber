@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Evento;
+use App\TipoEvento;
 use DB;
 
 class TipoEventoController extends Controller
@@ -15,7 +16,7 @@ class TipoEventoController extends Controller
      */
     public function index()
     {
-        $eventos = DB::select('CALL sp_consultarTodosTipoEvento()');
+        $eventos = TipoEvento::all();
         return view('tipoeventos.index')->with('eventos', $eventos);
     }
 
@@ -48,7 +49,8 @@ class TipoEventoController extends Controller
      */
     public function show($id)
     {
-        $eventos = DB::select('CALL sp_consultarTodosEventoPorTipoEvento(?, null)', [$id]);
+        $tipo = TipoEvento::where('idTipoEvento', $id)->first();
+        $eventos = $tipo->eventos()->get();
         return view('tipoeventos.show')->with('eventos', $eventos);
     }
 

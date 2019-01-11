@@ -12,4 +12,8 @@ class Area extends Model
     public $primaryKey = 'idArea';
     // Timestamps
     public $timestamps = false;
+
+    public function eventos() {
+        return $this->hasMany('App\Evento','idEvento');
+    }
 }

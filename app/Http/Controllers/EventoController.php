@@ -15,7 +15,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = DB::select('CALL sp_consultarTodosEvento()');
+        $eventos = Evento::with(['tipoevento','sede','area','expositor'])->get();
         return view('eventos.index')->with('eventos', $eventos);
     }
 
@@ -48,8 +48,8 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        $eventos = DB::select('CALL sp_consultarUnEvento(?, null)', [$id]);
-        return view('eventos.show')->with('eventos', $eventos);
+        $evento = Evento::find($id);
+        return view('eventos.show')->with('evento', $evento);
     }
 
     /**

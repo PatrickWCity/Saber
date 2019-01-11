@@ -30,7 +30,7 @@
                 @else
                 <td class="align-middle">{{Date::parse($noticia->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 @endif
-                <td class="align-middle">{{$noticia->TipoNoticia}}</td>
+                <td class="align-middle">{{$noticia->tiponoticia->nombre}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">
                     <a class="btn btn-primary btn-block" href="/noticias/{{$noticia->idNoticia}}" role="button" title="Ver Noticia {{$noticia->idNoticia}}">Ver</a>

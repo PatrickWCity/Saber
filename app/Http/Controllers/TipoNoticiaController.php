@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Noticia;
+use App\TipoNoticia;
 use DB;
 
 class TipoNoticiaController extends Controller
@@ -15,7 +16,7 @@ class TipoNoticiaController extends Controller
      */
     public function index()
     {
-        $noticias = DB::select('CALL sp_consultarTodosTipoNoticia()');
+        $noticias = TipoNoticia::all();
         return view('tiponoticias.index')->with('noticias', $noticias);
     }
 
@@ -48,7 +49,8 @@ class TipoNoticiaController extends Controller
      */
     public function show($id)
     {
-        $noticias = DB::select('CALL sp_consultarTodosNoticiaPorTipoNoticia(?, null)', [$id]);
+        $tipo = TipoNoticia::where('idTipoNoticia', $id)->first();
+        $noticias = $tipo->noticias()->get();
         return view('tiponoticias.show')->with('noticias', $noticias);
     }
 

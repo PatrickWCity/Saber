@@ -12,4 +12,8 @@ class Expositor extends Model
     public $primaryKey = 'idExpositor';
     // Timestamps
     public $timestamps = false;
+
+    public function eventos() {
+        return $this->hasMany('App\Evento','idEvento');
+    }
 }

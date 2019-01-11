@@ -12,4 +12,8 @@ class Noticia extends Model
     public $primaryKey = 'idNoticia';
     // Timestamps
     public $timestamps = false;
+
+    public function tiponoticia() {
+        return $this->belongsTo('App\TipoNoticia','idTipoNoticia');
+    }
 }

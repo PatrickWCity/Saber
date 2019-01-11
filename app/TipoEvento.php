@@ -12,4 +12,8 @@ class TipoEvento extends Model
     public $primaryKey = 'idTipoEvento';
     // Timestamps
     public $timestamps = false;
+
+    public function eventos() {
+        return $this->hasMany('App\Evento','idEvento');
+    }
 }

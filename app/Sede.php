@@ -12,4 +12,8 @@ class Sede extends Model
     public $primaryKey = 'idSede';
     // Timestamps
     public $timestamps = false;
+
+    public function eventos() {
+        return $this->hasMany('App\Evento','idEvento');
+    }
 }

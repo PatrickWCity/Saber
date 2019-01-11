@@ -27,10 +27,10 @@
                 <td class="align-middle">{{$evento->descripcion}}</td>
                 <td class="align-middle">{{Date::parse($evento->fechaInicio)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 <td class="align-middle">{{Date::parse($evento->fechaTermino)->format('l, j \d\e F \d\e Y G:i')}}</td>
-                <td class="align-middle">{{$evento->TipoEvento}}</td>
-                <td class="align-middle">{{$evento->Sede}}</td>
-                <td class="align-middle">{{$evento->Area}}</td>
-                <td class="align-middle">{{$evento->Expositor}}</td>
+                <td class="align-middle">{{$evento->tipoevento->nombre}}</td>
+                <td class="align-middle">{{$evento->sede->nombre}}</td>
+                <td class="align-middle">{{$evento->area->nombre}}</td>
+                <td class="align-middle">{{$evento->expositor->nombre}} {{$evento->expositor->appat}} {{$evento->expositor->apmat}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">
                     <a class="btn btn-primary btn-block" href="/eventos/{{$evento->idEvento}}" role="button" title="Ver Evento {{$evento->idEvento}}">Ver Evento</a>

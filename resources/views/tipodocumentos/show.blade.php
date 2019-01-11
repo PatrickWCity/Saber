@@ -30,7 +30,7 @@
                 @else
                 <td class="align-middle">{{Date::parse($documento->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</td>
                 @endif
-                <td class="align-middle">{{$documento->TipoDocumento}}</td>
+                <td class="align-middle">{{$documento->tipodocumento->nombre}}</td>
                 <td class="align-middle">
                 <div class="btn-group btn-block" role="group">
                     <a class="btn btn-primary btn-block" href="/documentos/{{$documento->idDocumento}}" role="button" title="Ver Documento {{$documento->idDocumento}}">Ver Documento</a>

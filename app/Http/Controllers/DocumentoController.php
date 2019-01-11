@@ -15,7 +15,7 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        $documentos = DB::select('CALL sp_consultarTodosDocumento()');
+        $documentos = Documento::with('tipodocumento')->get();
         return view('documentos.index')->with('documentos', $documentos);
     }
 
@@ -48,8 +48,8 @@ class DocumentoController extends Controller
      */
     public function show($id)
     {
-        $documentos = DB::select('CALL sp_consultarUnDocumento(?, null)', [$id]);
-        return view('documentos.show')->with('documentos', $documentos);
+        $documento = Documento::find($id);
+        return view('documentos.show')->with('documento', $documento);
     }
 
     /**

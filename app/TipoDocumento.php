@@ -12,4 +12,8 @@ class TipoDocumento extends Model
     public $primaryKey = 'idTipoDocumento';
     // Timestamps
     public $timestamps = false;
+
+    public function documentos() {
+        return $this->hasMany('App\Documento','idDocumento');
+    }
 }

@@ -12,4 +12,8 @@ class Documento extends Model
     public $primaryKey = 'idDocumento';
     // Timestamps
     public $timestamps = false;
+
+    public function tipodocumento() {
+        return $this->belongsTo('App\TipoDocumento','idTipoDocumento');
+    }
 }

@@ -12,4 +12,8 @@ class TipoNoticia extends Model
     public $primaryKey = 'idTipoNoticia';
     // Timestamps
     public $timestamps = false;
+
+    public function noticias() {
+        return $this->hasMany('App\Noticia','idNoticia');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Documento;
+use App\TipoDocumento;
 use DB;
 
 class TipoDocumentoController extends Controller
@@ -15,7 +16,7 @@ class TipoDocumentoController extends Controller
      */
     public function index()
     {
-        $documentos = DB::select('CALL sp_consultarTodosTipoDocumento()');
+        $documentos = TipoDocumento::all();
         return view('tipodocumentos.index')->with('documentos', $documentos);
     }
 
@@ -48,7 +49,8 @@ class TipoDocumentoController extends Controller
      */
     public function show($id)
     {
-        $documentos = DB::select('CALL sp_consultarTodosDocumentoPorTipoDocumento(?, null)', [$id]);
+        $tipo = TipoDocumento::where('idTipoDocumento', $id)->first();
+        $documentos = $tipo->documentos()->get();
         return view('tipodocumentos.show')->with('documentos', $documentos);
     }
 

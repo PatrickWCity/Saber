@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TipoVoluntario;
+use App\Voluntario;
 use App\Profesion;
 use Carbon\Carbon;
 use DB;
@@ -52,20 +53,21 @@ class VoluntarioController extends Controller
             'idTipoVoluntario' => 'sometimes', // ID not required
             'idProfesion' => 'sometimes'
         ]);
-        $values =
-        [
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat,
-            $request->direccion,
-            $request->telefono,
-            $request->email,
-            Carbon::now(),
-            $request->idTipoVoluntario,
-            $request->idProfesion
-        ];
-        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?,?)', $values);
+
+        $voluntario = new Voluntario;
+
+        $voluntario->run = $request->run;
+        $voluntario->nombre = $request->nombre;
+        $voluntario->appat = $request->appat;
+        $voluntario->apmat = $request->apmat;
+        $voluntario->direccion = $request->direccion;
+        $voluntario->telefono = $request->telefono;
+        $voluntario->email = $request->email;
+        $voluntario->fechaCreada = Carbon::now();
+        $voluntario->idTipoVoluntario = $request->idTipoVoluntario;
+        $voluntario->idProfesion = $request->idProfesion;
+        
+        $voluntario->save();
 
         return redirect('/voluntarios')->with('success', '¡Voluntario a sido Ingresado con Exito!');
     }

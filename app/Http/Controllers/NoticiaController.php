@@ -15,7 +15,7 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        $noticias = DB::select('CALL sp_consultarTodosNoticia()');
+        $noticias = Noticia::with('tiponoticia')->get();
         return view('noticias.index')->with('noticias', $noticias);
     }
 
@@ -48,8 +48,8 @@ class NoticiaController extends Controller
      */
     public function show($id)
     {
-        $noticias = DB::select('CALL sp_consultarUnNoticia(?, null)', [$id]);
-        return view('noticias.show')->with('noticias', $noticias);
+        $noticia = Noticia::find($id);
+        return view('noticias.show')->with('noticia', $noticia);
     }
 
     /**

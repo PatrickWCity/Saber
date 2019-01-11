@@ -4,9 +4,8 @@
 <div class="container mt-1 pt-1">
     <h1>Detalles de Documento</h1>
     <hr />
-    @if(count($documentos) > 0)
+    @if($documento)
     <dl class="row">
-        @foreach($documentos as $documento)
         <dt class="col-4">Nombre:</dt>
         <dd class="col-8">{{$documento->nombre}}</dd>
         <dt class="col-4">Descripcion:</dt>
@@ -28,10 +27,9 @@
         <dd class="col-8">{{Date::parse($documento->fechaActualizada)->format('l, j \d\e F \d\e Y G:i')}}</dd>
         @endif
         <dt class="col-4">Tipo de Documento:</dt>
-        <dd class="col-8">{{$documento->TipoDocumento}}</dd>
+        <dd class="col-8">{{$documento->tipodocumento->nombre}}</dd>
     </dl>
     <a href="/documentos" class="btn btn-dark" title="Volver">Volver</a>
-    @endforeach
     @else
         <p>Documento no encontrado.</p>
     @endif
