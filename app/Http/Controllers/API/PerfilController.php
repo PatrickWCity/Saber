@@ -26,7 +26,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosPerfil()');
+        return Perfil::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class PerfilController extends Controller
             'nombre' => 'required|max:60|unique:Perfil',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarPerfil(?,?)', $values);
+
+        $perfil = new Perfil;
+
+        $perfil->nombre = $request->nombre;
+        $perfil->descripcion = $request->descripcion;
+        
+        $perfil->save();
 
         return ['message' => 'El Perfil fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class PerfilController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnPerfil(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class PerfilController extends Controller
             'nombre' => 'required|max:60|unique:Perfil,idPerfil'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarPerfil(?,?,?)', $values);
+
+        $perfil = Perfil::find($id);
+
+        $perfil->nombre = $request->nombre;
+        $perfil->descripcion = $request->descripcion;
+
+        $perfil->save();
         
         return ['message' => 'El Perfil fue Actualizado con Exito!'];
     }
@@ -98,7 +97,10 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarPerfil(?)', [$id]);
+        $perfil = Perfil::find($id);
+
+        $perfil->delete();
+
         return ['message' => 'El Perfil fue Eliminado con Exito!'];
     }
 }

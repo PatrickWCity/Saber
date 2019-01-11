@@ -26,7 +26,7 @@ class ProfesionController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosProfesion()');
+        return Profesion::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class ProfesionController extends Controller
             'nombre' => 'required|max:60|unique:Profesion',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarProfesion(?,?)', $values);
+
+        $profesion = new Profesion;
+
+        $profesion->nombre = $request->nombre;
+        $profesion->descripcion = $request->descripcion;
+        
+        $profesion->save();
 
         return ['message' => 'La Profesión fue Ingresada con Exito!'];
     }
@@ -60,9 +61,7 @@ class ProfesionController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnProfesion(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class ProfesionController extends Controller
             'nombre' => 'required|max:60|unique:Profesion,idProfesion'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarProfesion(?,?,?)', $values);
+
+        $profesion = Profesion::find($id);
+
+        $profesion->nombre = $request->nombre;
+        $profesion->descripcion = $request->descripcion;
+
+        $profesion->save();
         
         return ['message' => 'La Profesión fue Actualizada con Exito!'];
     }
@@ -98,7 +97,10 @@ class ProfesionController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarProfesion(?)', [$id]);
+        $profesion = Profesion::find($id);
+
+        $profesion->delete();
+
         return ['message' => 'La Profesión fue Eliminada con Exito!'];
     }
 }

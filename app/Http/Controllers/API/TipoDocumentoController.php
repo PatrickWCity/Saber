@@ -26,7 +26,7 @@ class TipoDocumentoController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosTipoDocumento()');
+        return TipoDocumento::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class TipoDocumentoController extends Controller
             'nombre' => 'required|max:60|unique:TipoDocumento',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarTipoDocumento(?,?)', $values);
+
+        $tipodocumento = new TipoDocumento;
+
+        $tipodocumento->nombre = $request->nombre;
+        $tipodocumento->descripcion = $request->descripcion;
+        
+        $tipodocumento->save();
 
         return ['message' => 'El Tipo de Documento fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class TipoDocumentoController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnTipoDocumento(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class TipoDocumentoController extends Controller
             'nombre' => 'required|max:60|unique:TipoDocumento,idTipoDocumento'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarTipoDocumento(?,?,?)', $values);
+
+        $tipodocumento = TipoDocumento::find($id);
+
+        $tipodocumento->nombre = $request->nombre;
+        $tipodocumento->descripcion = $request->descripcion;
+
+        $tipodocumento->save();
         
         return ['message' => 'El Tipo de Documento fue Actualizado con Exito!'];
     }
@@ -98,7 +97,10 @@ class TipoDocumentoController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarTipoDocumento(?)', [$id]);
+        $tipodocumento = TipoDocumento::find($id);
+
+        $tipodocumento->delete();
+
         return ['message' => 'El Tipo de Documento fue Eliminado con Exito!'];
     }
 }

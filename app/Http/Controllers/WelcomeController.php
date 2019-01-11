@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Noticia;
 use DB;
 
 class WelcomeController extends Controller
@@ -14,7 +15,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        $noticias = DB::select('CALL sp_consultarUltimasNoticia()');
+        $noticias = Noticia::orderBy('idNoticia', 'desc')->take(4)->get();
         return view('welcome')->with('noticias', $noticias);
     }
     public function quienessomos()

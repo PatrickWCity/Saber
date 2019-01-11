@@ -26,7 +26,7 @@ class TipoNoticiaController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosTipoNoticia()');
+        return TipoNoticia::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class TipoNoticiaController extends Controller
             'nombre' => 'required|max:60|unique:TipoNoticia',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarTipoNoticia(?,?)', $values);
+
+        $tiponoticia = new TipoNoticia;
+
+        $tiponoticia->nombre = $request->nombre;
+        $tiponoticia->descripcion = $request->descripcion;
+        
+        $tiponoticia->save();
 
         return ['message' => 'El Tipo de Noticia fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class TipoNoticiaController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnTipoNoticia(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class TipoNoticiaController extends Controller
             'nombre' => 'required|max:60|unique:TipoNoticia,idTipoNoticia'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarTipoNoticia(?,?,?)', $values);
+
+        $tiponoticia = TipoNoticia::find($id);
+
+        $tiponoticia->nombre = $request->nombre;
+        $tiponoticia->descripcion = $request->descripcion;
+
+        $tiponoticia->save();
         
         return ['message' => 'El Tipo de Noticia fue Actualizado con Exito!'];
     }
@@ -98,7 +97,10 @@ class TipoNoticiaController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarTipoNoticia(?)', [$id]);
+        $tiponoticia = TipoNoticia::find($id);
+
+        $tiponoticia->delete();
+
         return ['message' => 'El Tipo de Noticia fue Eliminado con Exito!'];
     }
 }

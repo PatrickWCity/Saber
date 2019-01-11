@@ -26,7 +26,7 @@ class TipoVoluntarioController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosTipoVoluntario()');
+        return TipoVoluntario::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class TipoVoluntarioController extends Controller
             'nombre' => 'required|max:60|unique:TipoVoluntario',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarTipoVoluntario(?,?)', $values);
+
+        $tipovoluntario = new TipoVoluntario;
+
+        $tipovoluntario->nombre = $request->nombre;
+        $tipovoluntario->descripcion = $request->descripcion;
+        
+        $tipovoluntario->save();
 
         return ['message' => 'El Tipo de Voluntario fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class TipoVoluntarioController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnTipoVoluntario(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class TipoVoluntarioController extends Controller
             'nombre' => 'required|max:60|unique:TipoVoluntario,idTipoVoluntario'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarTipoVoluntario(?,?,?)', $values);
+
+        $tipovoluntario = TipoVoluntario::find($id);
+
+        $tipovoluntario->nombre = $request->nombre;
+        $tipovoluntario->descripcion = $request->descripcion;
+
+        $tipovoluntario->save();
         
         return ['message' => 'El Tipo de Voluntario fue Actualizado con Exito!'];
     }
@@ -98,7 +97,10 @@ class TipoVoluntarioController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarTipoVoluntario(?)', [$id]);
+        $tipovoluntario = TipoVoluntario::find($id);
+
+        $tipovoluntario->delete();
+
         return ['message' => 'El Tipo de Voluntario fue Eliminado con Exito!'];
     }
 }

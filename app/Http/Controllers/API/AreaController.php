@@ -26,7 +26,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosArea()');
+        return Area::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class AreaController extends Controller
             'nombre' => 'required|max:191|unique:Area',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarArea(?,?)', $values);
+        
+        $area = new Area;
+
+        $area->nombre = $request->nombre;
+        $area->descripcion = $request->descripcion;
+        
+        $area->save();
 
         return ['message' => 'La Area fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class AreaController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnArea(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class AreaController extends Controller
             'nombre' => 'required|max:191|unique:Area,idArea'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarArea(?,?,?)', $values);
+
+        $area = Area::find($id);
+
+        $area->nombre = $request->nombre;
+        $area->descripcion = $request->descripcion;
+
+        $area->save();
         
         return ['message' => 'La Area fue Actualizado con Exito!'];
     }
@@ -98,7 +97,10 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarArea(?)', [$id]);
+        $area = Area::find($id);
+
+        $area->delete();
+        
         return ['message' => 'La Area fue Eliminado con Exito!'];
     }
 }

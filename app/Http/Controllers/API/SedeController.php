@@ -26,7 +26,7 @@ class SedeController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosSede()');
+        return Sede::all();
     }
 
     /**
@@ -43,13 +43,14 @@ class SedeController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Sede'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion,
-            $request->ubicacion
-        ];
-        DB::insert('CALL sp_agregarSede(?,?,?)', $values);
+        
+        $sede = new Sede;
+
+        $sede->nombre = $request->nombre;
+        $sede->descripcion = $request->descripcion;
+        $sede->ubicacion = $request->ubicacion;
+
+        $sede->save();
 
         return ['message' => 'La Sede fue Ingresado con Exito!'];
     }
@@ -62,9 +63,7 @@ class SedeController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnSede(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -82,14 +81,14 @@ class SedeController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Sede,idSede'.$request->id,
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion,
-            $request->ubicacion
-        ];
-        DB::update('CALL sp_actualizarSede(?,?,?,?)', $values);
+
+        $sede = Sede::find($id);
+
+        $sede->nombre = $request->nombre;
+        $sede->descripcion = $request->descripcion;
+        $sede->ubicacion = $request->ubicacion;
+
+        $sede->save();
         
         return ['message' => 'La Sede fue Actualizado con Exito!'];
     }
@@ -102,7 +101,10 @@ class SedeController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarSede(?)', [$id]);
+        $sede = Sede::find($id);
+
+        $sede->delete();
+
         return ['message' => 'La Sede fue Eliminado con Exito!'];
     }
 }

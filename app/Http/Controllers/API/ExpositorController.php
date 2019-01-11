@@ -26,7 +26,7 @@ class ExpositorController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosExpositor()');
+        return Expositor::all();
     }
 
     /**
@@ -44,14 +44,15 @@ class ExpositorController extends Controller
             'appat' => 'min:3|required|max:60',
             'apmat' => 'max:60'
         ]);
-        $values =
-        [
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat
-        ];
-        DB::insert('CALL sp_agregarExpositor(?,?,?,?)', $values);
+
+        $expositor = new Expositor;
+
+        $expositor->run = $request->run;
+        $expositor->nombre = $request->nombre;
+        $expositor->appat = $request->appat;
+        $expositor->apmat = $request->apmat;
+        
+        $expositor->save();
 
         //return redirect('/usuario')->with('success', 'Expositor Ingresado');
         //return $request->all();
@@ -66,9 +67,7 @@ class ExpositorController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnExpositor(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -87,15 +86,15 @@ class ExpositorController extends Controller
             'appat' => 'required|max:60',
             'apmat' => 'max:60'
         ]);
-        $values =
-        [
-            $id,
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat
-        ];
-        DB::update('CALL sp_actualizarExpositor(?,?,?,?,?)', $values);
+
+        $expositor = Expositor::find($id);
+
+        $expositor->run = $request->run;
+        $expositor->nombre = $request->nombre;
+        $expositor->appat = $request->appat;
+        $expositor->apmat = $request->apmat;
+        
+        $expositor->save();
         
         return ['message' => 'El Expositor fue Actualizado con Exito!'];
     }
@@ -108,7 +107,10 @@ class ExpositorController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarExpositor(?)', [$id]);
+        $expositor = Expositor::find($id);
+
+        $expositor->delete();
+
         return ['message' => 'El Expositor fue Eliminado con Exito!'];
     }
 }

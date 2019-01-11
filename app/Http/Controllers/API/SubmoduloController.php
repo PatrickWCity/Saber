@@ -27,7 +27,7 @@ class SubmoduloController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosSubmodulo()');
+        return Submodulo::all();
     }
 
     /**
@@ -44,13 +44,14 @@ class SubmoduloController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Submodulo'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion,
-            $request->ubicacion
-        ];
-        DB::insert('CALL sp_agregarSubmodulo(?,?,?)', $values);
+
+        $submodulo = new Submodulo;
+
+        $submodulo->nombre = $request->nombre;
+        $submodulo->descripcion = $request->descripcion;
+        $submodulo->ubicacion = $request->ubicacion;
+
+        $submodulo->save();
 
         return ['message' => 'El Submódulo fue Ingresado con Exito!'];
     }
@@ -63,9 +64,7 @@ class SubmoduloController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnSubmodulo(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -83,14 +82,14 @@ class SubmoduloController extends Controller
             'descripcion' => 'max:255',
             'ubicacion' => 'required|max:60|unique:Submodulo,idSubmodulo'.$request->id,
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion,
-            $request->ubicacion
-        ];
-        DB::update('CALL sp_actualizarSubmodulo(?,?,?,?)', $values);
+
+        $submodulo = Submodulo::find($id);
+
+        $submodulo->nombre = $request->nombre;
+        $submodulo->descripcion = $request->descripcion;
+        $submodulo->ubicacion = $request->ubicacion;
+
+        $submodulo->save();
         
         return ['message' => 'El Submódulo fue Actualizado con Exito!'];
     }
@@ -103,7 +102,10 @@ class SubmoduloController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarSubmodulo(?)', [$id]);
+        $submodulo = Submodulo::find($id);
+
+        $submodulo->delete();
+
         return ['message' => 'El Submódulo fue Eliminado con Exito!'];
     }
 }

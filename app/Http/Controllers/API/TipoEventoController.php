@@ -26,7 +26,7 @@ class TipoEventoController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosTipoEvento()');
+        return TipoEvento::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class TipoEventoController extends Controller
             'nombre' => 'required|max:60|unique:TipoEvento',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarTipoEvento(?,?)', $values);
+
+        $tipoevento = new TipoEvento;
+
+        $tipoevento->nombre = $request->nombre;
+        $tipoevento->descripcion = $request->descripcion;
+        
+        $tipoevento->save();
 
         return ['message' => 'El Tipo de Evento fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class TipoEventoController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnTipoEvento(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,12 @@ class TipoEventoController extends Controller
             'nombre' => 'required|max:60|unique:TipoEvento,idTipoEvento'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarTipoEvento(?,?,?)', $values);
+        $tipoevento = TipoEvento::find($id);
+
+        $tipoevento->nombre = $request->nombre;
+        $tipoevento->descripcion = $request->descripcion;
+
+        $tipoevento->save();
         
         return ['message' => 'El Tipo de Evento fue Actualizado con Exito!'];
     }
@@ -98,7 +96,10 @@ class TipoEventoController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarTipoEvento(?)', [$id]);
+        $tipoevento = TipoEvento::find($id);
+
+        $tipoevento->delete();
+
         return ['message' => 'El Tipo de Evento fue Eliminado con Exito!'];
     }
 }

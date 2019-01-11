@@ -26,7 +26,7 @@ class ModuloController extends Controller
      */
     public function index()
     {
-        return DB::select('CALL sp_consultarTodosModulo()');
+        return Modulo::all();
     }
 
     /**
@@ -42,12 +42,13 @@ class ModuloController extends Controller
             'nombre' => 'required|max:60|unique:Modulo',
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::insert('CALL sp_agregarModulo(?,?)', $values);
+        
+        $modulo = new Modulo;
+
+        $modulo->nombre = $request->nombre;
+        $modulo->descripcion = $request->descripcion;
+        
+        $modulo->save();
 
         return ['message' => 'El Módulo fue Ingresado con Exito!'];
     }
@@ -60,9 +61,7 @@ class ModuloController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnModulo(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -79,13 +78,13 @@ class ModuloController extends Controller
             'nombre' => 'required|max:60|unique:Modulo,idModulo'.$request->id,
             'descripcion' => 'max:255'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion
-        ];
-        DB::update('CALL sp_actualizarModulo(?,?,?)', $values);
+
+        $modulo = Modulo::find($id);
+
+        $modulo->nombre = $request->nombre;
+        $modulo->descripcion = $request->descripcion;
+
+        $modulo->save();
         
         return ['message' => 'El Módulo fue Actualizado con Exito!'];
     }
@@ -98,7 +97,10 @@ class ModuloController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarModulo(?)', [$id]);
+        $modulo = Modulo::find($id);
+
+        $modulo->delete();
+
         return ['message' => 'El Módulo fue Eliminado con Exito!'];
     }
 }
