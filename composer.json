@@ -44,7 +44,8 @@
     },
     "scripts": {
         "post-install-cmd": [ 
-            "chmod -R 777 storage"
+            "chmod -R 777 storage", 
+            "php artisan passport:keys"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
