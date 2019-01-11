@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use DB;
 use App\Documento;
+use App\TipoDocumento;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,8 +29,8 @@ class DocumentoController extends Controller
     public function index()
     {
         return $data = [
-            'Documentos'       => DB::select('CALL sp_consultarTodosDocumento()'),
-            'TipoDocumentos'   => DB::select('CALL sp_consultarTodosTipoDocumento()')
+            'Documentos'       => Documento::with('tipodocumento')->get(),
+            'TipoDocumentos'   => TipoDocumento::all()
         ];
     }
 
@@ -55,16 +56,17 @@ class DocumentoController extends Controller
         } else {
             $nombreArchivo = '';
         }
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion,
-            $nombreArchivo,
-            Carbon::now(),
-            null,
-            $request->idTipoDocumento
-        ];
-        DB::insert('CALL sp_agregarDocumento(?,?,?,?,?,?)', $values);
+
+        $documento = new Documento;
+
+        $documento->nombre = $request->nombre;
+        $documento->descripcion = $request->descripcion;
+        $documento->archivo = $nombreArchivo;
+        $documento->fechaCreada = Carbon::now();
+        $documento->fechaActualizada = null;
+        $documento->idTipoDocumento = $request->idTipoDocumento;
+        
+        $documento->save();
 
         return ['message' => 'El Documento fue Ingresado con Exito!'];
     }
@@ -77,9 +79,7 @@ class DocumentoController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnDocumento(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -111,17 +111,17 @@ class DocumentoController extends Controller
         } else {
             $nombreArchivo = $currentArchivo;
         }
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion,
-            $nombreArchivo,
-            $request->fechaCreada,
-            Carbon::now(),
-            $request->idTipoDocumento
-        ];
-        DB::update('CALL sp_actualizarDocumento(?,?,?,?,?,?,?)', $values);
+
+        $documento = Documento::find($id);
+
+        $documento->nombre = $request->nombre;
+        $documento->descripcion = $request->descripcion;
+        $documento->archivo = $nombreArchivo;
+        $documento->fechaCreada = $request->fechaCreada;
+        $documento->fechaActualizada = Carbon::now();
+        $documento->idTipoDocumento = $request->idTipoDocumento;
+        
+        $documento->save();
         
         return ['message' => 'El Documento fue Actualizado con Exito!'];
     }
@@ -140,7 +140,10 @@ class DocumentoController extends Controller
         if (file_exists($documentoArchivo)) {
             @unlink($documentoArchivo);
         }
-        DB::delete('CALL sp_eliminarDocumento(?)', [$id]);
+        $documento = Documento::find($id);
+
+        $documento->delete();
+        
         return ['message' => 'El Documento fue Eliminado con Exito!'];
     }
 }

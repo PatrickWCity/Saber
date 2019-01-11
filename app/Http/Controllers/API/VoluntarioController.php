@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use DB;
 use App\Voluntario;
+use App\TipoVoluntario;
+use App\Profesion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,9 +30,9 @@ class VoluntarioController extends Controller
     public function index()
     {
         return $data = [
-            'Voluntarios'       => DB::select('CALL sp_consultarTodosVoluntario()'),
-            'TipoVoluntarios'   => DB::select('CALL sp_consultarTodosTipoVoluntario()'),
-            'Profesiones'         => DB::select('CALL sp_consultarTodosProfesion()')
+            'Voluntarios'       => Voluntario::with(['tipovoluntario','profesion'])->get(),
+            'TipoVoluntarios'   => TipoVoluntario::all(),
+            'Profesiones'       => Profesion::all()
         ];
     }
 
@@ -54,20 +56,21 @@ class VoluntarioController extends Controller
             'idTipoVoluntario' => 'sometimes', // ID not required
             'idProfesion' => 'sometimes'
         ]);
-        $values =
-        [
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat,
-            $request->direccion,
-            $request->telefono,
-            $request->email,
-            Carbon::now(),
-            $request->idTipoVoluntario,
-            $request->idProfesion
-        ];
-        DB::insert('CALL sp_agregarVoluntario(?,?,?,?,?,?,?,?,?,?)', $values);
+
+        $voluntario = new Voluntario;
+
+        $voluntario->run = $request->run;
+        $voluntario->nombre = $request->nombre;
+        $voluntario->appat = $request->appat;
+        $voluntario->apmat = $request->apmat;
+        $voluntario->direccion = $request->direccion;
+        $voluntario->telefono = $request->telefono;
+        $voluntario->email = $request->email;
+        $voluntario->fechaCreada = Carbon::now();
+        $voluntario->idTipoVoluntario = $request->idTipoVoluntario;
+        $voluntario->idProfesion = $request->idProfesion;
+        
+        $voluntario->save();
 
         return ['message' => 'El Voluntario fue Ingresado con Exito!'];
     }
@@ -80,9 +83,7 @@ class VoluntarioController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnVoluntario(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -104,21 +105,21 @@ class VoluntarioController extends Controller
             'telefono' => 'required|between:9,15|unique:Voluntario,idVoluntario'.$request->id,
             'email' => 'required|max:255|unique:Voluntario,idVoluntario'.$request->id
         ]);
-        $values =
-        [
-            $id,
-            $request->run,
-            $request->nombre,
-            $request->appat,
-            $request->apmat,
-            $request->direccion,
-            $request->telefono,
-            $request->email,
-            $request->fechaCreada,
-            $request->idTipoVoluntario,
-            $request->idProfesion
-        ];
-        DB::update('CALL sp_actualizarVoluntario(?,?,?,?,?,?,?,?,?,?,?)', $values);
+        
+        $voluntario =  Voluntario::find($id);
+
+        $voluntario->run = $request->run;
+        $voluntario->nombre = $request->nombre;
+        $voluntario->appat = $request->appat;
+        $voluntario->apmat = $request->apmat;
+        $voluntario->direccion = $request->direccion;
+        $voluntario->telefono = $request->telefono;
+        $voluntario->email = $request->email;
+        $voluntario->fechaCreada = $request->fechaCreada;
+        $voluntario->idTipoVoluntario = $request->idTipoVoluntario;
+        $voluntario->idProfesion = $request->idProfesion;
+        
+        $voluntario->save();
         
         return ['message' => 'El Voluntario fue Actualizado con Exito!'];
     }
@@ -131,7 +132,10 @@ class VoluntarioController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarVoluntario(?)', [$id]);
+        $voluntario = Voluntario::find($id);
+
+        $voluntario->delete();
+
         return ['message' => 'El Voluntario fue Eliminado con Exito!'];
     }
 }

@@ -66,8 +66,8 @@
                         <td>{{voluntario.telefono}}</td>
                         <td>{{voluntario.email}}</td>
                         <td>{{voluntario.fechaCreada | myDate}}</td>
-                        <td>{{voluntario.TipoVoluntario}}</td>
-                        <td>{{voluntario.Profesion}}</td>
+                        <td>{{voluntario.tipovoluntario.nombre}}</td>
+                        <td>{{voluntario.profesion.nombre}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(voluntario)">

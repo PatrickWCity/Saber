@@ -4,6 +4,10 @@ namespace App\Http\Controllers\API;
 
 use DB;
 use App\Evento;
+use App\TipoEvento;
+use App\Sede;
+use App\Area;
+use App\Expositor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,11 +31,11 @@ class EventoController extends Controller
     public function index()
     {
         return $data = [
-            'Eventos'       => DB::select('CALL sp_consultarTodosEvento()'),
-            'TipoEventos'   => DB::select('CALL sp_consultarTodosTipoEvento()'),
-            'Sedes'         => DB::select('CALL sp_consultarTodosSede()'),
-            'Areas'         => DB::select('CALL sp_consultarTodosArea()'),
-            'Expositores'     => DB::select('CALL sp_consultarTodosExpositor()')
+            'Eventos'       => Evento::with(['tipoevento','sede','area','expositor'])->get(),
+            'TipoEventos'   => TipoEvento::all(),
+            'Sedes'         => Sede::all(),
+            'Areas'         => Area::all(),
+            'Expositores'   => Expositor::all()
         ];
     }
 
@@ -54,18 +58,19 @@ class EventoController extends Controller
             'idArea' => 'sometimes', // ID not required
             'idExpositor' => 'sometimes' // ID not required
         ]);
-        $values =
-        [
-            $request->nombre,
-            $request->descripcion,
-            $request->fechaInicio,
-            $request->fechaTermino,
-            $request->idTipoEvento,
-            $request->idSede,
-            $request->idArea,
-            $request->idExpositor
-        ];
-        DB::insert('CALL sp_agregarEvento(?,?,?,?,?,?,?,?)', $values);
+
+        $evento = new Evento;
+
+        $evento->nombre = $request->nombre;
+        $evento->descripcion = $request->descripcion;
+        $evento->fechaInicio = $request->fechaInicio;
+        $evento->fechaTermino = $request->fechaTermino;
+        $evento->idTipoEvento = $request->idTipoEvento;
+        $evento->idSede = $request->idSede;
+        $evento->idArea = $request->idArea;
+        $evento->idExpositor = $request->idExpositor;
+        
+        $evento->save();
 
         return ['message' => 'El Evento fue Ingresado con Exito!'];
     }
@@ -78,9 +83,7 @@ class EventoController extends Controller
      */
     public function show($id)
     {
-        $numero = null;
-        $numero = (int)$id;
-        return DB::select('CALL sp_consultarUnEvento(?,?)', [$numero,$id]);
+        //
     }
 
     /**
@@ -99,19 +102,19 @@ class EventoController extends Controller
             'fechaInicio' => 'required|date',
             'fechaTermino' => 'required|date'
         ]);
-        $values =
-        [
-            $id,
-            $request->nombre,
-            $request->descripcion,
-            $request->fechaInicio,
-            $request->fechaTermino,
-            $request->idTipoEvento,
-            $request->idSede,
-            $request->idArea,
-            $request->idExpositor
-        ];
-        DB::update('CALL sp_actualizarEvento(?,?,?,?,?,?,?,?,?)', $values);
+
+        $evento = Evento::find($id);
+
+        $evento->nombre = $request->nombre;
+        $evento->descripcion = $request->descripcion;
+        $evento->fechaInicio = $request->fechaInicio;
+        $evento->fechaTermino = $request->fechaTermino;
+        $evento->idTipoEvento = $request->idTipoEvento;
+        $evento->idSede = $request->idSede;
+        $evento->idArea = $request->idArea;
+        $evento->idExpositor = $request->idExpositor;
+        
+        $evento->save();
         
         return ['message' => 'El Evento fue Actualizado con Exito!'];
     }
@@ -124,7 +127,10 @@ class EventoController extends Controller
      */
     public function destroy($id)
     {
-        DB::delete('CALL sp_eliminarEvento(?)', [$id]);
+        $evento = Evento::find($id);
+
+        $evento->delete();
+
         return ['message' => 'El Evento fue Eliminado con Exito!'];
     }
 }

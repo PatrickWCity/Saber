@@ -12,4 +12,12 @@ class Voluntario extends Model
     public $primaryKey = 'idVoluntario';
     // Timestamps
     public $timestamps = false;
+
+    public function tipovoluntario() {
+        return $this->belongsTo('App\TipoVoluntario','idTipoVoluntario');
+    }
+
+    public function profesion() {
+        return $this->belongsTo('App\Profesion','idProfesion');
+    }
 }

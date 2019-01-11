@@ -60,10 +60,10 @@
                         <td>{{evento.descripcion}}</td>
                         <td>{{evento.fechaInicio | myDate}}</td>
                         <td>{{evento.fechaTermino | myDate}}</td>
-                        <td>{{evento.TipoEvento}}</td>
-                        <td>{{evento.Sede}}</td>
-                        <td>{{evento.Area}}</td>
-                        <td>{{evento.Expositor}}</td>
+                        <td>{{evento.tipoevento.nombre}}</td>
+                        <td>{{evento.sede.nombre}}</td>
+                        <td>{{evento.area.nombre}}</td>
+                        <td>{{evento.expositor.nombre}} {{evento.expositor.appat}} {{evento.expositor.apmat}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(evento)">
@@ -302,7 +302,7 @@ export default {
       $("#eventoModal").modal("show");
       this.form.fill(evento);
     },
-    eliminarEvento(idEvento) {
+    eliminarEvento(idEvento, nombre) {
       swal({
         title:
           "¿Está seguro que desea eliminar el Evento " +

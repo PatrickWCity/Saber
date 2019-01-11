@@ -59,7 +59,7 @@
                         <td>{{noticia.imagenPortada}}</td>
                         <td>{{noticia.fechaCreada | myDate}}</td>
                         <td>{{noticia.fechaActualizada | myDate}}</td>
-                        <td>{{noticia.TipoNoticia}}</td>
+                        <td>{{noticia.tiponoticia.nombre}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(noticia)">

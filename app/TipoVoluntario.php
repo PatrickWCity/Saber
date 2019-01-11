@@ -12,4 +12,8 @@ class TipoVoluntario extends Model
     public $primaryKey = 'idTipoVoluntario';
     // Timestamps
     public $timestamps = false;
+
+    public function voluntarios() {
+        return $this->hasMany('App\Voluntario','idVoluntario');
+    }
 }

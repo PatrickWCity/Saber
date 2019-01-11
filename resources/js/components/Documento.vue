@@ -59,7 +59,7 @@
                         <td>{{documento.archivo}}</td>
                         <td>{{documento.fechaCreada | myDate}}</td>
                         <td>{{documento.fechaActualizada | myDate}}</td>
-                        <td>{{documento.TipoDocumento}}</td>
+                        <td>{{documento.tipodocumento.nombre}}</td>
                         <td role="text-center">
                           <div class="btn-group" style="width:100%">
                             <button type="button" style="width:50%" class="btn btn-link" @click="editarModal(documento)">

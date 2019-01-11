@@ -12,4 +12,8 @@ class Profesion extends Model
     public $primaryKey = 'idProfesion';
     // Timestamps
     public $timestamps = false;
+
+    public function voluntarios() {
+        return $this->hasMany('App\Voluntario','idVoluntario');
+    }
 }
